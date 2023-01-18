@@ -1,0 +1,23 @@
+#Log level
+log_level = "info"
+elastic_address = "localhost"
+elastic_port = 9200
+elastic_index = "quiz_registrator_api_prod"
+elastic_logs_enabled = true
+
+#
+# Syncer config
+#
+games_syncer_enabled = true
+games_syncer_period = 5
+registrator_api_address = "localhost"
+registrator_api_port = 8080
+
+#
+# DB Settings
+#
+driver = "mysql"
+database_address = "localhost"
+database_name = "quiz_fetcher_prod"
+database_port = 3306
+database_username = "quiz_prod"
