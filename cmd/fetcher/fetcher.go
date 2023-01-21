@@ -14,6 +14,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/quiz_please"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/squiz"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/syncer"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
@@ -78,7 +79,9 @@ func main() {
 		cancel()
 	}()
 
-	cc, err := grpc.Dial(config.GetRegistratorAPIAddress(), grpc.WithInsecure(), grpc.WithChainUnaryInterceptor())
+	cc, err := grpc.Dial(config.GetRegistratorAPIAddress(), grpc.WithInsecure(), grpc.WithChainUnaryInterceptor(
+		middleware.ModuleNameInterceptor,
+	))
 	if err != nil {
 		logger.Panic(ctx, fmt.Errorf("could not connect: %w", err))
 	}
