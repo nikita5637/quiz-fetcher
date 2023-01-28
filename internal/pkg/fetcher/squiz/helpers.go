@@ -36,9 +36,10 @@ var (
 
 var (
 	gameTypesByDescription = map[string]int32{
-		"Игра на общие темы. Самый популярный и массовый вариант.":                      int32(registrator.GameType_GAME_TYPE_CLASSIC),
-		"Игра, предназначенная для команд без большого опыта в интеллектуальных играх.": int32(registrator.GameType_GAME_TYPE_CLASSIC),
-		"Игра на общие темы. Пакет из очень простых вопросов - идеально для новичков.":  int32(registrator.GameType_GAME_TYPE_CLASSIC),
+		"Игра на общие темы. Самый популярный и массовый вариант.":                                                                                           int32(registrator.GameType_GAME_TYPE_CLASSIC),
+		"Игра, предназначенная для команд без большого опыта в интеллектуальных играх.":                                                                      int32(registrator.GameType_GAME_TYPE_CLASSIC),
+		"Игра на общие темы. Пакет из очень простых вопросов - идеально для новичков.":                                                                       int32(registrator.GameType_GAME_TYPE_CLASSIC),
+		"Игра на общие темы. Играем одновременно один и тот же пакет вопросов во всех городах. Подведем общие итоги и наградим победителей зачетным кубком.": int32(registrator.GameType_GAME_TYPE_CLASSIC),
 
 		"Фановая игра с раундами по мотивам популярных ТВ-шоу.": int32(registrator.GameType_GAME_TYPE_THEMATIC),
 
