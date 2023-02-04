@@ -27,7 +27,10 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
 
+		fx := tearUp(t)
+
 		fetcher := GamesFetcher{
+			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
 			placesCache:              make(map[string]int32, 0),
 			registratorServiceClient: mockRegistratorServiceClient,
 			url:                      svr.URL,
@@ -50,6 +53,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Id: 2,
 			},
 		}, nil)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
 
 		got, err := fetcher.GetGamesList(context.Background())
 		assert.Len(t, got, 10)
@@ -193,7 +198,10 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
 
+		fx := tearUp(t)
+
 		fetcher := GamesFetcher{
+			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
 			placesCache:              make(map[string]int32, 0),
 			registratorServiceClient: mockRegistratorServiceClient,
 			url:                      svr.URL,
@@ -216,6 +224,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Id: 2,
 			},
 		}, nil)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
 
 		got, err := fetcher.GetGamesList(context.Background())
 		assert.Len(t, got, 10)
@@ -359,7 +369,10 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
 
+		fx := tearUp(t)
+
 		fetcher := GamesFetcher{
+			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
 			placesCache:              make(map[string]int32, 0),
 			registratorServiceClient: mockRegistratorServiceClient,
 			url:                      svr.URL,
@@ -382,6 +395,9 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Id: 2,
 			},
 		}, nil)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Фановая игра с раундами по мотивам популярных ТВ-шоу.").Return(2, nil)
 
 		got, err := fetcher.GetGamesList(context.Background())
 		assert.Len(t, got, 7)

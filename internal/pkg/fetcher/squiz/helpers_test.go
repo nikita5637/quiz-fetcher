@@ -2,124 +2,162 @@ package squiz
 
 import (
 	"context"
-	"reflect"
+	"errors"
 	"testing"
 	"time"
 
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/squiz/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
 )
 
+type fixture struct {
+	ctx          context.Context
+	gamesFetcher *GamesFetcher
+
+	gameTypeMatchStorage *mocks.GameTypeMatchStorage
+}
+
+func tearUp(t *testing.T) *fixture {
+	fx := &fixture{
+		ctx: context.Background(),
+
+		gameTypeMatchStorage: mocks.NewGameTypeMatchStorage(t),
+	}
+
+	fx.gamesFetcher = &GamesFetcher{
+		gameTypeMatchStorage: fx.gameTypeMatchStorage,
+	}
+
+	t.Cleanup(func() {})
+
+	return fx
+}
+
 func Test_convertGameToModelGame(t *testing.T) {
-	type args struct {
-		game game
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    model.Game
-		wantErr bool
-	}{
-		{
-			name: "invalid href",
-			args: args{
-				game: game{
-					Href: "#href",
-				},
-			},
-			want:    model.Game{},
-			wantErr: true,
-		},
-		{
-			name: "invalid game type",
-			args: args{
-				game: game{
-					Href:        "#123",
-					Description: "invalid description",
-				},
-			},
-			want:    model.Game{},
-			wantErr: true,
-		},
-		{
-			name: "invalid game number",
-			args: args{
-				game: game{
-					Href:        "#123",
-					Description: "invalid description",
-					Number:      "",
-				},
-			},
-			want:    model.Game{},
-			wantErr: true,
-		},
-		{
-			name: "invalid date time",
-			args: args{
-				game: game{
-					Href:        "#123",
-					Description: "Игра на общие темы. Самый популярный и массовый вариант.",
-					Number:      "1",
-					DateTime:    "invalid date time",
-				},
-			},
-			want:    model.Game{},
-			wantErr: true,
-		},
-		{
-			name: "invalid price",
-			args: args{
-				game: game{
-					Href:        "#123",
-					Description: "Игра на общие темы. Самый популярный и массовый вариант.",
-					Number:      "1",
-					DateTime:    "21 января 2023 19:30",
-					PaymentInfo: "invalid payment info",
-				},
-			},
-			want:    model.Game{},
-			wantErr: true,
-		},
-		{
-			name: "ok",
-			args: args{
-				game: game{
-					Href:        "#123",
-					Description: "Игра на общие темы. Самый популярный и массовый вариант.",
-					Name:        "name",
-					Number:      "1",
-					DateTime:    "21 января 2023 19:30",
-					PaymentInfo: "400 рублей с человека, оплата только наличными",
-				},
-			},
-			want: model.Game{
-				ExternalID:  123,
-				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
-				Number:      "1",
-				Name:        "name",
-				PlaceID:     0,
-				DateTime:    convertTime("2023-01-21 16:30"),
-				Price:       400,
-				PaymentType: "cash",
-				MaxPlayers:  8,
-			},
-			wantErr: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := convertGameToModelGame(tt.args.game)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("convertGameToModelGame() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("convertGameToModelGame() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+	t.Run("invalid href", func(t *testing.T) {
+		fx := tearUp(t)
+
+		g := game{
+			Href: "#href",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("error while get game type", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "invalid description").Return(0, errors.New("some error"))
+
+		g := game{
+			Href:        "#123",
+			Description: "invalid description",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("game type is 0", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "description").Return(0, nil)
+
+		g := game{
+			Href:        "#123",
+			Description: "description",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("invalid game number", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "description").Return(1, nil)
+
+		g := game{
+			Href:        "#123",
+			Description: "description",
+			Number:      "",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("invalid date time", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "description").Return(1, nil)
+
+		g := game{
+			Href:        "#123",
+			Description: "description",
+			Number:      "1",
+			DateTime:    "invalid date time",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("invalid payment info", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "description").Return(1, nil)
+
+		g := game{
+			Href:        "#123",
+			Description: "description",
+			Number:      "1",
+			DateTime:    "21 января 2023 19:30",
+			PaymentInfo: "invalid payment info",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{}, got)
+		assert.Error(t, err)
+	})
+
+	t.Run("ok", func(t *testing.T) {
+		fx := tearUp(t)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "description").Return(1, nil)
+
+		g := game{
+			Href:        "#123",
+			Description: "description",
+			Name:        "name",
+			Number:      "1",
+			DateTime:    "21 января 2023 19:30",
+			PaymentInfo: "400 рублей с человека, оплата только наличными",
+		}
+
+		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		assert.Equal(t, model.Game{
+			ExternalID:  123,
+			LeagueID:    leagueID,
+			Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+			Number:      "1",
+			Name:        "name",
+			PlaceID:     0,
+			DateTime:    convertTime("2023-01-21 16:30"),
+			Price:       400,
+			PaymentType: "cash",
+			MaxPlayers:  8,
+		}, got)
+		assert.NoError(t, err)
+	})
 }
 
 func Test_dirtyHooksForDateTime(t *testing.T) {

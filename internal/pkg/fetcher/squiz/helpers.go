@@ -10,7 +10,6 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 )
 
 const (
@@ -34,28 +33,18 @@ var (
 	}
 )
 
-var (
-	gameTypesByDescription = map[string]int32{
-		"Игра на общие темы. Самый популярный и массовый вариант.":                                                                                           int32(registrator.GameType_GAME_TYPE_CLASSIC),
-		"Игра, предназначенная для команд без большого опыта в интеллектуальных играх.":                                                                      int32(registrator.GameType_GAME_TYPE_CLASSIC),
-		"Игра на общие темы. Пакет из очень простых вопросов - идеально для новичков.":                                                                       int32(registrator.GameType_GAME_TYPE_CLASSIC),
-		"Игра на общие темы. Играем одновременно один и тот же пакет вопросов во всех городах. Подведем общие итоги и наградим победителей зачетным кубком.": int32(registrator.GameType_GAME_TYPE_CLASSIC),
-
-		"Фановая игра с раундами по мотивам популярных ТВ-шоу.":                                  int32(registrator.GameType_GAME_TYPE_THEMATIC),
-		"Вопросы для взрослых, черный юмор, без цензуры. Приходите только, если уверены в себе.": int32(registrator.GameType_GAME_TYPE_THEMATIC),
-
-		"Вопросы только на темы кино, сериалов и музыки. Зарубежное и российское, современное и классическое. Кинофаны и меломаны - вэлкам!": int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
-	}
-)
-
-func convertGameToModelGame(game game) (model.Game, error) {
+func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (model.Game, error) {
 	h := strings.TrimPrefix(game.Href, "#")
 	externalID, err := strconv.ParseInt(h, 10, 32)
 	if err != nil {
 		return model.Game{}, err
 	}
 
-	gameType := gameTypesByDescription[game.Description]
+	gameType, err := f.gameTypeMatchStorage.GetGameTypeByDescription(ctx, game.Description)
+	if err != nil {
+		return model.Game{}, fmt.Errorf("get game type by description error: %w", err)
+	}
+
 	if gameType == 0 {
 		return model.Game{}, errors.New("game type is 0")
 	}
@@ -87,7 +76,7 @@ func convertGameToModelGame(game game) (model.Game, error) {
 	return model.Game{
 		ExternalID:  int32(externalID),
 		LeagueID:    leagueID,
-		Type:        gameType,
+		Type:        int32(gameType),
 		Number:      game.Number,
 		Name:        game.Name,
 		PlaceID:     0,

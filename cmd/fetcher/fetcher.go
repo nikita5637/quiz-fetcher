@@ -96,6 +96,8 @@ func main() {
 
 	txManager := tx.NewManager(db)
 
+	gameTypeMatchStorage := storage.NewGameTypeMatchStorage(txManager)
+
 	syncLogStorage := storage.NewSyncLogStorage(txManager)
 	syncerConfig := syncer.Config{
 		SyncLogStorage: syncLogStorage,
@@ -113,6 +115,7 @@ func main() {
 
 	squizFetcherConfig := squiz.Config{
 		GamesListPath:            squiz.GamesListPath,
+		GameTypeMatchStorage:     gameTypeMatchStorage,
 		Name:                     squiz.FetcherName,
 		RegistratorServiceClient: registratorServiceClient,
 		URL:                      squiz.URL,

@@ -1,6 +1,9 @@
+//go:generate mockery --case underscore --name GameTypeMatchStorage --with-expecter
+
 package squiz
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients"
@@ -17,10 +20,16 @@ const (
 	leagueID = 2
 )
 
+// GameTypeMatchStorage ...
+type GameTypeMatchStorage interface {
+	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
+}
+
 // GamesFetcher ...
 type GamesFetcher struct {
 	client                   http.Client
 	gamesListPath            string
+	gameTypeMatchStorage     GameTypeMatchStorage
 	name                     string
 	placesCache              map[string]int32
 	registratorServiceClient clients.RegistratorServiceClient
@@ -30,6 +39,7 @@ type GamesFetcher struct {
 // Config ...
 type Config struct {
 	GamesListPath            string
+	GameTypeMatchStorage     GameTypeMatchStorage
 	Name                     string
 	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
@@ -40,6 +50,7 @@ func NewGamesFetcher(cfg Config) *GamesFetcher {
 	return &GamesFetcher{
 		client:                   *http.DefaultClient,
 		gamesListPath:            cfg.GamesListPath,
+		gameTypeMatchStorage:     cfg.GameTypeMatchStorage,
 		name:                     cfg.Name,
 		placesCache:              make(map[string]int32, 0),
 		registratorServiceClient: cfg.RegistratorServiceClient,
