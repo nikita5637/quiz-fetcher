@@ -12,6 +12,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/quiz_please"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/sixty_seconds"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/squiz"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
@@ -122,11 +123,20 @@ func main() {
 	}
 	squizGamesFetcher := squiz.NewGamesFetcher(squizFetcherConfig)
 
+	sixtySecondsFetcherConfig := sixty_seconds.Config{
+		GamesListPath:            sixty_seconds.GamesListPath,
+		Name:                     sixty_seconds.FetcherName,
+		RegistratorServiceClient: registratorServiceClient,
+		URL:                      sixty_seconds.URL,
+	}
+	sixtySecondsFetcher := sixty_seconds.NewGamesFetcher(sixtySecondsFetcherConfig)
+
 	gamesSyncerCfg := syncer.GamesSyncerConfig{
 		Enabled: config.GetValue("GamesSyncerEnabled").Bool(),
 		GamesFetchers: []fetcher.GamesFetcher{
 			quizPleaseGamesFetcher,
 			squizGamesFetcher,
+			sixtySecondsFetcher,
 		},
 		Period:                   config.GetValue("GamesSyncerPeriod").Uint64(),
 		RegistratorServiceClient: registratorServiceClient,
