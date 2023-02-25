@@ -2,6 +2,7 @@ package syncer
 
 import (
 	"context"
+	"errors"
 	"sync"
 	"time"
 
@@ -16,6 +17,10 @@ import (
 
 const (
 	syncerName = "games syncer"
+)
+
+var (
+	errJobAlreadyInProgress = errors.New("job already in progress")
 )
 
 // GamesSyncer ...
@@ -115,12 +120,11 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 
 	err := g.prepare(ctx)
 	if err != nil {
+		if err == errJobAlreadyInProgress {
+			logger.WarnKV(ctx, "games fetch job already in progress")
+			return nil
+		}
 		return err
-	}
-	if g.syncStatus == model.SyncStatusInProgress {
-		// skip if status is "In progress"
-		logger.WarnKV(ctx, "games fetch job already in progress")
-		return nil
 	}
 
 	err = func() error {
@@ -212,6 +216,9 @@ func (g *GamesSyncer) prepare(ctx context.Context) error {
 		g.lastSyncAt = now
 		g.lastSyncID = lastSyncID
 		g.syncStatus = model.SyncStatusNotSynced
+	} else if g.syncStatus == model.SyncStatusInProgress {
+		// skip if status is "In progress"
+		return errJobAlreadyInProgress
 	}
 
 	if err := g.syncerFacade.Update(ctx, model.SyncLog{
