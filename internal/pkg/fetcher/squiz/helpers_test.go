@@ -511,6 +511,14 @@ func Test_getInfoFromStrong(t *testing.T) {
 			want:  "Лига новичков",
 			want1: "3",
 		},
+		{
+			name: "test case 9",
+			args: args{
+				strong: "OnlineСовместная игра с Pikabu",
+			},
+			want:  "",
+			want1: "",
+		},
 	}
 
 	for _, tt := range tests {

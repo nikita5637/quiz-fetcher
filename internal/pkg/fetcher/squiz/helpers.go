@@ -170,7 +170,11 @@ func getInfoFromStrong(strong string) (string, string) {
 		return "", strings.TrimPrefix(strong, "Игра ")
 	}
 	sl := strings.Split(strong, "Игра ")
-	return sl[0], sl[1]
+	if len(sl) == 2 {
+		return sl[0], sl[1]
+	}
+
+	return "", ""
 }
 
 func getPlaceKey(name, address string) string {

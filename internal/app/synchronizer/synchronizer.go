@@ -2,6 +2,7 @@ package synchronizer
 
 import (
 	"context"
+	"runtime/debug"
 	"time"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
@@ -48,6 +49,12 @@ func (s *Synchronizer) Start(ctx context.Context) error {
 				if (time_utils.TimeNow().After(syncer.GetLastSyncAt().Add(syncer.GetPeriod()*time.Second)) && syncer.GetSyncStatus() != model.SyncStatusInProgress) ||
 					syncer.GetSyncStatus() == model.SyncStatusNotSynced {
 					go func(ctx context.Context, syncer Syncer) {
+						defer func() {
+							if r := recover(); r != nil {
+								logger.ErrorKV(ctx, "panic recovered", "r", r, "name", syncer.GetSyncerName(), "stack", string(debug.Stack()))
+							}
+						}()
+
 						logger.InfoKV(ctx, "sync started", "name", syncer.GetSyncerName())
 
 						if err := syncer.Sync(ctx); err != nil {
