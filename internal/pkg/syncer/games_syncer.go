@@ -2,6 +2,7 @@ package syncer
 
 import (
 	"context"
+	"sync"
 	"time"
 
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
@@ -23,6 +24,7 @@ type GamesSyncer struct {
 	gamesFetchers            []fetcher.GamesFetcher
 	lastSyncAt               time.Time
 	lastSyncID               int
+	m                        sync.Mutex
 	name                     string
 	period                   time.Duration
 	registratorServiceClient registrator.RegistratorServiceClient
@@ -45,6 +47,7 @@ func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, e
 	gs := &GamesSyncer{
 		enabled:                  cfg.Enabled,
 		gamesFetchers:            cfg.GamesFetchers,
+		m:                        sync.Mutex{},
 		name:                     syncerName,
 		period:                   time.Duration(cfg.Period),
 		registratorServiceClient: cfg.RegistratorServiceClient,
@@ -110,34 +113,15 @@ func (g *GamesSyncer) GetSyncStatus() model.SyncStatus {
 func (g *GamesSyncer) Sync(ctx context.Context) error {
 	begin := time_utils.TimeNow()
 
-	if g.syncStatus == model.SyncStatusOK || g.syncStatus == model.SyncStatusFailed {
-		now := time_utils.TimeNow()
-		lastSyncID, err := g.syncerFacade.Insert(ctx, model.SyncLog{
-			Name:       g.name,
-			LastSyncAt: now,
-			Status:     model.SyncStatusNotSynced,
-		})
-		if err != nil {
-			return err
-		}
-
-		g.lastSyncAt = now
-		g.lastSyncID = lastSyncID
-		g.syncStatus = model.SyncStatusNotSynced
-	}
-
-	var err error
-	err = g.syncerFacade.Update(ctx, model.SyncLog{
-		ID:         g.lastSyncID,
-		Name:       g.name,
-		LastSyncAt: g.lastSyncAt,
-		Status:     model.SyncStatusInProgress,
-	})
+	err := g.prepare(ctx)
 	if err != nil {
 		return err
 	}
-
-	g.syncStatus = model.SyncStatusInProgress
+	if g.syncStatus == model.SyncStatusInProgress {
+		// skip if status is "In progress"
+		logger.WarnKV(ctx, "games fetch job already in progress")
+		return nil
+	}
 
 	err = func() error {
 		for _, gamesFetcher := range g.gamesFetchers {
@@ -207,5 +191,39 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 	g.syncStatus = model.SyncStatusOK
 
 	logger.DebugKV(ctx, "sync done", "name", g.name, "duration(ms)", time_utils.TimeNow().Sub(begin).Milliseconds())
+	return nil
+}
+
+func (g *GamesSyncer) prepare(ctx context.Context) error {
+	g.m.Lock()
+	defer g.m.Unlock()
+
+	if g.syncStatus == model.SyncStatusOK || g.syncStatus == model.SyncStatusFailed {
+		now := time_utils.TimeNow()
+		lastSyncID, err := g.syncerFacade.Insert(ctx, model.SyncLog{
+			Name:       g.name,
+			LastSyncAt: now,
+			Status:     model.SyncStatusNotSynced,
+		})
+		if err != nil {
+			return err
+		}
+
+		g.lastSyncAt = now
+		g.lastSyncID = lastSyncID
+		g.syncStatus = model.SyncStatusNotSynced
+	}
+
+	if err := g.syncerFacade.Update(ctx, model.SyncLog{
+		ID:         g.lastSyncID,
+		Name:       g.name,
+		LastSyncAt: g.lastSyncAt,
+		Status:     model.SyncStatusInProgress,
+	}); err != nil {
+		return err
+	}
+
+	g.syncStatus = model.SyncStatusInProgress
+
 	return nil
 }
