@@ -16,103 +16,109 @@ import (
 
 // GetGamesList ...
 func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
-	resp, err := f.client.Get(f.url + f.gamesListPath)
-	if err != nil {
-		return nil, fmt.Errorf("can't get response: %w", err)
-	}
-
-	doc, err := goquery.NewDocumentFromResponse(resp)
-	if err != nil {
-		return nil, fmt.Errorf("can't read document: %w", err)
-	}
-
 	games := []model.Game{}
-	doc.Find(".container").Each(func(i int, c *goquery.Selection) {
-		if !c.HasClass("py-3") {
-			return
+	for _, gamesListPath := range []string{f.openLeagueGamesListPath, f.firstLeagueGamesListPath} {
+		if gamesListPath == "" {
+			continue
 		}
 
-		g := model.Game{
-			LeagueID: leagueID,
-		}
-
-		h5 := c.Find("h5").First()
-		a := h5.Find("a").First()
-
-		var gameInfoPath string
-		if value, exists := a.Attr("href"); exists {
-			gameInfoPath = value
-		}
-
-		externalID, err := getExternalID(gameInfoPath)
+		resp, err := f.client.Get(f.url + gamesListPath)
 		if err != nil {
-			logger.WarnKV(ctx, "can't parse externalID", "error", err, "gameInfoPath", gameInfoPath)
-			return
-		}
-		g.ExternalID = externalID
-
-		h5Text := h5.Text()
-		name := getName(h5Text)
-		if name == "" {
-			logger.WarnKV(ctx, "can't parse game name", "text", h5.Text())
-			return
-		}
-		g.Name = name
-
-		number := getNumber(h5Text)
-		if number == "" {
-			logger.WarnKV(ctx, "can't parse game number", "text", h5.Text())
-			return
-		}
-		g.Number = number
-
-		if strings.HasPrefix(number, "#") {
-			g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
-		} else if number == "Финал" {
-			g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
+			return nil, fmt.Errorf("can't get response: %w", err)
 		}
 
-		if g.Type == 0 {
-			logger.WarnKV(ctx, "can't parse game type", "number", number)
-			return
-		}
-
-		dateTime, err := f.getDateTime(ctx, gameInfoPath)
+		doc, err := goquery.NewDocumentFromResponse(resp)
 		if err != nil {
-			logger.Warnf(ctx, "can't parse game dateTime: %s", err.Error())
-			return
+			return nil, fmt.Errorf("can't read document: %w", err)
 		}
-		g.DateTime = dateTime
 
-		g.PaymentType = "cash"
-		g.MaxPlayers = 6
-
-		var placeStr, priceStr string
-		c.Find("tr").Each(func(i int, tr *goquery.Selection) {
-			switch i {
-			case 2:
-				placeStr = tr.Text()
-			case 3:
-				priceStr = tr.Text()
+		doc.Find(".container").Each(func(i int, c *goquery.Selection) {
+			if !c.HasClass("py-3") {
+				return
 			}
+
+			g := model.Game{
+				LeagueID: leagueID,
+			}
+
+			h5 := c.Find("h5").First()
+			a := h5.Find("a").First()
+
+			var gameInfoPath string
+			if value, exists := a.Attr("href"); exists {
+				gameInfoPath = value
+			}
+
+			externalID, err := getExternalID(gameInfoPath)
+			if err != nil {
+				logger.WarnKV(ctx, "can't parse externalID", "error", err, "gameInfoPath", gameInfoPath)
+				return
+			}
+			g.ExternalID = externalID
+
+			h5Text := h5.Text()
+			name := getName(h5Text)
+			if name == "" {
+				logger.WarnKV(ctx, "can't parse game name", "text", h5.Text())
+				return
+			}
+			g.Name = name
+
+			number := getNumber(h5Text)
+			if number == "" {
+				logger.WarnKV(ctx, "can't parse game number", "text", h5.Text())
+				return
+			}
+			g.Number = number
+
+			if strings.HasPrefix(number, "#") {
+				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
+			} else if number == "Финал" {
+				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
+			}
+
+			if g.Type == 0 {
+				logger.WarnKV(ctx, "can't parse game type", "number", number)
+				return
+			}
+
+			dateTime, err := f.getDateTime(ctx, gameInfoPath)
+			if err != nil {
+				logger.Warnf(ctx, "can't parse game dateTime: %s", err.Error())
+				return
+			}
+			g.DateTime = dateTime
+
+			g.PaymentType = "cash"
+			g.MaxPlayers = 6
+
+			var placeStr, priceStr string
+			c.Find("tr").Each(func(i int, tr *goquery.Selection) {
+				switch i {
+				case 2:
+					placeStr = tr.Text()
+				case 3:
+					priceStr = tr.Text()
+				}
+			})
+
+			placeID, err := f.getPlaceID(ctx, placeStr)
+			if err != nil {
+				logger.WarnKV(ctx, "can't parse place", "error", err, "place", placeStr)
+				return
+			}
+			g.PlaceID = placeID
+
+			price, err := getPrice(priceStr)
+			if err != nil {
+				logger.WarnKV(ctx, "can't parse price", "error", err, "price", priceStr)
+				return
+			}
+			g.Price = price
+
+			games = append(games, g)
 		})
-
-		placeID, err := f.getPlaceID(ctx, placeStr)
-		if err != nil {
-			logger.WarnKV(ctx, "can't parse place", "error", err, "place", placeStr)
-			return
-		}
-		g.PlaceID = placeID
-
-		price, err := getPrice(priceStr)
-		if err != nil {
-			logger.WarnKV(ctx, "can't parse price", "error", err, "price", priceStr)
-			return
-		}
-		g.Price = price
-
-		games = append(games, g)
-	})
+	}
 
 	return games, nil
 }

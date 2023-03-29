@@ -124,7 +124,8 @@ func main() {
 	squizGamesFetcher := squiz.NewGamesFetcher(squizFetcherConfig)
 
 	sixtySecondsFetcherConfig := sixty_seconds.Config{
-		GamesListPath:            sixty_seconds.GamesListPath,
+		OpenLeagueGamesListPath:  sixty_seconds.OpenLeagueGamesListPath,
+		FirstLeagueGamesListPath: sixty_seconds.FirstLeagueGamesListPath,
 		Name:                     sixty_seconds.FetcherName,
 		RegistratorServiceClient: registratorServiceClient,
 		URL:                      sixty_seconds.URL,

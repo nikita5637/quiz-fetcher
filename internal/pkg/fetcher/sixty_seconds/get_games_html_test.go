@@ -1675,4 +1675,1157 @@ function xlsdownload() {
 };
 
 </script><link href="https://www.google-analytics.com" rel="preconnect"><link href="https://stats.g.doubleclick.net" rel="preconnect"><div id="corner-popup" class="popup-xs" style="display: flex;"><div class="hide-mobile col sm-4"><img src="/static/img/cookie.png" class="corner-img-cookie responsive"></div><div class="col xs-12 sm-8"><div class="corner-close close-change"></div><div class="corner-container"><p class="corner-text">This website uses cookies to ensure you get the best experience on our website. <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" class="cookie-more">More information.</a></p><a class="corner-btn-cookie">Got it</a></div></div></div></body></html>`
+	html3 = `<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><meta content="" name="description"><meta content="madrobit" name="author"><title>Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Клуб «60 секунд»</title><link href="/static/apple-touch-icon.png?v=1.5.1" rel="apple-touch-icon" sizes="180x180"><link href="/static/favicon-32x32.png?v=1.5.1" rel="icon" sizes="32x32" type="image/png"><link href="/static/favicon-16x16.png?v=1.5.1" rel="icon" sizes="16x16" type="image/png"><link href="/static/site.webmanifest" rel="manifest"><link color="#5bbad5" href="/static/safari-pinned-tab.svg?v=1.5.1" rel="mask-icon"><link href="/static/favicon.ico?v=1.5.1" rel="shortcut icon"><meta content="#2b5797" name="msapplication-TileColor"><meta content="/static/browserconfig.xml?v=1.5.1" name="msapplication-config"><meta content="#ffffff" name="theme-color"><meta content="https://60sec.online/static/img/snippet.jpg" property="og:image"><link href="/static/css/bootstrap.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/style.css?v=1.5.1" rel="stylesheet"></head><body><div class="loadingio-spinner-bean-eater-i7x2im0jb9" style="display: none;"><div class="int-packman-wrapper"><div class="ldio-yj1mc95c7go"><div><div></div><div></div><div></div></div><div><div></div><div></div><div></div></div></div></div></div><nav class="navbar navbar-expand-lg navbar-light"><div class="container"><div class="navbar-brand d-flex flex-row align-items-center"><div class="pr-2"><a href="/"><img alt="Клуб 60 Секунд" class="logo-img1" id="logo-img" src="/static/img/logo.svg"></a></div><div class="d-flex flex-column" id="club-selector"><div class="text-truncate" style="max-width: 250px; margin-bottom: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="league_name" id="league_name">Выбрать Лигу</span></a></div><div style="margin-top: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="city" id="city">Санкт-Петербург</span></a></div></div></div><div class="d-flex flex-row order-2 order-lg-3"><ul class="navbar-nav flex-row"><li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="navbarDropdown" role="button"><i class="fa fa-search mt-1 pr-3 pr-lg-0"></i></a><div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right popout"><form action="/search/" class="form-inline dropdown-item" id="form-id" method="get"><div class="input-group" style="min-width: 200px;"><input autocomplete="off" class="form-control py-2 border-right-0 border" id="example-search-input" name="search" placeholder="Поиск" style="outline: 0 !important; border-color: initial; box-shadow: none;" type="Поиск"><span class="input-group-append"><div class="input-group-text bg-transparent"><i class="fa fa-search" onclick="document.getElementById('form-id').submit();" style="cursor: pointer;"></i></div></span></div></form></div></li><li class="dropdown nav-item"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="lang_dropdown" role="button"><img alt="Русский" class="mb-1" id="flag-gb" src="/static/img/ru.svg" width="24"></a><div aria-labelledby="lang_dropdown" class="dropdown-menu dropdown-menu-right popout"><a class="dropdown-item" href="/en/league/118/"><img alt="English" class="mb-1 pr-2" id="flag-gb" src="/static/img/gb.svg" width="24">English</a><a class="dropdown-item" href="/league/118/"><img alt="Русский" class="mb-1 pr-2" id="flag-ru" src="/static/img/ru.svg" width="24">Русский</a></div></li></ul><button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" style="border: 0px;" type="button"><i class="material-icons dark-blue">more_vert</i></button></div><div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent"><ul class="navbar-nav mr-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/igroki/" style="color:#0096E4 !important;">ИГРОКИ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/faq/">FAQ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/syncro/">Синхроны</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/teams/118/">Команды</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/reglament/118/">Регламент</a></li></ul><ul class="navbar-nav ml-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/login/">Вход</a></li></ul></div></div></nav><div aria-hidden="true" aria-labelledby="cityModalTitle" class="modal fade bd-example-modal-lg" id="cityModal" role="document" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg" role="document"><div class="modal-content"><div class="modal-body"><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button><div class="container" id="leagues"><div class="row"><div class="mx-auto text-center dark-blue" id="modal_city"><p>Ваш город <span class="modal-city">Санкт-Петербург</span> верно? <span class="modal-city-inv multi" onclick="select_city()">Нет</span> <span class="multi"><br>Выберите лигу. Вы сможете поменять выбор в любой момент.</span></p><div class="mx-auto text-center pb-2 single" style="display: none;"><span class="modal-city-yes" onclick="set_league(215)">&nbsp;Да&nbsp;</span> <span class="modal-city-inv" onclick="select_city()">Нет</span></div><p></p></div><div class="col-lg-6 col-12 text-center container pb-2 offline"><h5 class="dark-blue pb-1" onclick="toggleOff()" style="cursor: pointer;">Offline <i class="fas fa-angle-down fa-xs" id="off-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(118)">Первая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(119)">Высшая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(121)">Корпоративная лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(117)">Открытая лига</a></div></div></div><div class="col-lg-6 col-12 text-center container pb-1 online"><h5 class="dark-blue pb-1" onclick="toggleOn()" style="cursor: pointer;">Online <i class="fas fa-angle-down fa-xs" id="on-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(198)">Киберлига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(207)">Спецпроекты</a></div></div></div><div class="mx-auto text-center container pb-2 archive" style="display: none;"><h5 class="dark-blue" onclick="toggleArchive()" style="cursor: pointer;">Archive <i class="fas fa-angle-down fa-xs" id="archive-icon"></i></h5><div class="container modal-leagues pb-3"></div></div></div></div><div class="container" id="cityes" style="display:none;"><h2 class="black pt-4">Наша география</h2><input class="form-control" id="cityInput" onkeyup="cityFilter()" placeholder="Поиск" type="text"><br><div class="container pb-3 list-group d-flex flex-row flex-wrap"><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(57, 'Актау')">Актау</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(121, 'Аланья')">Аланья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(104, 'Алматы')">Алматы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(116, 'Анталья')">Анталья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(2, 'Антананариву')">Антананариву</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(45, 'Архангельск и Северодвинск')">Архангельск и Северодвинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(34, 'Астрахань')">Астрахань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(43, 'Баку')">Баку</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(81, 'Барнаул')">Барнаул</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(126, 'Батуми')">Батуми</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(24, 'Берлин')">Берлин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(102, 'Бишкек')">Бишкек</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(96, 'Бремен')">Бремен</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(12, 'Брест')">Брест</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(11, 'Великий Новгород')">Великий Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(122, 'Вильнюс')">Вильнюс</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(6, 'Владивосток')">Владивосток</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(22, 'Владимир')">Владимир</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(53, 'Вологда')">Вологда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(61, 'Воркута')">Воркута</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(30, 'Воронеж')">Воронеж</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(28, 'Воткинск')">Воткинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(73, 'Гаага')">Гаага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(76, 'Гамбург')">Гамбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(51, 'Гатчина')">Гатчина</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(40, 'Глазов')">Глазов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(106, 'Гуанчжоу')">Гуанчжоу</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(77, 'Детройт')">Детройт</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(39, 'Дубай')">Дубай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(47, 'Екатеринбург')">Екатеринбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(113, 'Ереван')">Ереван</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(109, 'Жуковский')">Жуковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(87, 'Зарайск')">Зарайск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(44, 'Иваново')">Иваново</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(94, 'Игра Головой Online')">Игра Головой Online</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(68, 'Ижевск')">Ижевск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(90, 'Иматра')">Иматра</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(128, 'Йошкар-Ола')">Йошкар-Ола</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(108, 'Казань')">Казань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(99, 'Калгари')">Калгари</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(13, 'Калининград')">Калининград</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(63, 'Калуга')">Калуга</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(112, 'Караганда')">Караганда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(101, 'Кёльн')">Кёльн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(37, 'Кемерово')">Кемерово</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(75, 'Киль')">Киль</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(3, 'Киров')">Киров</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(74, 'Кливленд')">Кливленд</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(41, 'Коломна')">Коломна</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(117, 'Комсомольск-на-Амуре')">Комсомольск-на-Амуре</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(65, 'Кострома')">Кострома</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(52, 'Котлас')">Котлас</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(19, 'Курск')">Курск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(91, 'Лаппеенранта')">Лаппеенранта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(1, 'Лимасол')">Лимасол</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(111, 'Лиссабон')">Лиссабон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(21, 'Лондон')">Лондон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(80, 'Лос-Анджелес')">Лос-Анджелес</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(105, 'Луховицы')">Луховицы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(124, 'Манавгат')">Манавгат</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(67, 'Миасс, Златоуст, Сатка')">Миасс, Златоуст, Сатка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(78, 'Минск')">Минск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(25, 'Москва')">Москва</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(62, 'Мурманск')">Мурманск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(110, 'Набережные Челны')">Набережные Челны</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(64, 'Надым')">Надым</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(8, 'Находка')">Находка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(23, 'Нижнекамск')">Нижнекамск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(16, 'Нижний Новгород')">Нижний Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(88, 'Никосия')">Никосия</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(123, 'Нови Сад')">Нови Сад</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(46, 'Новокузнецк')">Новокузнецк</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(50, 'Новомосковск')">Новомосковск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(17, 'Новосибирск')">Новосибирск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(119, 'Ноябрьск')">Ноябрьск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(97, 'Нур-Султан')">Нур-Султан</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(125, 'Обнинск')">Обнинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(82, 'Омск')">Омск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(92, 'Орск')">Орск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(84, 'Островцы и Октябрьский')">Островцы и Октябрьский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(89, 'Павлодар')">Павлодар</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(127, 'Пафос')">Пафос</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(107, 'Пекин')">Пекин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(58, 'Пенза')">Пенза</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(120, 'Петропавловск-Камчатский')">Петропавловск-Камчатский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(114, 'Пинск')">Пинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(33, 'Прага')">Прага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(59, 'Псков')">Псков</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(129, 'Раменское')">Раменское</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(49, 'Ростов-на-Дону')">Ростов-на-Дону</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(20, 'Рязань')">Рязань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(26, 'Самара')">Самара</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(71, 'Санкт-Петербург')">Санкт-Петербург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(95, 'Саратов')">Саратов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(85, 'Североморск')">Североморск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(66, 'Симферополь')">Симферополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(93, 'Ставрополь')">Ставрополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(31, 'Стокгольм')">Стокгольм</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(48, 'Таганрог')">Таганрог</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(15, 'Таллинн')">Таллинн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(55, 'Ташкент')">Ташкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(118, 'Тбилиси')">Тбилиси</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(29, 'Тверь')">Тверь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(56, 'Тенерифе')">Тенерифе</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(70, 'Томск')">Томск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(69, 'Тула')">Тула</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(83, 'Удомля')">Удомля</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(54, 'Уссурийск')">Уссурийск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(60, 'Ухта')">Ухта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(9, 'Хабаровск')">Хабаровск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(115, 'Чайковский')">Чайковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(38, 'Чебоксары')">Чебоксары</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(35, 'Челябинск')">Челябинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(18, 'Чита')">Чита</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(100, 'Шанхай')">Шанхай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(72, 'Шахты')">Шахты</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(103, 'Шымкент')">Шымкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(27, 'Элиста')">Элиста</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(14, 'Югорск')">Югорск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(42, 'Ярославль')">Ярославль</a></div></div></div></div></div></div></div><div id="header"><div class="container unskew"><div class="row"><div class="col-12" style="margin-top: -20px;"><div class="d-flex flex-row-reverse"><h4><a class="blue" href="None" target="_blank"><i class="fab fa-telegram-plane"></i></a>&nbsp;&nbsp;&nbsp; <a class="blue" href="None" target="_blank"><i class="fab fa-vk"></i></a>&nbsp;&nbsp;&nbsp;</h4></div></div><div class="col-md-6 col-12 pb-2"><div class="card transparent"><div class="card-body" style="padding:0;"><h2 class="white">Первая лига</h2><div class="white-razdel"></div><div class="l-blue pt-2">Клуб «60 Секунд» / Санкт-Петербург</div></div></div></div><div class="col-md-6 col-12"><h5 class="yellow text-center">Ближайшая игра</h5><h6 class="l-grey text-center"><a href="/game/18615/">Первая лига | Игра #4</a></h6><div class="col-12 d-flex flex-row justify-content-center align-items-center"><div class="l-blue ff-ibc vertical-text align-middle"><span>Играем</span></div><div><table><tbody><tr><td class="l-grey"><i class="fas fa-calendar-alt fa-fw l-blue"></i>&nbsp;04 апреля, Вторник</td></tr><tr><td class="l-grey"><i class="fas fa-clock fa-fw l-blue"></i>&nbsp;19:30</td></tr><tr><td class="l-grey"><i class="fas fa-map-marker-alt fa-fw l-blue"></i>&nbsp;Дворец «Олимпия» - Литейный пр., д. 14</td></tr><tr><td class="l-grey"><i class="fas fa-credit-card l-blue"></i>&nbsp; <a class="" href="https://club60sec.timepad.ru/event/2361915/" target="_blank">Купить билет</a></td></tr></tbody></table></div></div></div><div class="col-md-6 col-12 py-3 pt-md-0 mt-md-n4"><ul class="nav nav-pills justify-content-md-start justify-content-center" id="myTab" role="tablist"><li class="nav-item nav-pills-yellow"><a aria-controls="schedule" aria-selected="true" class="nav-link tab-link active" data-toggle="tab" href="#schedule" id="schedule-tab" role="tab"><span>Лига</span></a></li><li class="nav-item nav-pills-yellow"><a aria-controls="seasons" aria-selected="true" class="nav-link tab-link" data-toggle="tab" href="#seasons" id="seasons-tab" role="tab"><span>Все сезоны</span></a></li><li class="nav-item nav-pills-yellow"><a class="nav-link tab-link" href="/schedule/71/"><span>Расписание клуба</span></a></li></ul></div></div></div></div><div class="container"><div class="row pt-4"><div class="col-12"><div class="tab-content" id="myTabContent"><div aria-labelledby="schedule-tab" class="tab-pane fade show active" id="schedule" role="tabpanel"><div class="row"><div class="col-12"><h4 class="text-center dark-blue">Ближайшие игры лиги</h4></div><div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch pb-3"><div class="container py-3" style="border: 1px solid #E4E4E4;"><h5 class="dark-blue text-center"><a class="" href="/game/18615/">Первая лига | Игра #4</a></h5><div class="col-12 d-flex flex-row justify-content-center align-items-center"><div class="text-light-blue ff-ibc vertical-text align-middle igraem"><span>Играем</span></div><div><table><tbody><tr><td class="dark-blue"><i class="fas fa-calendar-alt fa-fw text-light-blue"></i>&nbsp;04 апреля, Вторник</td></tr><tr><td class="dark-blue"><i class="fas fa-clock fa-fw text-light-blue"></i>&nbsp;19:30</td></tr><tr><td class="dark-blue"><i class="fas fa-map-marker-alt fa-fw text-light-blue"></i>&nbsp;Дворец «Олимпия» - Литейный пр., д. 14</td></tr><tr><td class="dark-blue"><i class="fas fa-ruble-sign fa-fw text-light-blue"></i>&nbsp;1200 руб. с команды</td></tr><tr><td class="dark-blue"><i class="fas fa-credit-card text-light-blue"></i>&nbsp; <a class="" href="https://club60sec.timepad.ru/event/2361915/" target="_blank">Купить билет</a></td></tr></tbody></table></div></div></div></div><div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch pb-3"><div class="container py-3" style="border: 1px solid #E4E4E4;"><h5 class="dark-blue text-center"><a class="" href="/game/18616/">Первая лига | Игра #5</a></h5><div class="col-12 d-flex flex-row justify-content-center align-items-center"><div class="text-light-blue ff-ibc vertical-text align-middle igraem"><span>Играем</span></div><div><table><tbody><tr><td class="dark-blue"><i class="fas fa-calendar-alt fa-fw text-light-blue"></i>&nbsp;11 апреля, Вторник</td></tr><tr><td class="dark-blue"><i class="fas fa-clock fa-fw text-light-blue"></i>&nbsp;19:30</td></tr><tr><td class="dark-blue"><i class="fas fa-map-marker-alt fa-fw text-light-blue"></i>&nbsp;Дворец «Олимпия» - Литейный пр., д. 14</td></tr><tr><td class="dark-blue"><i class="fas fa-ruble-sign fa-fw text-light-blue"></i>&nbsp;1200 руб. с команды</td></tr></tbody></table></div></div></div></div><div class="col-lg-4 col-md-6 col-12 d-flex align-items-stretch pb-3"><div class="container py-3" style="border: 1px solid #E4E4E4;"><h5 class="dark-blue text-center"><a class="" href="/game/18617/">Первая лига | Игра #6</a></h5><div class="col-12 d-flex flex-row justify-content-center align-items-center"><div class="text-light-blue ff-ibc vertical-text align-middle igraem"><span>Играем</span></div><div><table><tbody><tr><td class="dark-blue"><i class="fas fa-calendar-alt fa-fw text-light-blue"></i>&nbsp;18 апреля, Вторник</td></tr><tr><td class="dark-blue"><i class="fas fa-clock fa-fw text-light-blue"></i>&nbsp;19:30</td></tr><tr><td class="dark-blue"><i class="fas fa-map-marker-alt fa-fw text-light-blue"></i>&nbsp;Дворец «Олимпия» - Литейный пр., д. 14</td></tr><tr><td class="dark-blue"><i class="fas fa-ruble-sign fa-fw text-light-blue"></i>&nbsp;1200 руб. с команды</td></tr></tbody></table></div></div></div></div></div><div class="col-12"><h5 class="dark-blue text-center">Рейтинг сезона <a href="/season/2091/">Весна 2023</a></h5></div><div class=""><div class="container-fluid"><div class="row"><div class="col-12"><nav class="tabbable"><ul class="nav nav-pills justify-content-sm-start justify-content-center" id="myTab" role="tablist"><li class="nav-item text-center nav-pills-dark"><a aria-controls="1" aria-selected="true" class="nav-link active" data-toggle="tab" href="#h1" id="h1-tab" role="tab"><span>Первая лига</span></a></li></ul></nav></div></div></div><div class="tab-content" id="myTabContent"><div aria-labelledby="h1-tab" class="tab-pane fade show active" id="h1" role="tabpanel"><div class="table-responsive pt-2 pb-3"><table class="table table-hover table-sm table-nonfluid borderless-top" id="rate_table"><thead><tr><th class="text-center fit-strickt">&nbsp;&nbsp;#&nbsp;&nbsp;</th><th class="text-left fit-strickt">Название</th><th class="text-center fit-strickt">&nbsp;&nbsp;&nbsp;Сумма&nbsp;&nbsp;&nbsp;</th><th class="text-center text-nowrap small"><a class="table_a" href="/game/18612/">14.03.23</a></th><th class="text-center text-nowrap small"><a class="table_a" href="/game/18613/">21.03.23</a></th><th class="text-center text-nowrap small"><a class="table_a" href="/game/18614/">28.03.23</a></th></tr></thead><tbody id="myTable"><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>1</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/8999/">Так получилось</a></td><td class="bg-blue-dark text-white text-center fit-strickt">89.00</td><td class="text-center text-secondary"><span>32.00</span></td><td class="text-center text-secondary"><span>33.50</span></td><td class="text-center text-secondary"><span>23.50</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>2</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/14921/">Картель Укупника</a></td><td class="bg-blue-dark text-white text-center fit-strickt">81.25</td><td class="text-center text-secondary"><span>30.00</span></td><td class="text-center text-secondary"><span>27.75</span></td><td class="text-center text-secondary"><span>23.50</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>3</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/30850/">Ангелы Кренделя</a> <sup class="dark-blue">+2</sup></td><td class="bg-blue-dark text-white text-center fit-strickt">68.50</td><td class="text-center text-secondary"><span>23.50</span></td><td class="text-center text-secondary"><span>19.00</span></td><td class="text-center text-secondary"><span>26.00</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>4</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/5093/">Напутствие Широкова</a> <sup class="yellow">-1</sup></td><td class="bg-blue-dark text-white text-center fit-strickt">67.75</td><td class="text-center text-secondary"><span>23.50</span></td><td class="text-center text-secondary"><span>27.75</span></td><td class="text-center text-secondary"><span>16.50</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>5</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/30230/">6x7</a> <sup class="yellow">-1</sup></td><td class="bg-blue-dark text-white text-center fit-strickt">67.50</td><td class="text-center text-secondary"><span>25.50</span></td><td class="text-center text-secondary"><span>21.50</span></td><td class="text-center text-secondary"><span>20.50</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>6</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/8178/">The Hateful Seven</a> <sup class="dark-blue">+1</sup></td><td class="bg-blue-dark text-white text-center fit-strickt">66.00</td><td class="text-center text-secondary"><span>20.50</span></td><td class="text-center text-secondary"><span>13.50</span></td><td class="text-center text-secondary"><span>32.00</span></td></tr><tr><td class="bg-blue-dark text-white text-center fit-strickt"><strong>7</strong></td><td class="text-nowrap elipsis fit-strickt"><a class="table_a" href="/team/5112/">Мама, я больше не Будда</a> <sup class="yellow">-1</sup></td><td class="bg-blue-dark text-white text-center fit-strickt">65.75</td><td class="text-center text-secondary"><span>12.00</span></td><td class="text-center text-secondary"><span>27.75</span></td><td class="text-center text-secondary"><span>26.00</span></td></tr></tbody></table></div></div></div></div><div class="row"><div class="col-12 pt-2"><h4 class="dark-blue text-center">Статистика</h4><p><small>Ниже представлены топ-5 команд в некоторых номинациях. Обратите внимание, что это общая статистика по всем играм. Кроме общей статистики, есть расширенная статистика для каждого из сезонов. Например, вот статистика <a class="table_a" href="/season/2091/#stats">текущего</a> и <a class="table_a" href="/season/1927/#stats">предыдущего</a> сезонов. Кликнув на любую из команд лиги - вы попадете на страницу этой команды, где сможете ознакомится с её подробной статистикой, как за всё время, так и за каждый сезон в отдельности. Команды можно искать с помощью поиска, а также из списка всех <a class="table_a" href="/teams/118/">команд лиги</a>.</small></p></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Больше всех сыграли</h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/7114/">Развал-снисхождение</a></td><td class="text-center">257</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/5144/">Второе предельное состояние</a></td><td class="text-center">196</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5094/">Повстанцы с Будуина</a></td><td class="text-center">195</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/5093/">Напутствие Широкова</a></td><td class="text-center">184</td></tr></tbody></table></div></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Побед в сезонах</h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Побед</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td><td class="text-center">4</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/24679/">Файервольные каменщики</a></td><td class="text-center">54</td><td class="text-center">3</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/5142/">Power Of Sport</a></td><td class="text-center">99</td><td class="text-center">2</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">2</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/7114/">Развал-снисхождение</a></td><td class="text-center">257</td><td class="text-center">1</td></tr></tbody></table></div></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Победители</h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Побед</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">37</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td><td class="text-center">25</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/8603/">Витамин 404</a></td><td class="text-center">151</td><td class="text-center">22</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/7114/">Развал-снисхождение</a></td><td class="text-center">257</td><td class="text-center">21</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/5142/">Power Of Sport</a></td><td class="text-center">99</td><td class="text-center">17</td></tr></tbody></table></div></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Призёры</h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Пьедесталов</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td><td class="text-center">89</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/7114/">Развал-снисхождение</a></td><td class="text-center">257</td><td class="text-center">63</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/8603/">Витамин 404</a></td><td class="text-center">151</td><td class="text-center">62</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">58</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/5094/">Повстанцы с Будуина</a></td><td class="text-center">195</td><td class="text-center">42</td></tr></tbody></table></div></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Лучший процент взятия <sup>*</sup></h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Процент взятия</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">80.4 %</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/24679/">Файервольные каменщики</a></td><td class="text-center">54</td><td class="text-center">76.0 %</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td><td class="text-center">72.2 %</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5080/">Незнайки на Луне</a></td><td class="text-center">43</td><td class="text-center">71.2 %</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/8603/">Витамин 404</a></td><td class="text-center">151</td><td class="text-center">70.3 %</td></tr></tbody></table></div><small><sup>*</sup> - среди команд сыгравших больше 15 игр</small></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Лучшая серия <sup>*</sup></h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Серия</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/5094/">Повстанцы с Будуина</a></td><td class="text-center">195</td><td class="text-center">35</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/7114/">Развал-снисхождение</a></td><td class="text-center">257</td><td class="text-center">31</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/29121/">Во всём виноват Тиндер</a></td><td class="text-center">31</td><td class="text-center">28</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5080/">Незнайки на Луне</a></td><td class="text-center">43</td><td class="text-center">28</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">27</td></tr></tbody></table></div><small><sup>*</sup> - количество правильных ответов подряд</small></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">лучшая худшая серия<sup>*</sup></h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Серия</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/8999/">Так получилось</a></td><td class="text-center">30</td><td class="text-center">4</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/24679/">Файервольные каменщики</a></td><td class="text-center">54</td><td class="text-center">5</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/30230/">6x7</a></td><td class="text-center">28</td><td class="text-center">5</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">6</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/5080/">Незнайки на Луне</a></td><td class="text-center">43</td><td class="text-center">6</td></tr></tbody></table></div><small><sup>*</sup> - количество неправильных ответов подряд, среди команд сыгравших минимум 15 игр</small></div><div class="col-sm-6 col-lg-4 col-12 pt-2"><h6 class="dark-blue text-center">Тоталов в турах <sup>*</sup></h6><div class="table-responsive"><table class="table table-hover table-sm small"><thead><tr class="active"><th class="text-right">#</th><th>Команда</th><th class="text-center">Игр</th><th class="text-center">Тоталов</th></tr></thead><tbody><tr><th class="text-right">1</th><td><a class="table_a" href="/team/7101/">iSteria</a></td><td class="text-center">222</td><td class="text-center">26</td></tr><tr><th class="text-right">2</th><td><a class="table_a" href="/team/5122/">Повторники</a></td><td class="text-center">86</td><td class="text-center">23</td></tr><tr><th class="text-right">3</th><td><a class="table_a" href="/team/5142/">Power Of Sport</a></td><td class="text-center">99</td><td class="text-center">16</td></tr><tr><th class="text-right">4</th><td><a class="table_a" href="/team/5094/">Повстанцы с Будуина</a></td><td class="text-center">195</td><td class="text-center">10</td></tr><tr><th class="text-right">5</th><td><a class="table_a" href="/team/7115/">Тритий лишний</a></td><td class="text-center">169</td><td class="text-center">9</td></tr></tbody></table></div><small><sup>*</sup> - тотал - это тур в котором, команда ответила верно на все вопросы</small></div></div></div><div aria-labelledby="seasons-tab" class="tab-pane fade" id="seasons" role="tabpanel"><div class=""><h4 class="text-center dark-blue">Сезоны</h4><div class="table-responsive pb-4"><table class="table table-hover table-sm"><thead><tr class="active"><th class="text-nowrap">Сезон</th><th class="text-nowrap text-center">Игр</th><th class="text-nowrap">Начало</th><th class="text-nowrap">Окончание</th></tr></thead><tbody><tr><td class="text-nowrap"><a class="table_a" href="/season/2091/">Весна 2023</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">14 Март 2023</td><td class="text-nowrap">30 Май 2023</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1927/">Зима-22/23</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">29 Ноябрь 2022</td><td class="text-nowrap">28 Февраль 2023</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1814/">Осень 2022</a></td><td class="text-nowrap text-center">13</td><td class="text-nowrap">29 Август 2022</td><td class="text-nowrap">21 Ноябрь 2022</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1739/">Лето 2022</a></td><td class="text-nowrap text-center">10</td><td class="text-nowrap">06 Июнь 2022</td><td class="text-nowrap">22 Август 2022</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1624/">Весна 2022</a></td><td class="text-nowrap text-center">10</td><td class="text-nowrap">07 Март 2022</td><td class="text-nowrap">30 Май 2022</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1506/">Зима 2022</a></td><td class="text-nowrap text-center">11</td><td class="text-nowrap">06 Декабрь 2021</td><td class="text-nowrap">28 Февраль 2022</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1393/">Осень 2021</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">06 Сентябрь 2021</td><td class="text-nowrap">29 Ноябрь 2021</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1308/">Лето 2021</a></td><td class="text-nowrap text-center">13</td><td class="text-nowrap">07 Июнь 2021</td><td class="text-nowrap">30 Август 2021</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1198/">Весна 2021</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">15 Март 2021</td><td class="text-nowrap">31 Май 2021</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1131/">Зима 2021</a></td><td class="text-nowrap text-center">6</td><td class="text-nowrap">18 Январь 2021</td><td class="text-nowrap">01 Март 2021</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/1031/">Поздняя осень 2020</a></td><td class="text-nowrap text-center">7</td><td class="text-nowrap">12 Октябрь 2020</td><td class="text-nowrap">23 Ноябрь 2020</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/969/">Блиц-сезон:Евротур</a></td><td class="text-nowrap text-center">4</td><td class="text-nowrap">14 Сентябрь 2020</td><td class="text-nowrap">05 Октябрь 2020</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/949/">Блиц-сезон:Космическая Одиссея</a></td><td class="text-nowrap text-center">4</td><td class="text-nowrap">10 Август 2020</td><td class="text-nowrap">31 Август 2020</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/741/">Весна 2020</a></td><td class="text-nowrap text-center">2</td><td class="text-nowrap">10 Март 2020</td><td class="text-nowrap">26 Май 2020</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/614/">Зима 2020</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">03 Декабрь 2019</td><td class="text-nowrap">03 Март 2020</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/536/">Осень 2019</a></td><td class="text-nowrap text-center">12</td><td class="text-nowrap">10 Сентябрь 2019</td><td class="text-nowrap">26 Ноябрь 2019</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/420/">Лето 2019</a></td><td class="text-nowrap text-center">13</td><td class="text-nowrap">04 Июнь 2019</td><td class="text-nowrap">27 Август 2019</td></tr><tr><td class="text-nowrap"><a class="table_a" href="/season/364/">Весна 2019</a></td><td class="text-nowrap text-center">8</td><td class="text-nowrap">15 Апрель 2019</td><td class="text-nowrap">28 Май 2019</td></tr></tbody></table></div></div></div></div></div></div></div><footer class="footer"><div class="footer_top mt-n3"></div><div class="container"><div class="row"><div class="col-12 my-n3"><div class="d-flex flex-row-reverse pt-1"><h4><a class="no-bb foot-link" href="None" rel="noopener" target="_blank"><i class="fab fa-telegram-plane"></i></a>&nbsp;&nbsp;&nbsp; <a class="no-bb foot-link" href="None" rel="noopener" target="_blank"><i class="fab fa-vk"></i></a>&nbsp;&nbsp;&nbsp;</h4></div></div><div class="col-12"><div class="d-flex justify-content-between"><div class="pb-3"><a class="no-bb" href="/"><img alt="Клуб 60 Секунд" src="/static/img/logo_white.svg" width="80"></a></div><div class="mt-4"><a class="btn btn_w_ol btn-sm" href="http://vopros.club60sec.ru/" rel="noopener" target="_blank">Прислать вопрос</a></div></div></div><div class="col-md-6 small"><p class="truncate">© 2016-2023. Интеллектуальный клуб «60 секунд».<br>ИП Жирнов Д. В. | <a class="foot-link" href="/static/requisites.pdf" rel="noopener" target="_blank">реквизиты</a></p></div><div class="col-md-6 text-right small"><p><a class="link_privacy foot-link" href="https://club60sec.ru/privacy/" rel="noopener" target="_blank">Политика конфиденциальности</a><br>powered by <a class="foot-link" href="https://madrobit.com" rel="noopener" target="_blank">madrobit.com</a></p></div></div></div></footer><link href="/static/fontawesome/css/all.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/alertify.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/corner-popup.min.css?v=1.5.1" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-B97GDESXDV&amp;l=dataLayer&amp;cx=c"></script><script src="/static/js/js.cookie.min.js?v=1.5.1"></script><script src="/static/js/jquery-3.4.1.min.js?v=1.5.1"></script><script src="/static/js/popper.min.js?v=1.5.1"></script><script src="/static/js/bootstrap.min.js?v=1.5.1"></script><script src="/static/js/corner-popup.js?v=1.5.1"></script><script src="/static/js/reconnecting-websocket.min.js?v=1.5.1"></script><script src="/static/js/alertify.min.js?v=1.5.1"></script><script type="text/javascript">
+    setTimeout(function(){
+      $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+    }, 5000);
+
+    $(window).on("load", function (e) {
+    // Animate loader off screen
+    
+    $(".single").hide();
+    
+
+    if (Cookies.get('league') != undefined)
+    {
+      $('#city').text(htmlDecode(''));
+      $('#league_name').text(htmlDecode(''));
+      $('.modal-city').text(htmlDecode(''));
+      
+    }
+    else{
+      set_city(71, 'Санкт-Петербург');
+    };
+
+    $.fn.cornerpopup({
+      variant: 2
+    });
+    $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+  });
+    function toggleOn() {
+      $(".online .modal-leagues").toggle();
+      $("#on-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleOff() {
+      $(".offline .modal-leagues").toggle();
+      $("#off-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleArchive() {
+      $(".archive .modal-leagues").toggle();
+      $("#archive-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    
+    function htmlDecode(value) {
+      return $("<textarea/>").html(value).text();
+    };
+    function set_city(club_id, city) {
+
+      $(".modal-leagues").empty();
+      $(".archive").hide();
+      $.ajax({
+        url: "/getclubleagues/", // the endpoint
+        type: "POST", // http method
+        data: {
+          club_id: club_id,
+          csrfmiddlewaretoken: '9fyn1JKdkUnJYNR52qHH7fhdGuS9gpCKndW25awuRh7ej7U8fSTXZeXBxmngvQ02',
+        }, // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+         if (Object.keys(json.on).length + Object.keys(json.off).length > 1){
+          $(".single").hide();
+          $(".multi").show();
+
+          if (Object.keys(json.off).length > 0){
+            $.each(json.off, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".offline .modal-leagues").append(div);
+            });
+            $(".offline").show();
+            if (club_id == 25) {
+              $(".offline .modal-leagues").hide();
+            }
+            
+          } else{
+            $(".offline").hide();
+          }
+          if (Object.keys(json.on).length > 0){
+            $.each(json.on, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".online .modal-leagues").append(div);
+            });
+            $(".online").show();
+            if (club_id == 25) {
+              $(".online .modal-leagues").hide();
+            }
+            $(".offline .off-title").show();
+              //$(".offline .modal-leagues").hide();
+            } else {
+              $(".online").hide();
+              //$(".offline .modal-leagues").show();
+              $(".offline .off-title").hide();
+            }
+          }
+          else {
+            $(".modal-city-yes").removeAttr('onclick');
+            if (Object.keys(json.off).length > 0){
+              $.each(json.off, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            } else {
+              $.each(json.on, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            };
+            $(".multi").hide();
+            $(".single").show();
+            $(".online").hide();
+            $(".offline").hide();
+          };
+          if (Object.keys(json.archive).length > 0){
+            $.each(json.archive, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".archive .modal-leagues").append(div);
+            });
+            $(".archive").show();
+            $(".archive .modal-leagues").hide();
+          } else {
+            $(".archive").hide();
+          };
+
+        },
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+        });
+
+      $('.modal-city').text(city);
+      $('#leagues').slideDown(200);
+      $('#cityes').fadeOut(200);
+
+    };
+
+    function set_league(league_id) {
+      Cookies.set('league', league_id, { expires: 90 });
+      document.location.href="/";
+    };
+
+    function select_city() {
+      $('#leagues').fadeOut(200);
+      $('#cityes').slideDown(200);
+    };
+
+    function cityFilter() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("cityInput");
+  filter = input.value.toUpperCase();
+
+  $('.modal-a-div').each(function() {
+    if ($(this).text().toUpperCase().indexOf(filter) > -1) {
+      $(this).show();
+    } else {
+      $(this).css("display","none");
+    }
+  });
+
+};
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".navbar");
+    var logo_img = $("#logo-img");
+    //$nav.toggleClass('', $(this).scrollTop() > $nav.height());
+    $nav.toggleClass('sticky-top bg-white', $(this).scrollTop() > $nav.height());
+    logo_img.toggleClass('logo-img', $(this).scrollTop() > $nav.height());
+  });
+});
+</script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-104995998-1');
+</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-104995998-1"></script><script type="text/javascript">
+	
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		var hash = $(e.target).attr('href');
+		if (history.pushState) {
+			history.pushState(null, null, hash);
+		} else {
+			location.hash = hash;
+		}
+	});
+
+	jQuery(document).ready(function ($) {
+		let selectedTab = window.location.hash;
+		$('.nav-link[href="' + selectedTab + '"]' ).trigger('click');
+	})
+</script><link href="https://www.google-analytics.com" rel="preconnect"><link href="https://stats.g.doubleclick.net" rel="preconnect"><div id="corner-popup" class="popup-xs" style="display: flex;"><div class="hide-mobile col sm-4"><img src="/static/img/cookie.png" class="corner-img-cookie responsive"></div><div class="col xs-12 sm-8"><div class="corner-close close-change"></div><div class="corner-container"><p class="corner-text">This website uses cookies to ensure you get the best experience on our website. <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" class="cookie-more">More information.</a></p><a class="corner-btn-cookie">Got it</a></div></div></div></body></html>`
+	html18615 = `<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><meta content="" name="description"><meta content="madrobit" name="author"><title>Первая лига | Игра #4 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»</title><meta content="Таблица игры сезона: Первая лига | Игра #4 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»" name="Description"><link href="/static/apple-touch-icon.png?v=1.5.1" rel="apple-touch-icon" sizes="180x180"><link href="/static/favicon-32x32.png?v=1.5.1" rel="icon" sizes="32x32" type="image/png"><link href="/static/favicon-16x16.png?v=1.5.1" rel="icon" sizes="16x16" type="image/png"><link href="/static/site.webmanifest" rel="manifest"><link color="#5bbad5" href="/static/safari-pinned-tab.svg?v=1.5.1" rel="mask-icon"><link href="/static/favicon.ico?v=1.5.1" rel="shortcut icon"><meta content="#2b5797" name="msapplication-TileColor"><meta content="/static/browserconfig.xml?v=1.5.1" name="msapplication-config"><meta content="#ffffff" name="theme-color"><meta content="https://60sec.online/static/img/snippet.jpg" property="og:image"><link href="/static/css/bootstrap.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/style.css?v=1.5.1" rel="stylesheet"><style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head><body><div class="loadingio-spinner-bean-eater-i7x2im0jb9" style="display: none;"><div class="int-packman-wrapper"><div class="ldio-yj1mc95c7go"><div><div></div><div></div><div></div></div><div><div></div><div></div><div></div></div></div></div></div><nav class="navbar navbar-expand-lg navbar-light"><div class="container"><div class="navbar-brand d-flex flex-row align-items-center"><div class="pr-2"><a href="/"><img alt="Клуб 60 Секунд" class="logo-img1" id="logo-img" src="/static/img/logo.svg"></a></div><div class="d-flex flex-column" id="club-selector"><div class="text-truncate" style="max-width: 250px; margin-bottom: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="league_name" id="league_name">Выбрать Лигу</span></a></div><div style="margin-top: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="city" id="city">Санкт-Петербург</span></a></div></div></div><div class="d-flex flex-row order-2 order-lg-3"><ul class="navbar-nav flex-row"><li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="navbarDropdown" role="button"><i class="fa fa-search mt-1 pr-3 pr-lg-0"></i></a><div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right popout"><form action="/search/" class="form-inline dropdown-item" id="form-id" method="get"><div class="input-group" style="min-width: 200px;"><input autocomplete="off" class="form-control py-2 border-right-0 border" id="example-search-input" name="search" placeholder="Поиск" style="outline: 0 !important; border-color: initial; box-shadow: none;" type="Поиск"><span class="input-group-append"><div class="input-group-text bg-transparent"><i class="fa fa-search" onclick="document.getElementById('form-id').submit();" style="cursor: pointer;"></i></div></span></div></form></div></li><li class="dropdown nav-item"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="lang_dropdown" role="button"><img alt="Русский" class="mb-1" id="flag-gb" src="/static/img/ru.svg" width="24"></a><div aria-labelledby="lang_dropdown" class="dropdown-menu dropdown-menu-right popout"><a class="dropdown-item" href="/en/game/18615/"><img alt="English" class="mb-1 pr-2" id="flag-gb" src="/static/img/gb.svg" width="24">English</a><a class="dropdown-item" href="/game/18615/"><img alt="Русский" class="mb-1 pr-2" id="flag-ru" src="/static/img/ru.svg" width="24">Русский</a></div></li></ul><button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" style="border: 0px;" type="button"><i class="material-icons dark-blue">more_vert</i></button></div><div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent"><ul class="navbar-nav mr-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/igroki/" style="color:#0096E4 !important;">ИГРОКИ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/faq/">FAQ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/syncro/">Синхроны</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/teams/118/">Команды</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/reglament/118/">Регламент</a></li></ul><ul class="navbar-nav ml-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/login/">Вход</a></li></ul></div></div></nav><div aria-hidden="true" aria-labelledby="cityModalTitle" class="modal fade bd-example-modal-lg" id="cityModal" role="document" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg" role="document"><div class="modal-content"><div class="modal-body"><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button><div class="container" id="leagues"><div class="row"><div class="mx-auto text-center dark-blue" id="modal_city"><p>Ваш город <span class="modal-city">Санкт-Петербург</span> верно? <span class="modal-city-inv multi" onclick="select_city()">Нет</span> <span class="multi"><br>Выберите лигу. Вы сможете поменять выбор в любой момент.</span></p><div class="mx-auto text-center pb-2 single" style="display: none;"><span class="modal-city-yes" onclick="set_league(215)">&nbsp;Да&nbsp;</span> <span class="modal-city-inv" onclick="select_city()">Нет</span></div><p></p></div><div class="col-lg-6 col-12 text-center container pb-2 offline"><h5 class="dark-blue pb-1" onclick="toggleOff()" style="cursor: pointer;">Offline <i class="fas fa-angle-down fa-xs" id="off-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(118)">Первая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(119)">Высшая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(121)">Корпоративная лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(117)">Открытая лига</a></div></div></div><div class="col-lg-6 col-12 text-center container pb-1 online"><h5 class="dark-blue pb-1" onclick="toggleOn()" style="cursor: pointer;">Online <i class="fas fa-angle-down fa-xs" id="on-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(198)">Киберлига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(207)">Спецпроекты</a></div></div></div><div class="mx-auto text-center container pb-2 archive" style="display: none;"><h5 class="dark-blue" onclick="toggleArchive()" style="cursor: pointer;">Archive <i class="fas fa-angle-down fa-xs" id="archive-icon"></i></h5><div class="container modal-leagues pb-3"></div></div></div></div><div class="container" id="cityes" style="display:none;"><h2 class="black pt-4">Наша география</h2><input class="form-control" id="cityInput" onkeyup="cityFilter()" placeholder="Поиск" type="text"><br><div class="container pb-3 list-group d-flex flex-row flex-wrap"><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(57, 'Актау')">Актау</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(121, 'Аланья')">Аланья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(104, 'Алматы')">Алматы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(116, 'Анталья')">Анталья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(2, 'Антананариву')">Антананариву</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(45, 'Архангельск и Северодвинск')">Архангельск и Северодвинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(34, 'Астрахань')">Астрахань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(43, 'Баку')">Баку</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(81, 'Барнаул')">Барнаул</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(126, 'Батуми')">Батуми</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(24, 'Берлин')">Берлин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(102, 'Бишкек')">Бишкек</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(96, 'Бремен')">Бремен</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(12, 'Брест')">Брест</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(11, 'Великий Новгород')">Великий Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(122, 'Вильнюс')">Вильнюс</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(6, 'Владивосток')">Владивосток</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(22, 'Владимир')">Владимир</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(53, 'Вологда')">Вологда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(61, 'Воркута')">Воркута</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(30, 'Воронеж')">Воронеж</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(28, 'Воткинск')">Воткинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(73, 'Гаага')">Гаага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(76, 'Гамбург')">Гамбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(51, 'Гатчина')">Гатчина</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(40, 'Глазов')">Глазов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(106, 'Гуанчжоу')">Гуанчжоу</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(77, 'Детройт')">Детройт</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(39, 'Дубай')">Дубай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(47, 'Екатеринбург')">Екатеринбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(113, 'Ереван')">Ереван</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(109, 'Жуковский')">Жуковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(87, 'Зарайск')">Зарайск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(44, 'Иваново')">Иваново</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(94, 'Игра Головой Online')">Игра Головой Online</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(68, 'Ижевск')">Ижевск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(90, 'Иматра')">Иматра</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(128, 'Йошкар-Ола')">Йошкар-Ола</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(108, 'Казань')">Казань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(99, 'Калгари')">Калгари</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(13, 'Калининград')">Калининград</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(63, 'Калуга')">Калуга</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(112, 'Караганда')">Караганда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(101, 'Кёльн')">Кёльн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(37, 'Кемерово')">Кемерово</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(75, 'Киль')">Киль</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(3, 'Киров')">Киров</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(74, 'Кливленд')">Кливленд</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(41, 'Коломна')">Коломна</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(117, 'Комсомольск-на-Амуре')">Комсомольск-на-Амуре</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(65, 'Кострома')">Кострома</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(52, 'Котлас')">Котлас</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(19, 'Курск')">Курск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(91, 'Лаппеенранта')">Лаппеенранта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(1, 'Лимасол')">Лимасол</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(111, 'Лиссабон')">Лиссабон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(21, 'Лондон')">Лондон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(80, 'Лос-Анджелес')">Лос-Анджелес</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(105, 'Луховицы')">Луховицы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(124, 'Манавгат')">Манавгат</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(67, 'Миасс, Златоуст, Сатка')">Миасс, Златоуст, Сатка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(78, 'Минск')">Минск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(25, 'Москва')">Москва</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(62, 'Мурманск')">Мурманск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(110, 'Набережные Челны')">Набережные Челны</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(64, 'Надым')">Надым</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(8, 'Находка')">Находка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(23, 'Нижнекамск')">Нижнекамск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(16, 'Нижний Новгород')">Нижний Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(88, 'Никосия')">Никосия</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(123, 'Нови Сад')">Нови Сад</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(46, 'Новокузнецк')">Новокузнецк</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(50, 'Новомосковск')">Новомосковск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(17, 'Новосибирск')">Новосибирск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(119, 'Ноябрьск')">Ноябрьск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(97, 'Нур-Султан')">Нур-Султан</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(125, 'Обнинск')">Обнинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(82, 'Омск')">Омск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(92, 'Орск')">Орск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(84, 'Островцы и Октябрьский')">Островцы и Октябрьский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(89, 'Павлодар')">Павлодар</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(127, 'Пафос')">Пафос</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(107, 'Пекин')">Пекин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(58, 'Пенза')">Пенза</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(120, 'Петропавловск-Камчатский')">Петропавловск-Камчатский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(114, 'Пинск')">Пинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(33, 'Прага')">Прага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(59, 'Псков')">Псков</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(129, 'Раменское')">Раменское</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(49, 'Ростов-на-Дону')">Ростов-на-Дону</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(20, 'Рязань')">Рязань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(26, 'Самара')">Самара</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(71, 'Санкт-Петербург')">Санкт-Петербург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(95, 'Саратов')">Саратов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(85, 'Североморск')">Североморск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(66, 'Симферополь')">Симферополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(93, 'Ставрополь')">Ставрополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(31, 'Стокгольм')">Стокгольм</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(48, 'Таганрог')">Таганрог</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(15, 'Таллинн')">Таллинн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(55, 'Ташкент')">Ташкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(118, 'Тбилиси')">Тбилиси</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(29, 'Тверь')">Тверь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(56, 'Тенерифе')">Тенерифе</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(70, 'Томск')">Томск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(69, 'Тула')">Тула</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(83, 'Удомля')">Удомля</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(54, 'Уссурийск')">Уссурийск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(60, 'Ухта')">Ухта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(9, 'Хабаровск')">Хабаровск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(115, 'Чайковский')">Чайковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(38, 'Чебоксары')">Чебоксары</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(35, 'Челябинск')">Челябинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(18, 'Чита')">Чита</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(100, 'Шанхай')">Шанхай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(72, 'Шахты')">Шахты</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(103, 'Шымкент')">Шымкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(27, 'Элиста')">Элиста</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(14, 'Югорск')">Югорск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(42, 'Ярославль')">Ярославль</a></div></div></div></div></div></div></div><div id="header"><div class="container unskew"><div class="row"><div class="col-12 pb-2"><div class="card transparent"><div class="card-body" style="padding:0;"><h2 class="white">Первая лига | Игра #4</h2><div class="white-razdel"></div><div class="l-blue pt-2">Санкт-Петербург / <a href="/league/118/">Первая лига</a> / <a href="/season/2091/">Весна 2023</a> / 4 апреля 2023 19:30</div></div></div></div><div class="col-md-6 col-12 py-3 pt-md-0"><a class="btn btn-yellow" href="/enterthegame/18615/" style="min-width: 250px;">Войти в игру</a></div></div></div></div><div class="container-fluid pt-3"><div class="row justify-content-center"><div class="col-12" style="margin-bottom: -38px; z-index: 10"><div class="d-flex flex-row-reverse"><div class="dropdown show text-right"><a aria-label="Game menu button" class="table_a" data-toggle="dropdown" href="#" id="dropdownMenuLink" role="button"><h2><i class="fas fa-bars"></i></h2></a><div aria-labelledby="dropdownMenuLink" class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#" onclick="divshow()">По дивизионам</a> <a class="dropdown-item" data-target="#graph" data-toggle="collapse" href="#">График взятия</a> <a class="dropdown-item" href="#" onclick="QRS()">Рейтинг вопросов</a> <a class="dropdown-item" href="/game/18615/show">Режим демонстрации</a></div></div></div></div><div class="collapse container-fluid" id="graph"><div class="row justify-content-center"><div class="col-12 col-lg-10 col-xl-8"><canvas id="bar-chart" height="0" width="0" class="chartjs-render-monitor" style="display: block; height: 0px; width: 0px;"></canvas></div></div></div><div class="col-12"><div class="pb-4" id="main_content"></div></div><div class="col-12"><div class="pb-3"></div></div></div></div><footer class="footer"><div class="footer_top mt-n3"></div><div class="container"><div class="row"><div class="col-12"><div class="d-flex justify-content-between"><div class="pb-3"><a class="no-bb" href="/"><img alt="Клуб 60 Секунд" src="/static/img/logo_white.svg" width="80"></a></div><div class="mt-4"><a class="btn btn_w_ol btn-sm" href="http://vopros.club60sec.ru/" rel="noopener" target="_blank">Прислать вопрос</a></div></div></div><div class="col-md-6 small"><p class="truncate">© 2016-2023. Интеллектуальный клуб «60 секунд».<br>ИП Жирнов Д. В. | <a class="foot-link" href="/static/requisites.pdf" rel="noopener" target="_blank">реквизиты</a></p></div><div class="col-md-6 text-right small"><p><a class="link_privacy foot-link" href="https://club60sec.ru/privacy/" rel="noopener" target="_blank">Политика конфиденциальности</a><br>powered by <a class="foot-link" href="https://madrobit.com" rel="noopener" target="_blank">madrobit.com</a></p></div></div></div></footer><link href="/static/fontawesome/css/all.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/alertify.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/corner-popup.min.css?v=1.5.1" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-B97GDESXDV&amp;l=dataLayer&amp;cx=c"></script><script src="/static/js/js.cookie.min.js?v=1.5.1"></script><script src="/static/js/jquery-3.4.1.min.js?v=1.5.1"></script><script src="/static/js/popper.min.js?v=1.5.1"></script><script src="/static/js/bootstrap.min.js?v=1.5.1"></script><script src="/static/js/corner-popup.js?v=1.5.1"></script><script src="/static/js/reconnecting-websocket.min.js?v=1.5.1"></script><script src="/static/js/alertify.min.js?v=1.5.1"></script><script type="text/javascript">
+    setTimeout(function(){
+      $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+    }, 5000);
+
+    $(window).on("load", function (e) {
+    // Animate loader off screen
+    
+    $(".single").hide();
+    
+
+    if (Cookies.get('league') != undefined)
+    {
+      $('#city').text(htmlDecode(''));
+      $('#league_name').text(htmlDecode(''));
+      $('.modal-city').text(htmlDecode(''));
+      
+    }
+    else{
+      set_city(71, 'Санкт-Петербург');
+    };
+
+    $.fn.cornerpopup({
+      variant: 2
+    });
+    $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+  });
+    function toggleOn() {
+      $(".online .modal-leagues").toggle();
+      $("#on-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleOff() {
+      $(".offline .modal-leagues").toggle();
+      $("#off-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleArchive() {
+      $(".archive .modal-leagues").toggle();
+      $("#archive-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    
+    function htmlDecode(value) {
+      return $("<textarea/>").html(value).text();
+    };
+    function set_city(club_id, city) {
+
+      $(".modal-leagues").empty();
+      $(".archive").hide();
+      $.ajax({
+        url: "/getclubleagues/", // the endpoint
+        type: "POST", // http method
+        data: {
+          club_id: club_id,
+          csrfmiddlewaretoken: 'H4v1xvPw9mGv17Lv3cTlFjpv7c9kLCG7V2TGBWBNGJq0mrOygE5Bxi5TY4Er034p',
+        }, // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+         if (Object.keys(json.on).length + Object.keys(json.off).length > 1){
+          $(".single").hide();
+          $(".multi").show();
+
+          if (Object.keys(json.off).length > 0){
+            $.each(json.off, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".offline .modal-leagues").append(div);
+            });
+            $(".offline").show();
+            if (club_id == 25) {
+              $(".offline .modal-leagues").hide();
+            }
+            
+          } else{
+            $(".offline").hide();
+          }
+          if (Object.keys(json.on).length > 0){
+            $.each(json.on, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".online .modal-leagues").append(div);
+            });
+            $(".online").show();
+            if (club_id == 25) {
+              $(".online .modal-leagues").hide();
+            }
+            $(".offline .off-title").show();
+              //$(".offline .modal-leagues").hide();
+            } else {
+              $(".online").hide();
+              //$(".offline .modal-leagues").show();
+              $(".offline .off-title").hide();
+            }
+          }
+          else {
+            $(".modal-city-yes").removeAttr('onclick');
+            if (Object.keys(json.off).length > 0){
+              $.each(json.off, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            } else {
+              $.each(json.on, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            };
+            $(".multi").hide();
+            $(".single").show();
+            $(".online").hide();
+            $(".offline").hide();
+          };
+          if (Object.keys(json.archive).length > 0){
+            $.each(json.archive, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".archive .modal-leagues").append(div);
+            });
+            $(".archive").show();
+            $(".archive .modal-leagues").hide();
+          } else {
+            $(".archive").hide();
+          };
+
+        },
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+        });
+
+      $('.modal-city').text(city);
+      $('#leagues').slideDown(200);
+      $('#cityes').fadeOut(200);
+
+    };
+
+    function set_league(league_id) {
+      Cookies.set('league', league_id, { expires: 90 });
+      document.location.href="/";
+    };
+
+    function select_city() {
+      $('#leagues').fadeOut(200);
+      $('#cityes').slideDown(200);
+    };
+
+    function cityFilter() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("cityInput");
+  filter = input.value.toUpperCase();
+
+  $('.modal-a-div').each(function() {
+    if ($(this).text().toUpperCase().indexOf(filter) > -1) {
+      $(this).show();
+    } else {
+      $(this).css("display","none");
+    }
+  });
+
+};
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".navbar");
+    var logo_img = $("#logo-img");
+    //$nav.toggleClass('', $(this).scrollTop() > $nav.height());
+    $nav.toggleClass('sticky-top bg-white', $(this).scrollTop() > $nav.height());
+    logo_img.toggleClass('logo-img', $(this).scrollTop() > $nav.height());
+  });
+});
+</script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-104995998-1');
+</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-104995998-1"></script><link href="/static/css/chart.min.css?v=1.5.1" rel="stylesheet"><script src="/static/js/chart.bundle.min.js?v=1.5.1"></script><script src="/static/js/jquery.tablesorter.min.js?v=1.5.1" type="text/javascript"></script><script src="/static/js/gametable.js?v=1.5.1"></script><script src="/static/js/FileSaver.min.js?v=1.5.1"></script><script src="/static/js/tableexport.min.js?v=1.5.1"></script><script type="text/javascript">
+
+const game_settings = {"divisions": {"100": "\u0412\u043d\u0435 \u0437\u0430\u0447\u0451\u0442\u0430"}, "divisions_count": 1, "countmatrix": true, "countrating": false, "dontskipplaces": false, "tours": 3, "qlist": [12, 24, 36], "questions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mediatours": [], "media_game": false, "matrix_game": false, "show_city": false, "language": "ru"};
+
+function get_game_results(key) {
+    $.ajax({
+          url: "/get_game_results/", // the endpoint
+          type: "GET", // http method
+          data: {
+            csrfmiddlewaretoken: 'H4v1xvPw9mGv17Lv3cTlFjpv7c9kLCG7V2TGBWBNGJq0mrOygE5Bxi5TY4Er034p',
+            game_id: '18615',
+            key: key,
+          },
+          async: false,
+          success: function (json) {
+                if(json.teams > 0){
+                    createtable(json, game_settings, key);
+                    $("#jsonTable_"+key).tablesorter({
+                        sortList : [[0,0], [2,0]]
+                    });
+                };
+          },
+          error: function (xhr, errmsg, err) {
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('Проблема с получением информации с сервера. Попробуйте обновить страницу позже.');
+          }
+    });
+};
+
+
+function toogletur(tur_id) {
+    event.stopPropagation();
+    $(".table ."+tur_id+"_tur").toggleClass("d-none");
+    $("."+tur_id+"_but").toggleClass("fa-plus-square").toggleClass("fa-minus-square");
+};
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({delay: { "show": 500, "hide": 200 }});
+});
+
+
+$(document).ready(function () {
+    if ((Cookies.get('divs') == 'True') && (game_settings.divisions_count > 1))
+    {
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    } else {
+        get_game_results(1000);
+    };
+
+    var labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+    var graph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var ctx = document.getElementById('bar-chart').getContext('2d');
+      var barChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              datasets: [{
+                  label: 'Правильных ответов',
+                  yAxisID: 'A',
+                  backgroundColor: '#0096E4',
+                  data: graph,
+              }],
+              labels: labels,
+          },
+          options: {
+            aspectRatio: 2.5,
+            title: {
+                display: true,
+                fontColor: '#090438',
+                text: "Команд в игре: 0 | взятие: 0.00% | гробов:  36 | спасённых:  0 | кнопок:  0 | дыр: 0."
+            },
+            legend: {
+              labels: {
+                  fontColor: '#090438'
+                }
+              },
+            scales: {
+              xAxes: [{
+                 ticks: {
+                    fontColor: "#090438",
+                 }
+              }],
+              yAxes: [{
+                id: 'A',
+                type: 'linear',
+                position: 'left',
+                ticks: {
+                  //max: 40,
+                  min: 0,
+                  fontColor: "#090438",
+                }
+              }]
+            }
+          }
+      });
+      $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+});
+
+
+
+
+function QRS() {
+    //iterate through each row in the table
+    $('.qrs').each(function(){
+        $(this).fadeToggle();
+    });
+};
+
+function divshow() {
+    if (game_settings.divisions_count < 2){return false};
+    $("#main_content").empty();
+    if (Cookies.get('divs') == 'True')
+    {
+        Cookies.set('divs', 'False', { expires: 10 });
+        get_game_results(1000); 
+    } else {
+        Cookies.set('divs', 'True', { expires: 10 });
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    }
+};
+
+function xlsdownload() {
+    $("table").each(function(){
+        TableExport.prototype.charset = "charset=utf-8";
+
+        if (this.id.substring(0,4) == 'json'){
+            var tableid = this.id
+            var exporttable = $(this).tableExport({
+                formats: ['csv'],
+                exportButtons: false,
+                filename: 'Первая лига | Игра #4',
+                separator: ',',
+                mimeType: 'text/csv',
+                fileExtension: '.csv',
+                enforceStrictRFC4180: true
+            });
+            
+        var exportData = exporttable.getExportData();
+        var xlsxData = exportData[tableid].csv; 
+        exporttable.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges);
+        }
+    });
+};
+
+</script><link href="https://www.google-analytics.com" rel="preconnect"><link href="https://stats.g.doubleclick.net" rel="preconnect"><div id="corner-popup" class="popup-xs" style="display: flex;"><div class="hide-mobile col sm-4"><img src="/static/img/cookie.png" class="corner-img-cookie responsive"></div><div class="col xs-12 sm-8"><div class="corner-close close-change"></div><div class="corner-container"><p class="corner-text">This website uses cookies to ensure you get the best experience on our website. <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" class="cookie-more">More information.</a></p><a class="corner-btn-cookie">Got it</a></div></div></div></body></html>`
+	html18616 = `<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><meta content="" name="description"><meta content="madrobit" name="author"><title>Первая лига | Игра #5 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»</title><meta content="Таблица игры сезона: Первая лига | Игра #5 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»" name="Description"><link href="/static/apple-touch-icon.png?v=1.5.1" rel="apple-touch-icon" sizes="180x180"><link href="/static/favicon-32x32.png?v=1.5.1" rel="icon" sizes="32x32" type="image/png"><link href="/static/favicon-16x16.png?v=1.5.1" rel="icon" sizes="16x16" type="image/png"><link href="/static/site.webmanifest" rel="manifest"><link color="#5bbad5" href="/static/safari-pinned-tab.svg?v=1.5.1" rel="mask-icon"><link href="/static/favicon.ico?v=1.5.1" rel="shortcut icon"><meta content="#2b5797" name="msapplication-TileColor"><meta content="/static/browserconfig.xml?v=1.5.1" name="msapplication-config"><meta content="#ffffff" name="theme-color"><meta content="https://60sec.online/static/img/snippet.jpg" property="og:image"><link href="/static/css/bootstrap.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/style.css?v=1.5.1" rel="stylesheet"><style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head><body><div class="loadingio-spinner-bean-eater-i7x2im0jb9" style="display: none;"><div class="int-packman-wrapper"><div class="ldio-yj1mc95c7go"><div><div></div><div></div><div></div></div><div><div></div><div></div><div></div></div></div></div></div><nav class="navbar navbar-expand-lg navbar-light"><div class="container"><div class="navbar-brand d-flex flex-row align-items-center"><div class="pr-2"><a href="/"><img alt="Клуб 60 Секунд" class="logo-img1" id="logo-img" src="/static/img/logo.svg"></a></div><div class="d-flex flex-column" id="club-selector"><div class="text-truncate" style="max-width: 250px; margin-bottom: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="league_name" id="league_name">Выбрать Лигу</span></a></div><div style="margin-top: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="city" id="city">Санкт-Петербург</span></a></div></div></div><div class="d-flex flex-row order-2 order-lg-3"><ul class="navbar-nav flex-row"><li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="navbarDropdown" role="button"><i class="fa fa-search mt-1 pr-3 pr-lg-0"></i></a><div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right popout"><form action="/search/" class="form-inline dropdown-item" id="form-id" method="get"><div class="input-group" style="min-width: 200px;"><input autocomplete="off" class="form-control py-2 border-right-0 border" id="example-search-input" name="search" placeholder="Поиск" style="outline: 0 !important; border-color: initial; box-shadow: none;" type="Поиск"><span class="input-group-append"><div class="input-group-text bg-transparent"><i class="fa fa-search" onclick="document.getElementById('form-id').submit();" style="cursor: pointer;"></i></div></span></div></form></div></li><li class="dropdown nav-item"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="lang_dropdown" role="button"><img alt="Русский" class="mb-1" id="flag-gb" src="/static/img/ru.svg" width="24"></a><div aria-labelledby="lang_dropdown" class="dropdown-menu dropdown-menu-right popout"><a class="dropdown-item" href="/en/game/18616/"><img alt="English" class="mb-1 pr-2" id="flag-gb" src="/static/img/gb.svg" width="24">English</a><a class="dropdown-item" href="/game/18616/"><img alt="Русский" class="mb-1 pr-2" id="flag-ru" src="/static/img/ru.svg" width="24">Русский</a></div></li></ul><button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" style="border: 0px;" type="button"><i class="material-icons dark-blue">more_vert</i></button></div><div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent"><ul class="navbar-nav mr-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/igroki/" style="color:#0096E4 !important;">ИГРОКИ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/faq/">FAQ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/syncro/">Синхроны</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/teams/118/">Команды</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/reglament/118/">Регламент</a></li></ul><ul class="navbar-nav ml-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/login/">Вход</a></li></ul></div></div></nav><div aria-hidden="true" aria-labelledby="cityModalTitle" class="modal fade bd-example-modal-lg" id="cityModal" role="document" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg" role="document"><div class="modal-content"><div class="modal-body"><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button><div class="container" id="leagues"><div class="row"><div class="mx-auto text-center dark-blue" id="modal_city"><p>Ваш город <span class="modal-city">Санкт-Петербург</span> верно? <span class="modal-city-inv multi" onclick="select_city()">Нет</span> <span class="multi"><br>Выберите лигу. Вы сможете поменять выбор в любой момент.</span></p><div class="mx-auto text-center pb-2 single" style="display: none;"><span class="modal-city-yes" onclick="set_league(215)">&nbsp;Да&nbsp;</span> <span class="modal-city-inv" onclick="select_city()">Нет</span></div><p></p></div><div class="col-lg-6 col-12 text-center container pb-2 offline"><h5 class="dark-blue pb-1" onclick="toggleOff()" style="cursor: pointer;">Offline <i class="fas fa-angle-down fa-xs" id="off-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(118)">Первая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(119)">Высшая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(121)">Корпоративная лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(117)">Открытая лига</a></div></div></div><div class="col-lg-6 col-12 text-center container pb-1 online"><h5 class="dark-blue pb-1" onclick="toggleOn()" style="cursor: pointer;">Online <i class="fas fa-angle-down fa-xs" id="on-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(198)">Киберлига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(207)">Спецпроекты</a></div></div></div><div class="mx-auto text-center container pb-2 archive" style="display: none;"><h5 class="dark-blue" onclick="toggleArchive()" style="cursor: pointer;">Archive <i class="fas fa-angle-down fa-xs" id="archive-icon"></i></h5><div class="container modal-leagues pb-3"></div></div></div></div><div class="container" id="cityes" style="display:none;"><h2 class="black pt-4">Наша география</h2><input class="form-control" id="cityInput" onkeyup="cityFilter()" placeholder="Поиск" type="text"><br><div class="container pb-3 list-group d-flex flex-row flex-wrap"><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(57, 'Актау')">Актау</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(121, 'Аланья')">Аланья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(104, 'Алматы')">Алматы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(116, 'Анталья')">Анталья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(2, 'Антананариву')">Антананариву</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(45, 'Архангельск и Северодвинск')">Архангельск и Северодвинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(34, 'Астрахань')">Астрахань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(43, 'Баку')">Баку</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(81, 'Барнаул')">Барнаул</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(126, 'Батуми')">Батуми</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(24, 'Берлин')">Берлин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(102, 'Бишкек')">Бишкек</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(96, 'Бремен')">Бремен</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(12, 'Брест')">Брест</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(11, 'Великий Новгород')">Великий Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(122, 'Вильнюс')">Вильнюс</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(6, 'Владивосток')">Владивосток</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(22, 'Владимир')">Владимир</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(53, 'Вологда')">Вологда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(61, 'Воркута')">Воркута</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(30, 'Воронеж')">Воронеж</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(28, 'Воткинск')">Воткинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(73, 'Гаага')">Гаага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(76, 'Гамбург')">Гамбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(51, 'Гатчина')">Гатчина</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(40, 'Глазов')">Глазов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(106, 'Гуанчжоу')">Гуанчжоу</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(77, 'Детройт')">Детройт</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(39, 'Дубай')">Дубай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(47, 'Екатеринбург')">Екатеринбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(113, 'Ереван')">Ереван</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(109, 'Жуковский')">Жуковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(87, 'Зарайск')">Зарайск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(44, 'Иваново')">Иваново</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(94, 'Игра Головой Online')">Игра Головой Online</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(68, 'Ижевск')">Ижевск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(90, 'Иматра')">Иматра</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(128, 'Йошкар-Ола')">Йошкар-Ола</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(108, 'Казань')">Казань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(99, 'Калгари')">Калгари</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(13, 'Калининград')">Калининград</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(63, 'Калуга')">Калуга</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(112, 'Караганда')">Караганда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(101, 'Кёльн')">Кёльн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(37, 'Кемерово')">Кемерово</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(75, 'Киль')">Киль</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(3, 'Киров')">Киров</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(74, 'Кливленд')">Кливленд</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(41, 'Коломна')">Коломна</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(117, 'Комсомольск-на-Амуре')">Комсомольск-на-Амуре</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(65, 'Кострома')">Кострома</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(52, 'Котлас')">Котлас</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(19, 'Курск')">Курск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(91, 'Лаппеенранта')">Лаппеенранта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(1, 'Лимасол')">Лимасол</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(111, 'Лиссабон')">Лиссабон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(21, 'Лондон')">Лондон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(80, 'Лос-Анджелес')">Лос-Анджелес</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(105, 'Луховицы')">Луховицы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(124, 'Манавгат')">Манавгат</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(67, 'Миасс, Златоуст, Сатка')">Миасс, Златоуст, Сатка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(78, 'Минск')">Минск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(25, 'Москва')">Москва</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(62, 'Мурманск')">Мурманск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(110, 'Набережные Челны')">Набережные Челны</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(64, 'Надым')">Надым</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(8, 'Находка')">Находка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(23, 'Нижнекамск')">Нижнекамск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(16, 'Нижний Новгород')">Нижний Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(88, 'Никосия')">Никосия</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(123, 'Нови Сад')">Нови Сад</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(46, 'Новокузнецк')">Новокузнецк</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(50, 'Новомосковск')">Новомосковск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(17, 'Новосибирск')">Новосибирск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(119, 'Ноябрьск')">Ноябрьск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(97, 'Нур-Султан')">Нур-Султан</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(125, 'Обнинск')">Обнинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(82, 'Омск')">Омск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(92, 'Орск')">Орск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(84, 'Островцы и Октябрьский')">Островцы и Октябрьский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(89, 'Павлодар')">Павлодар</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(127, 'Пафос')">Пафос</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(107, 'Пекин')">Пекин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(58, 'Пенза')">Пенза</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(120, 'Петропавловск-Камчатский')">Петропавловск-Камчатский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(114, 'Пинск')">Пинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(33, 'Прага')">Прага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(59, 'Псков')">Псков</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(129, 'Раменское')">Раменское</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(49, 'Ростов-на-Дону')">Ростов-на-Дону</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(20, 'Рязань')">Рязань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(26, 'Самара')">Самара</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(71, 'Санкт-Петербург')">Санкт-Петербург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(95, 'Саратов')">Саратов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(85, 'Североморск')">Североморск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(66, 'Симферополь')">Симферополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(93, 'Ставрополь')">Ставрополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(31, 'Стокгольм')">Стокгольм</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(48, 'Таганрог')">Таганрог</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(15, 'Таллинн')">Таллинн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(55, 'Ташкент')">Ташкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(118, 'Тбилиси')">Тбилиси</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(29, 'Тверь')">Тверь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(56, 'Тенерифе')">Тенерифе</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(70, 'Томск')">Томск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(69, 'Тула')">Тула</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(83, 'Удомля')">Удомля</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(54, 'Уссурийск')">Уссурийск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(60, 'Ухта')">Ухта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(9, 'Хабаровск')">Хабаровск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(115, 'Чайковский')">Чайковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(38, 'Чебоксары')">Чебоксары</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(35, 'Челябинск')">Челябинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(18, 'Чита')">Чита</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(100, 'Шанхай')">Шанхай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(72, 'Шахты')">Шахты</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(103, 'Шымкент')">Шымкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(27, 'Элиста')">Элиста</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(14, 'Югорск')">Югорск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(42, 'Ярославль')">Ярославль</a></div></div></div></div></div></div></div><div id="header"><div class="container unskew"><div class="row"><div class="col-12 pb-2"><div class="card transparent"><div class="card-body" style="padding:0;"><h2 class="white">Первая лига | Игра #5</h2><div class="white-razdel"></div><div class="l-blue pt-2">Санкт-Петербург / <a href="/league/118/">Первая лига</a> / <a href="/season/2091/">Весна 2023</a> / 11 апреля 2023 19:30</div></div></div></div><div class="col-md-6 col-12 py-3 pt-md-0"><a class="btn btn-yellow" href="/enterthegame/18616/" style="min-width: 250px;">Войти в игру</a></div></div></div></div><div class="container-fluid pt-3"><div class="row justify-content-center"><div class="col-12" style="margin-bottom: -38px; z-index: 10"><div class="d-flex flex-row-reverse"><div class="dropdown show text-right"><a aria-label="Game menu button" class="table_a" data-toggle="dropdown" href="#" id="dropdownMenuLink" role="button"><h2><i class="fas fa-bars"></i></h2></a><div aria-labelledby="dropdownMenuLink" class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#" onclick="divshow()">По дивизионам</a> <a class="dropdown-item" data-target="#graph" data-toggle="collapse" href="#">График взятия</a> <a class="dropdown-item" href="#" onclick="QRS()">Рейтинг вопросов</a> <a class="dropdown-item" href="/game/18616/show">Режим демонстрации</a></div></div></div></div><div class="collapse container-fluid" id="graph"><div class="row justify-content-center"><div class="col-12 col-lg-10 col-xl-8"><canvas id="bar-chart" height="0" width="0" class="chartjs-render-monitor" style="display: block; height: 0px; width: 0px;"></canvas></div></div></div><div class="col-12"><div class="pb-4" id="main_content"></div></div><div class="col-12"><div class="pb-3"></div></div></div></div><footer class="footer"><div class="footer_top mt-n3"></div><div class="container"><div class="row"><div class="col-12"><div class="d-flex justify-content-between"><div class="pb-3"><a class="no-bb" href="/"><img alt="Клуб 60 Секунд" src="/static/img/logo_white.svg" width="80"></a></div><div class="mt-4"><a class="btn btn_w_ol btn-sm" href="http://vopros.club60sec.ru/" rel="noopener" target="_blank">Прислать вопрос</a></div></div></div><div class="col-md-6 small"><p class="truncate">© 2016-2023. Интеллектуальный клуб «60 секунд».<br>ИП Жирнов Д. В. | <a class="foot-link" href="/static/requisites.pdf" rel="noopener" target="_blank">реквизиты</a></p></div><div class="col-md-6 text-right small"><p><a class="link_privacy foot-link" href="https://club60sec.ru/privacy/" rel="noopener" target="_blank">Политика конфиденциальности</a><br>powered by <a class="foot-link" href="https://madrobit.com" rel="noopener" target="_blank">madrobit.com</a></p></div></div></div></footer><link href="/static/fontawesome/css/all.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/alertify.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/corner-popup.min.css?v=1.5.1" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-B97GDESXDV&amp;l=dataLayer&amp;cx=c"></script><script src="/static/js/js.cookie.min.js?v=1.5.1"></script><script src="/static/js/jquery-3.4.1.min.js?v=1.5.1"></script><script src="/static/js/popper.min.js?v=1.5.1"></script><script src="/static/js/bootstrap.min.js?v=1.5.1"></script><script src="/static/js/corner-popup.js?v=1.5.1"></script><script src="/static/js/reconnecting-websocket.min.js?v=1.5.1"></script><script src="/static/js/alertify.min.js?v=1.5.1"></script><script type="text/javascript">
+    setTimeout(function(){
+      $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+    }, 5000);
+
+    $(window).on("load", function (e) {
+    // Animate loader off screen
+    
+    $(".single").hide();
+    
+
+    if (Cookies.get('league') != undefined)
+    {
+      $('#city').text(htmlDecode(''));
+      $('#league_name').text(htmlDecode(''));
+      $('.modal-city').text(htmlDecode(''));
+      
+    }
+    else{
+      set_city(71, 'Санкт-Петербург');
+    };
+
+    $.fn.cornerpopup({
+      variant: 2
+    });
+    $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+  });
+    function toggleOn() {
+      $(".online .modal-leagues").toggle();
+      $("#on-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleOff() {
+      $(".offline .modal-leagues").toggle();
+      $("#off-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleArchive() {
+      $(".archive .modal-leagues").toggle();
+      $("#archive-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    
+    function htmlDecode(value) {
+      return $("<textarea/>").html(value).text();
+    };
+    function set_city(club_id, city) {
+
+      $(".modal-leagues").empty();
+      $(".archive").hide();
+      $.ajax({
+        url: "/getclubleagues/", // the endpoint
+        type: "POST", // http method
+        data: {
+          club_id: club_id,
+          csrfmiddlewaretoken: 'JVWMJHKC6i1NqHLlrurrvw59tKdHGATUXTkrN8wTDFLiL1OoEWDHnvLxkCIOV1hc',
+        }, // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+         if (Object.keys(json.on).length + Object.keys(json.off).length > 1){
+          $(".single").hide();
+          $(".multi").show();
+
+          if (Object.keys(json.off).length > 0){
+            $.each(json.off, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".offline .modal-leagues").append(div);
+            });
+            $(".offline").show();
+            if (club_id == 25) {
+              $(".offline .modal-leagues").hide();
+            }
+            
+          } else{
+            $(".offline").hide();
+          }
+          if (Object.keys(json.on).length > 0){
+            $.each(json.on, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".online .modal-leagues").append(div);
+            });
+            $(".online").show();
+            if (club_id == 25) {
+              $(".online .modal-leagues").hide();
+            }
+            $(".offline .off-title").show();
+              //$(".offline .modal-leagues").hide();
+            } else {
+              $(".online").hide();
+              //$(".offline .modal-leagues").show();
+              $(".offline .off-title").hide();
+            }
+          }
+          else {
+            $(".modal-city-yes").removeAttr('onclick');
+            if (Object.keys(json.off).length > 0){
+              $.each(json.off, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            } else {
+              $.each(json.on, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            };
+            $(".multi").hide();
+            $(".single").show();
+            $(".online").hide();
+            $(".offline").hide();
+          };
+          if (Object.keys(json.archive).length > 0){
+            $.each(json.archive, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".archive .modal-leagues").append(div);
+            });
+            $(".archive").show();
+            $(".archive .modal-leagues").hide();
+          } else {
+            $(".archive").hide();
+          };
+
+        },
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+        });
+
+      $('.modal-city').text(city);
+      $('#leagues').slideDown(200);
+      $('#cityes').fadeOut(200);
+
+    };
+
+    function set_league(league_id) {
+      Cookies.set('league', league_id, { expires: 90 });
+      document.location.href="/";
+    };
+
+    function select_city() {
+      $('#leagues').fadeOut(200);
+      $('#cityes').slideDown(200);
+    };
+
+    function cityFilter() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("cityInput");
+  filter = input.value.toUpperCase();
+
+  $('.modal-a-div').each(function() {
+    if ($(this).text().toUpperCase().indexOf(filter) > -1) {
+      $(this).show();
+    } else {
+      $(this).css("display","none");
+    }
+  });
+
+};
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".navbar");
+    var logo_img = $("#logo-img");
+    //$nav.toggleClass('', $(this).scrollTop() > $nav.height());
+    $nav.toggleClass('sticky-top bg-white', $(this).scrollTop() > $nav.height());
+    logo_img.toggleClass('logo-img', $(this).scrollTop() > $nav.height());
+  });
+});
+</script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-104995998-1');
+</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-104995998-1"></script><link href="/static/css/chart.min.css?v=1.5.1" rel="stylesheet"><script src="/static/js/chart.bundle.min.js?v=1.5.1"></script><script src="/static/js/jquery.tablesorter.min.js?v=1.5.1" type="text/javascript"></script><script src="/static/js/gametable.js?v=1.5.1"></script><script src="/static/js/FileSaver.min.js?v=1.5.1"></script><script src="/static/js/tableexport.min.js?v=1.5.1"></script><script type="text/javascript">
+
+const game_settings = {"divisions": {"100": "\u0412\u043d\u0435 \u0437\u0430\u0447\u0451\u0442\u0430"}, "divisions_count": 1, "countmatrix": true, "countrating": false, "dontskipplaces": false, "tours": 3, "qlist": [12, 24, 36], "questions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mediatours": [], "media_game": false, "matrix_game": false, "show_city": false, "language": "ru"};
+
+function get_game_results(key) {
+    $.ajax({
+          url: "/get_game_results/", // the endpoint
+          type: "GET", // http method
+          data: {
+            csrfmiddlewaretoken: 'JVWMJHKC6i1NqHLlrurrvw59tKdHGATUXTkrN8wTDFLiL1OoEWDHnvLxkCIOV1hc',
+            game_id: '18616',
+            key: key,
+          },
+          async: false,
+          success: function (json) {
+                if(json.teams > 0){
+                    createtable(json, game_settings, key);
+                    $("#jsonTable_"+key).tablesorter({
+                        sortList : [[0,0], [2,0]]
+                    });
+                };
+          },
+          error: function (xhr, errmsg, err) {
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('Проблема с получением информации с сервера. Попробуйте обновить страницу позже.');
+          }
+    });
+};
+
+
+function toogletur(tur_id) {
+    event.stopPropagation();
+    $(".table ."+tur_id+"_tur").toggleClass("d-none");
+    $("."+tur_id+"_but").toggleClass("fa-plus-square").toggleClass("fa-minus-square");
+};
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({delay: { "show": 500, "hide": 200 }});
+});
+
+
+$(document).ready(function () {
+    if ((Cookies.get('divs') == 'True') && (game_settings.divisions_count > 1))
+    {
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    } else {
+        get_game_results(1000);
+    };
+
+    var labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+    var graph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var ctx = document.getElementById('bar-chart').getContext('2d');
+      var barChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              datasets: [{
+                  label: 'Правильных ответов',
+                  yAxisID: 'A',
+                  backgroundColor: '#0096E4',
+                  data: graph,
+              }],
+              labels: labels,
+          },
+          options: {
+            aspectRatio: 2.5,
+            title: {
+                display: true,
+                fontColor: '#090438',
+                text: "Команд в игре: 0 | взятие: 0.00% | гробов:  36 | спасённых:  0 | кнопок:  0 | дыр: 0."
+            },
+            legend: {
+              labels: {
+                  fontColor: '#090438'
+                }
+              },
+            scales: {
+              xAxes: [{
+                 ticks: {
+                    fontColor: "#090438",
+                 }
+              }],
+              yAxes: [{
+                id: 'A',
+                type: 'linear',
+                position: 'left',
+                ticks: {
+                  //max: 40,
+                  min: 0,
+                  fontColor: "#090438",
+                }
+              }]
+            }
+          }
+      });
+      $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+});
+
+
+
+
+function QRS() {
+    //iterate through each row in the table
+    $('.qrs').each(function(){
+        $(this).fadeToggle();
+    });
+};
+
+function divshow() {
+    if (game_settings.divisions_count < 2){return false};
+    $("#main_content").empty();
+    if (Cookies.get('divs') == 'True')
+    {
+        Cookies.set('divs', 'False', { expires: 10 });
+        get_game_results(1000); 
+    } else {
+        Cookies.set('divs', 'True', { expires: 10 });
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    }
+};
+
+function xlsdownload() {
+    $("table").each(function(){
+        TableExport.prototype.charset = "charset=utf-8";
+
+        if (this.id.substring(0,4) == 'json'){
+            var tableid = this.id
+            var exporttable = $(this).tableExport({
+                formats: ['csv'],
+                exportButtons: false,
+                filename: 'Первая лига | Игра #5',
+                separator: ',',
+                mimeType: 'text/csv',
+                fileExtension: '.csv',
+                enforceStrictRFC4180: true
+            });
+            
+        var exportData = exporttable.getExportData();
+        var xlsxData = exportData[tableid].csv; 
+        exporttable.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges);
+        }
+    });
+};
+
+</script><link href="https://www.google-analytics.com" rel="preconnect"><link href="https://stats.g.doubleclick.net" rel="preconnect"><div id="corner-popup" class="popup-xs" style="display: flex;"><div class="hide-mobile col sm-4"><img src="/static/img/cookie.png" class="corner-img-cookie responsive"></div><div class="col xs-12 sm-8"><div class="corner-close close-change"></div><div class="corner-container"><p class="corner-text">This website uses cookies to ensure you get the best experience on our website. <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" class="cookie-more">More information.</a></p><a class="corner-btn-cookie">Got it</a></div></div></div></body></html>`
+	html18617 = `<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"><meta content="" name="description"><meta content="madrobit" name="author"><title>Первая лига | Игра #6 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»</title><meta content="Таблица игры сезона: Первая лига | Игра #6 | Первая лига (Санкт-Петербург, Клуб «60 Секунд») | Весна 2023 | Клуб «60 секунд»" name="Description"><link href="/static/apple-touch-icon.png?v=1.5.1" rel="apple-touch-icon" sizes="180x180"><link href="/static/favicon-32x32.png?v=1.5.1" rel="icon" sizes="32x32" type="image/png"><link href="/static/favicon-16x16.png?v=1.5.1" rel="icon" sizes="16x16" type="image/png"><link href="/static/site.webmanifest" rel="manifest"><link color="#5bbad5" href="/static/safari-pinned-tab.svg?v=1.5.1" rel="mask-icon"><link href="/static/favicon.ico?v=1.5.1" rel="shortcut icon"><meta content="#2b5797" name="msapplication-TileColor"><meta content="/static/browserconfig.xml?v=1.5.1" name="msapplication-config"><meta content="#ffffff" name="theme-color"><meta content="https://60sec.online/static/img/snippet.jpg" property="og:image"><link href="/static/css/bootstrap.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/style.css?v=1.5.1" rel="stylesheet"><style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head><body><div class="loadingio-spinner-bean-eater-i7x2im0jb9" style="display: none;"><div class="int-packman-wrapper"><div class="ldio-yj1mc95c7go"><div><div></div><div></div><div></div></div><div><div></div><div></div><div></div></div></div></div></div><nav class="navbar navbar-expand-lg navbar-light"><div class="container"><div class="navbar-brand d-flex flex-row align-items-center"><div class="pr-2"><a href="/"><img alt="Клуб 60 Секунд" class="logo-img1" id="logo-img" src="/static/img/logo.svg"></a></div><div class="d-flex flex-column" id="club-selector"><div class="text-truncate" style="max-width: 250px; margin-bottom: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="league_name" id="league_name">Выбрать Лигу</span></a></div><div style="margin-top: -6px;"><a data-target="#cityModal" data-toggle="modal" href="#"><span class="city" id="city">Санкт-Петербург</span></a></div></div></div><div class="d-flex flex-row order-2 order-lg-3"><ul class="navbar-nav flex-row"><li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="navbarDropdown" role="button"><i class="fa fa-search mt-1 pr-3 pr-lg-0"></i></a><div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right popout"><form action="/search/" class="form-inline dropdown-item" id="form-id" method="get"><div class="input-group" style="min-width: 200px;"><input autocomplete="off" class="form-control py-2 border-right-0 border" id="example-search-input" name="search" placeholder="Поиск" style="outline: 0 !important; border-color: initial; box-shadow: none;" type="Поиск"><span class="input-group-append"><div class="input-group-text bg-transparent"><i class="fa fa-search" onclick="document.getElementById('form-id').submit();" style="cursor: pointer;"></i></div></span></div></form></div></li><li class="dropdown nav-item"><a aria-expanded="false" aria-haspopup="true" class="nav-link nav-link-nav" data-toggle="dropdown" href="#" id="lang_dropdown" role="button"><img alt="Русский" class="mb-1" id="flag-gb" src="/static/img/ru.svg" width="24"></a><div aria-labelledby="lang_dropdown" class="dropdown-menu dropdown-menu-right popout"><a class="dropdown-item" href="/en/game/18617/"><img alt="English" class="mb-1 pr-2" id="flag-gb" src="/static/img/gb.svg" width="24">English</a><a class="dropdown-item" href="/game/18617/"><img alt="Русский" class="mb-1 pr-2" id="flag-ru" src="/static/img/ru.svg" width="24">Русский</a></div></li></ul><button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" style="border: 0px;" type="button"><i class="material-icons dark-blue">more_vert</i></button></div><div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent"><ul class="navbar-nav mr-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/igroki/" style="color:#0096E4 !important;">ИГРОКИ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/faq/">FAQ</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/syncro/">Синхроны</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/teams/118/">Команды</a></li><li class="nav-item"><a class="nav-link nav-link-nav" href="/reglament/118/">Регламент</a></li></ul><ul class="navbar-nav ml-auto uppercase"><li class="nav-item"><a class="nav-link nav-link-nav" href="/login/">Вход</a></li></ul></div></div></nav><div aria-hidden="true" aria-labelledby="cityModalTitle" class="modal fade bd-example-modal-lg" id="cityModal" role="document" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg" role="document"><div class="modal-content"><div class="modal-body"><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button><div class="container" id="leagues"><div class="row"><div class="mx-auto text-center dark-blue" id="modal_city"><p>Ваш город <span class="modal-city">Санкт-Петербург</span> верно? <span class="modal-city-inv multi" onclick="select_city()">Нет</span> <span class="multi"><br>Выберите лигу. Вы сможете поменять выбор в любой момент.</span></p><div class="mx-auto text-center pb-2 single" style="display: none;"><span class="modal-city-yes" onclick="set_league(215)">&nbsp;Да&nbsp;</span> <span class="modal-city-inv" onclick="select_city()">Нет</span></div><p></p></div><div class="col-lg-6 col-12 text-center container pb-2 offline"><h5 class="dark-blue pb-1" onclick="toggleOff()" style="cursor: pointer;">Offline <i class="fas fa-angle-down fa-xs" id="off-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(118)">Первая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(119)">Высшая лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(121)">Корпоративная лига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(117)">Открытая лига</a></div></div></div><div class="col-lg-6 col-12 text-center container pb-1 online"><h5 class="dark-blue pb-1" onclick="toggleOn()" style="cursor: pointer;">Online <i class="fas fa-angle-down fa-xs" id="on-icon"></i></h5><div class="container modal-leagues pb-3"><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(198)">Киберлига</a></div><div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(207)">Спецпроекты</a></div></div></div><div class="mx-auto text-center container pb-2 archive" style="display: none;"><h5 class="dark-blue" onclick="toggleArchive()" style="cursor: pointer;">Archive <i class="fas fa-angle-down fa-xs" id="archive-icon"></i></h5><div class="container modal-leagues pb-3"></div></div></div></div><div class="container" id="cityes" style="display:none;"><h2 class="black pt-4">Наша география</h2><input class="form-control" id="cityInput" onkeyup="cityFilter()" placeholder="Поиск" type="text"><br><div class="container pb-3 list-group d-flex flex-row flex-wrap"><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(57, 'Актау')">Актау</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(121, 'Аланья')">Аланья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(104, 'Алматы')">Алматы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(116, 'Анталья')">Анталья</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(2, 'Антананариву')">Антананариву</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(45, 'Архангельск и Северодвинск')">Архангельск и Северодвинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(34, 'Астрахань')">Астрахань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(43, 'Баку')">Баку</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(81, 'Барнаул')">Барнаул</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(126, 'Батуми')">Батуми</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(24, 'Берлин')">Берлин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(102, 'Бишкек')">Бишкек</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(96, 'Бремен')">Бремен</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(12, 'Брест')">Брест</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(11, 'Великий Новгород')">Великий Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(122, 'Вильнюс')">Вильнюс</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(6, 'Владивосток')">Владивосток</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(22, 'Владимир')">Владимир</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(53, 'Вологда')">Вологда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(61, 'Воркута')">Воркута</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(30, 'Воронеж')">Воронеж</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(28, 'Воткинск')">Воткинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(73, 'Гаага')">Гаага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(76, 'Гамбург')">Гамбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(51, 'Гатчина')">Гатчина</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(40, 'Глазов')">Глазов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(106, 'Гуанчжоу')">Гуанчжоу</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(77, 'Детройт')">Детройт</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(39, 'Дубай')">Дубай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(47, 'Екатеринбург')">Екатеринбург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(113, 'Ереван')">Ереван</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(109, 'Жуковский')">Жуковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(87, 'Зарайск')">Зарайск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(44, 'Иваново')">Иваново</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(94, 'Игра Головой Online')">Игра Головой Online</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(68, 'Ижевск')">Ижевск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(90, 'Иматра')">Иматра</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(128, 'Йошкар-Ола')">Йошкар-Ола</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(108, 'Казань')">Казань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(99, 'Калгари')">Калгари</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(13, 'Калининград')">Калининград</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(63, 'Калуга')">Калуга</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(112, 'Караганда')">Караганда</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(101, 'Кёльн')">Кёльн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(37, 'Кемерово')">Кемерово</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(75, 'Киль')">Киль</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(3, 'Киров')">Киров</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(74, 'Кливленд')">Кливленд</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(41, 'Коломна')">Коломна</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(117, 'Комсомольск-на-Амуре')">Комсомольск-на-Амуре</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(65, 'Кострома')">Кострома</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(52, 'Котлас')">Котлас</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(19, 'Курск')">Курск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(91, 'Лаппеенранта')">Лаппеенранта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(1, 'Лимасол')">Лимасол</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(111, 'Лиссабон')">Лиссабон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(21, 'Лондон')">Лондон</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(80, 'Лос-Анджелес')">Лос-Анджелес</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(105, 'Луховицы')">Луховицы</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(124, 'Манавгат')">Манавгат</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(67, 'Миасс, Златоуст, Сатка')">Миасс, Златоуст, Сатка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(78, 'Минск')">Минск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(25, 'Москва')">Москва</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(62, 'Мурманск')">Мурманск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(110, 'Набережные Челны')">Набережные Челны</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(64, 'Надым')">Надым</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(8, 'Находка')">Находка</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(23, 'Нижнекамск')">Нижнекамск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(16, 'Нижний Новгород')">Нижний Новгород</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(88, 'Никосия')">Никосия</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(123, 'Нови Сад')">Нови Сад</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(46, 'Новокузнецк')">Новокузнецк</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(50, 'Новомосковск')">Новомосковск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(17, 'Новосибирск')">Новосибирск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(119, 'Ноябрьск')">Ноябрьск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(97, 'Нур-Султан')">Нур-Султан</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(125, 'Обнинск')">Обнинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(82, 'Омск')">Омск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(92, 'Орск')">Орск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(84, 'Островцы и Октябрьский')">Островцы и Октябрьский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(89, 'Павлодар')">Павлодар</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(127, 'Пафос')">Пафос</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(107, 'Пекин')">Пекин</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(58, 'Пенза')">Пенза</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(120, 'Петропавловск-Камчатский')">Петропавловск-Камчатский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(114, 'Пинск')">Пинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(33, 'Прага')">Прага</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(59, 'Псков')">Псков</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(129, 'Раменское')">Раменское</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(49, 'Ростов-на-Дону')">Ростов-на-Дону</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(20, 'Рязань')">Рязань</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(26, 'Самара')">Самара</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(71, 'Санкт-Петербург')">Санкт-Петербург</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(95, 'Саратов')">Саратов</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(85, 'Североморск')">Североморск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(66, 'Симферополь')">Симферополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(93, 'Ставрополь')">Ставрополь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(31, 'Стокгольм')">Стокгольм</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(48, 'Таганрог')">Таганрог</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(15, 'Таллинн')">Таллинн</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(55, 'Ташкент')">Ташкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(118, 'Тбилиси')">Тбилиси</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(29, 'Тверь')">Тверь</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(56, 'Тенерифе')">Тенерифе</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(70, 'Томск')">Томск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(69, 'Тула')">Тула</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(83, 'Удомля')">Удомля</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(54, 'Уссурийск')">Уссурийск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(60, 'Ухта')">Ухта</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(9, 'Хабаровск')">Хабаровск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(115, 'Чайковский')">Чайковский</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(38, 'Чебоксары')">Чебоксары</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(35, 'Челябинск')">Челябинск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(18, 'Чита')">Чита</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(100, 'Шанхай')">Шанхай</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(72, 'Шахты')">Шахты</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(103, 'Шымкент')">Шымкент</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(27, 'Элиста')">Элиста</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(14, 'Югорск')">Югорск</a></div><div class="modal-a-div" style="padding: 10px; padding-right: 20px;"><a class="modal-a" href="#" onclick="set_city(42, 'Ярославль')">Ярославль</a></div></div></div></div></div></div></div><div id="header"><div class="container unskew"><div class="row"><div class="col-12 pb-2"><div class="card transparent"><div class="card-body" style="padding:0;"><h2 class="white">Первая лига | Игра #6</h2><div class="white-razdel"></div><div class="l-blue pt-2">Санкт-Петербург / <a href="/league/118/">Первая лига</a> / <a href="/season/2091/">Весна 2023</a> / 18 апреля 2023 19:30</div></div></div></div><div class="col-md-6 col-12 py-3 pt-md-0"><a class="btn btn-yellow" href="/enterthegame/18617/" style="min-width: 250px;">Войти в игру</a></div></div></div></div><div class="container-fluid pt-3"><div class="row justify-content-center"><div class="col-12" style="margin-bottom: -38px; z-index: 10"><div class="d-flex flex-row-reverse"><div class="dropdown show text-right"><a aria-label="Game menu button" class="table_a" data-toggle="dropdown" href="#" id="dropdownMenuLink" role="button"><h2><i class="fas fa-bars"></i></h2></a><div aria-labelledby="dropdownMenuLink" class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#" onclick="divshow()">По дивизионам</a> <a class="dropdown-item" data-target="#graph" data-toggle="collapse" href="#">График взятия</a> <a class="dropdown-item" href="#" onclick="QRS()">Рейтинг вопросов</a> <a class="dropdown-item" href="/game/18617/show">Режим демонстрации</a></div></div></div></div><div class="collapse container-fluid" id="graph"><div class="row justify-content-center"><div class="col-12 col-lg-10 col-xl-8"><canvas id="bar-chart" height="0" width="0" class="chartjs-render-monitor" style="display: block; height: 0px; width: 0px;"></canvas></div></div></div><div class="col-12"><div class="pb-4" id="main_content"></div></div><div class="col-12"><div class="pb-3"></div></div></div></div><footer class="footer"><div class="footer_top mt-n3"></div><div class="container"><div class="row"><div class="col-12"><div class="d-flex justify-content-between"><div class="pb-3"><a class="no-bb" href="/"><img alt="Клуб 60 Секунд" src="/static/img/logo_white.svg" width="80"></a></div><div class="mt-4"><a class="btn btn_w_ol btn-sm" href="http://vopros.club60sec.ru/" rel="noopener" target="_blank">Прислать вопрос</a></div></div></div><div class="col-md-6 small"><p class="truncate">© 2016-2023. Интеллектуальный клуб «60 секунд».<br>ИП Жирнов Д. В. | <a class="foot-link" href="/static/requisites.pdf" rel="noopener" target="_blank">реквизиты</a></p></div><div class="col-md-6 text-right small"><p><a class="link_privacy foot-link" href="https://club60sec.ru/privacy/" rel="noopener" target="_blank">Политика конфиденциальности</a><br>powered by <a class="foot-link" href="https://madrobit.com" rel="noopener" target="_blank">madrobit.com</a></p></div></div></div></footer><link href="/static/fontawesome/css/all.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/alertify.min.css?v=1.5.1" rel="stylesheet"><link href="/static/css/corner-popup.min.css?v=1.5.1" rel="stylesheet"><link href="https://fonts.googleapis.com/icon?family=Material+Icons&amp;display=swap" rel="stylesheet"><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-B97GDESXDV&amp;l=dataLayer&amp;cx=c"></script><script src="/static/js/js.cookie.min.js?v=1.5.1"></script><script src="/static/js/jquery-3.4.1.min.js?v=1.5.1"></script><script src="/static/js/popper.min.js?v=1.5.1"></script><script src="/static/js/bootstrap.min.js?v=1.5.1"></script><script src="/static/js/corner-popup.js?v=1.5.1"></script><script src="/static/js/reconnecting-websocket.min.js?v=1.5.1"></script><script src="/static/js/alertify.min.js?v=1.5.1"></script><script type="text/javascript">
+    setTimeout(function(){
+      $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+    }, 5000);
+
+    $(window).on("load", function (e) {
+    // Animate loader off screen
+    
+    $(".single").hide();
+    
+
+    if (Cookies.get('league') != undefined)
+    {
+      $('#city').text(htmlDecode(''));
+      $('#league_name').text(htmlDecode(''));
+      $('.modal-city').text(htmlDecode(''));
+      
+    }
+    else{
+      set_city(71, 'Санкт-Петербург');
+    };
+
+    $.fn.cornerpopup({
+      variant: 2
+    });
+    $(".loadingio-spinner-bean-eater-i7x2im0jb9").fadeOut("slow");
+  });
+    function toggleOn() {
+      $(".online .modal-leagues").toggle();
+      $("#on-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleOff() {
+      $(".offline .modal-leagues").toggle();
+      $("#off-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    function toggleArchive() {
+      $(".archive .modal-leagues").toggle();
+      $("#archive-icon").toggleClass("fa-angle-up fa-angle-down");
+    };
+    
+    function htmlDecode(value) {
+      return $("<textarea/>").html(value).text();
+    };
+    function set_city(club_id, city) {
+
+      $(".modal-leagues").empty();
+      $(".archive").hide();
+      $.ajax({
+        url: "/getclubleagues/", // the endpoint
+        type: "POST", // http method
+        data: {
+          club_id: club_id,
+          csrfmiddlewaretoken: 'bs5X3Vw0YDiNttD89mxnCbxoGz4YWuP4pqtC7mihv02iONGbmOJDuadMxrz5bVdm',
+        }, // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+         if (Object.keys(json.on).length + Object.keys(json.off).length > 1){
+          $(".single").hide();
+          $(".multi").show();
+
+          if (Object.keys(json.off).length > 0){
+            $.each(json.off, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".offline .modal-leagues").append(div);
+            });
+            $(".offline").show();
+            if (club_id == 25) {
+              $(".offline .modal-leagues").hide();
+            }
+            
+          } else{
+            $(".offline").hide();
+          }
+          if (Object.keys(json.on).length > 0){
+            $.each(json.on, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".online .modal-leagues").append(div);
+            });
+            $(".online").show();
+            if (club_id == 25) {
+              $(".online .modal-leagues").hide();
+            }
+            $(".offline .off-title").show();
+              //$(".offline .modal-leagues").hide();
+            } else {
+              $(".online").hide();
+              //$(".offline .modal-leagues").show();
+              $(".offline .off-title").hide();
+            }
+          }
+          else {
+            $(".modal-city-yes").removeAttr('onclick');
+            if (Object.keys(json.off).length > 0){
+              $.each(json.off, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            } else {
+              $.each(json.on, function(index, element) {
+                $(".modal-city-yes").attr('onclick', 'set_league('+element+');');
+              });
+            };
+            $(".multi").hide();
+            $(".single").show();
+            $(".online").hide();
+            $(".offline").hide();
+          };
+          if (Object.keys(json.archive).length > 0){
+            $.each(json.archive, function(index, element) {
+              var div = '<div class="mx-auto text-center pb-2"><a href="#" class="modal-a" onclick="set_league(' + element + ')">'+ index +'</a></div>'
+              $(".archive .modal-leagues").append(div);
+            });
+            $(".archive").show();
+            $(".archive .modal-leagues").hide();
+          } else {
+            $(".archive").hide();
+          };
+
+        },
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+          }
+        });
+
+      $('.modal-city').text(city);
+      $('#leagues').slideDown(200);
+      $('#cityes').fadeOut(200);
+
+    };
+
+    function set_league(league_id) {
+      Cookies.set('league', league_id, { expires: 90 });
+      document.location.href="/";
+    };
+
+    function select_city() {
+      $('#leagues').fadeOut(200);
+      $('#cityes').slideDown(200);
+    };
+
+    function cityFilter() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("cityInput");
+  filter = input.value.toUpperCase();
+
+  $('.modal-a-div').each(function() {
+    if ($(this).text().toUpperCase().indexOf(filter) > -1) {
+      $(this).show();
+    } else {
+      $(this).css("display","none");
+    }
+  });
+
+};
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".navbar");
+    var logo_img = $("#logo-img");
+    //$nav.toggleClass('', $(this).scrollTop() > $nav.height());
+    $nav.toggleClass('sticky-top bg-white', $(this).scrollTop() > $nav.height());
+    logo_img.toggleClass('logo-img', $(this).scrollTop() > $nav.height());
+  });
+});
+</script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-104995998-1');
+</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-104995998-1"></script><link href="/static/css/chart.min.css?v=1.5.1" rel="stylesheet"><script src="/static/js/chart.bundle.min.js?v=1.5.1"></script><script src="/static/js/jquery.tablesorter.min.js?v=1.5.1" type="text/javascript"></script><script src="/static/js/gametable.js?v=1.5.1"></script><script src="/static/js/FileSaver.min.js?v=1.5.1"></script><script src="/static/js/tableexport.min.js?v=1.5.1"></script><script type="text/javascript">
+
+const game_settings = {"divisions": {"100": "\u0412\u043d\u0435 \u0437\u0430\u0447\u0451\u0442\u0430"}, "divisions_count": 1, "countmatrix": true, "countrating": false, "dontskipplaces": false, "tours": 3, "qlist": [12, 24, 36], "questions": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "mediatours": [], "media_game": false, "matrix_game": false, "show_city": false, "language": "ru"};
+
+function get_game_results(key) {
+    $.ajax({
+          url: "/get_game_results/", // the endpoint
+          type: "GET", // http method
+          data: {
+            csrfmiddlewaretoken: 'bs5X3Vw0YDiNttD89mxnCbxoGz4YWuP4pqtC7mihv02iONGbmOJDuadMxrz5bVdm',
+            game_id: '18617',
+            key: key,
+          },
+          async: false,
+          success: function (json) {
+                if(json.teams > 0){
+                    createtable(json, game_settings, key);
+                    $("#jsonTable_"+key).tablesorter({
+                        sortList : [[0,0], [2,0]]
+                    });
+                };
+          },
+          error: function (xhr, errmsg, err) {
+            alertify.set('notifier','position', 'top-right');
+            alertify.error('Проблема с получением информации с сервера. Попробуйте обновить страницу позже.');
+          }
+    });
+};
+
+
+function toogletur(tur_id) {
+    event.stopPropagation();
+    $(".table ."+tur_id+"_tur").toggleClass("d-none");
+    $("."+tur_id+"_but").toggleClass("fa-plus-square").toggleClass("fa-minus-square");
+};
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({delay: { "show": 500, "hide": 200 }});
+});
+
+
+$(document).ready(function () {
+    if ((Cookies.get('divs') == 'True') && (game_settings.divisions_count > 1))
+    {
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    } else {
+        get_game_results(1000);
+    };
+
+    var labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+    var graph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      var ctx = document.getElementById('bar-chart').getContext('2d');
+      var barChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              datasets: [{
+                  label: 'Правильных ответов',
+                  yAxisID: 'A',
+                  backgroundColor: '#0096E4',
+                  data: graph,
+              }],
+              labels: labels,
+          },
+          options: {
+            aspectRatio: 2.5,
+            title: {
+                display: true,
+                fontColor: '#090438',
+                text: "Команд в игре: 0 | взятие: 0.00% | гробов:  36 | спасённых:  0 | кнопок:  0 | дыр: 0."
+            },
+            legend: {
+              labels: {
+                  fontColor: '#090438'
+                }
+              },
+            scales: {
+              xAxes: [{
+                 ticks: {
+                    fontColor: "#090438",
+                 }
+              }],
+              yAxes: [{
+                id: 'A',
+                type: 'linear',
+                position: 'left',
+                ticks: {
+                  //max: 40,
+                  min: 0,
+                  fontColor: "#090438",
+                }
+              }]
+            }
+          }
+      });
+      $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+});
+
+
+
+
+function QRS() {
+    //iterate through each row in the table
+    $('.qrs').each(function(){
+        $(this).fadeToggle();
+    });
+};
+
+function divshow() {
+    if (game_settings.divisions_count < 2){return false};
+    $("#main_content").empty();
+    if (Cookies.get('divs') == 'True')
+    {
+        Cookies.set('divs', 'False', { expires: 10 });
+        get_game_results(1000); 
+    } else {
+        Cookies.set('divs', 'True', { expires: 10 });
+        $.each(game_settings.divisions, function(key, value) {
+            get_game_results(key);  
+        });
+    }
+};
+
+function xlsdownload() {
+    $("table").each(function(){
+        TableExport.prototype.charset = "charset=utf-8";
+
+        if (this.id.substring(0,4) == 'json'){
+            var tableid = this.id
+            var exporttable = $(this).tableExport({
+                formats: ['csv'],
+                exportButtons: false,
+                filename: 'Первая лига | Игра #6',
+                separator: ',',
+                mimeType: 'text/csv',
+                fileExtension: '.csv',
+                enforceStrictRFC4180: true
+            });
+            
+        var exportData = exporttable.getExportData();
+        var xlsxData = exportData[tableid].csv; 
+        exporttable.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges);
+        }
+    });
+};
+
+</script><link href="https://www.google-analytics.com" rel="preconnect"><link href="https://stats.g.doubleclick.net" rel="preconnect"><div id="corner-popup" class="popup-xs" style="display: flex;"><div class="hide-mobile col sm-4"><img src="/static/img/cookie.png" class="corner-img-cookie responsive"></div><div class="col xs-12 sm-8"><div class="corner-close close-change"></div><div class="corner-container"><p class="corner-text">This website uses cookies to ensure you get the best experience on our website. <a href="https://en.wikipedia.org/wiki/HTTP_cookie" target="_blank" class="cookie-more">More information.</a></p><a class="corner-btn-cookie">Got it</a></div></div></div></body></html>`
 )
