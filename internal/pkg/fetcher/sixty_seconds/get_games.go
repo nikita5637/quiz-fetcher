@@ -73,7 +73,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 			if strings.HasPrefix(number, "#") {
 				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
-			} else if number == "Финал" {
+			} else if number == "Финал" || number == "Финал сезона" {
 				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
 			}
 
