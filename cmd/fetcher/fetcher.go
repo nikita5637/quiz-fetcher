@@ -139,6 +139,7 @@ func main() {
 			squizGamesFetcher,
 			sixtySecondsFetcher,
 		},
+		DisabledGamesFetchers:    config.GetValue("DisabledGamesFetchers").Strings(),
 		Period:                   config.GetValue("GamesSyncerPeriod").Uint64(),
 		RegistratorServiceClient: registratorServiceClient,
 		SyncerFacade:             *syncerFacade,

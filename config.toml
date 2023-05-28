@@ -8,6 +8,7 @@ elastic_logs_enabled = true
 #
 # Syncer config
 #
+disabled_games_fetchers = []
 games_syncer_enabled = true
 games_syncer_period = 5
 registrator_api_address = "localhost"

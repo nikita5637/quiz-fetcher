@@ -16,7 +16,8 @@ import (
 )
 
 const (
-	syncerName = "games syncer"
+	fetcherNameKey = "fetcher name"
+	syncerName     = "games syncer"
 )
 
 var (
@@ -27,6 +28,7 @@ var (
 type GamesSyncer struct {
 	enabled                  bool
 	gamesFetchers            []fetcher.GamesFetcher
+	disabledGamesFetchers    []string
 	lastSyncAt               time.Time
 	lastSyncID               int
 	m                        sync.Mutex
@@ -41,6 +43,7 @@ type GamesSyncer struct {
 type GamesSyncerConfig struct {
 	Enabled                  bool
 	GamesFetchers            []fetcher.GamesFetcher
+	DisabledGamesFetchers    []string
 	Period                   uint64
 	RegistratorServiceClient registrator.RegistratorServiceClient
 	SyncerFacade             Facade
@@ -52,6 +55,7 @@ func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, e
 	gs := &GamesSyncer{
 		enabled:                  cfg.Enabled,
 		gamesFetchers:            cfg.GamesFetchers,
+		disabledGamesFetchers:    cfg.DisabledGamesFetchers,
 		m:                        sync.Mutex{},
 		name:                     syncerName,
 		period:                   time.Duration(cfg.Period),
@@ -130,9 +134,22 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 	err = func() error {
 		for _, gamesFetcher := range g.gamesFetchers {
 			var games []model.Game
+			gamesFetcherDisabled := false
+			for _, disabledGamesFetcher := range g.disabledGamesFetchers {
+				if disabledGamesFetcher == gamesFetcher.GetName() {
+					gamesFetcherDisabled = true
+					break
+				}
+			}
+
+			if gamesFetcherDisabled {
+				logger.InfoKV(ctx, "games fetcher disabled. skip...", fetcherNameKey, gamesFetcher.GetName())
+				continue
+			}
+
 			games, err = gamesFetcher.GetGamesList(ctx)
 			if err != nil {
-				logger.ErrorKV(ctx, "games fetch error", "fetcher name", gamesFetcher.GetName(), "error", err)
+				logger.ErrorKV(ctx, "games fetch error", fetcherNameKey, gamesFetcher.GetName(), "error", err)
 				return err
 			}
 

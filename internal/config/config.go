@@ -42,6 +42,21 @@ func (c Value) String() string {
 	return reflect.Value(c).String()
 }
 
+// Strings ...
+func (c Value) Strings() []string {
+	if reflect.Value(c).Kind() == reflect.Invalid {
+		return nil
+	}
+
+	l := reflect.Value(c).Len()
+	sl := make([]string, 0, l)
+	for i := 0; i < l; i++ {
+		sl = append(sl, reflect.Value(c).Index(i).String())
+	}
+
+	return sl
+}
+
 // Uint64 ...
 func (c Value) Uint64() uint64 {
 	if reflect.Value(c).Kind() == reflect.Invalid {
