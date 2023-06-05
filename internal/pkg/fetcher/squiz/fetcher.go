@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients"
+	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 )
 
 const (
@@ -17,7 +18,8 @@ const (
 	// URL ...
 	URL = "https://spb.squiz.ru"
 
-	leagueID = 2
+	leagueID   = pkgmodel.LeagueSquiz
+	maxPlayers = 8
 )
 
 // GameTypeMatchStorage ...

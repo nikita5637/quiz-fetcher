@@ -10,7 +10,7 @@ require (
 	github.com/go-xorm/builder v0.3.4
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/google/uuid v1.3.0
-	github.com/nikita5637/quiz-registrator-api v1.1.0
+	github.com/nikita5637/quiz-registrator-api v1.2.2
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.24.0
 	golang.org/x/tools v0.4.0
@@ -177,7 +177,6 @@ require (
 	golang.org/x/sys v0.3.0 // indirect
 	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6 // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

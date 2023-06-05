@@ -10,6 +10,7 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
+	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 )
 
 const (
@@ -34,57 +35,69 @@ var (
 )
 
 func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (model.Game, error) {
-	h := strings.TrimPrefix(game.Href, "#")
-	externalID, err := strconv.ParseInt(h, 10, 32)
-	if err != nil {
-		return model.Game{}, err
-	}
+	var externalID int64
+	var gameType int32
+	var err error
+	var ret model.Game
+	if game.Name != "Финал" {
+		h := strings.TrimPrefix(game.Href, "#")
+		externalID, err = strconv.ParseInt(h, 10, 32)
+		if err != nil {
+			return model.Game{}, err
+		}
+		ret.ExternalID = int32(externalID)
 
-	gameType, err := f.gameTypeMatchStorage.GetGameTypeByDescription(ctx, game.Description)
-	if err != nil {
-		return model.Game{}, fmt.Errorf("get game type by description error: %w", err)
-	}
+		gameType, err = f.gameTypeMatchStorage.GetGameTypeByDescription(ctx, game.Description)
+		if err != nil {
+			return model.Game{}, fmt.Errorf("get game type by description error: %w", err)
+		}
 
-	if gameType == 0 {
-		return model.Game{}, errors.New("game type is 0")
+		if gameType == 0 {
+			return model.Game{}, errors.New("game type is 0")
+		}
+		ret.Type = gameType
+
+		price := uint64(0)
+		sl := strings.Split(game.PaymentInfo, " ")
+		if len(sl) > 0 {
+			price, err = strconv.ParseUint(sl[0], 10, 32)
+			if err != nil {
+				return model.Game{}, fmt.Errorf("parse price error: %w", err)
+			}
+		}
+		ret.Price = uint32(price)
+	} else {
+		ret.Type = pkgmodel.GameTypeClosed
 	}
 
 	if game.Number == "" {
 		return model.Game{}, errors.New("empty game number")
 	}
 
+	ret.Number = game.Number
+	if i := strings.Index(game.Number, "("); i != -1 {
+		ret.Number = game.Number[:i]
+	}
+
 	dt := dirtyHooksForDateTime(game.DateTime)
 	dateTime, err := convertDateTime(dt)
 	if err != nil {
-		return model.Game{}, err
+		return model.Game{}, fmt.Errorf("convert date time error: %w", err)
 	}
-
-	price := uint64(0)
-	sl := strings.Split(game.PaymentInfo, " ")
-	if len(sl) > 0 {
-		price, err = strconv.ParseUint(sl[0], 10, 32)
-		if err != nil {
-			return model.Game{}, err
-		}
-	}
+	ret.DateTime = dateTime
 
 	paymentType := ""
 	if i := strings.Index(game.PaymentInfo, "наличными"); i != -1 {
 		paymentType = "cash"
 	}
+	ret.PaymentType = paymentType
 
-	return model.Game{
-		ExternalID:  int32(externalID),
-		LeagueID:    leagueID,
-		Type:        int32(gameType),
-		Number:      game.Number,
-		Name:        game.Name,
-		PlaceID:     0,
-		DateTime:    dateTime,
-		Price:       uint32(price),
-		PaymentType: paymentType,
-		MaxPlayers:  8,
-	}, nil
+	ret.LeagueID = leagueID
+	ret.Name = game.Name
+	ret.PlaceID = 0
+	ret.MaxPlayers = maxPlayers
+
+	return ret, nil
 }
 
 func convertDateTime(dateTime string) (time.Time, error) {
@@ -129,7 +142,7 @@ func getInfoFromHTML(text string) (string, string, error) {
 	return ss[1], ss[2], nil
 }
 
-func getInfoFromPopup(ctx context.Context, html string) (string, string, string, error) {
+func getInfoFromCommonGamePopup(ctx context.Context, html string) (string, string, string, error) {
 	if html == "" {
 		return "", "", "", errors.New("empty text")
 	}
@@ -165,10 +178,61 @@ func getInfoFromPopup(ctx context.Context, html string) (string, string, string,
 	return dateTime, description, paymentInfo, nil
 }
 
+func getInfoFromFinalGamePopup(ctx context.Context, html string) (string, string, error) {
+	if html == "" {
+		return "", "", errors.New("empty text")
+	}
+
+	ss := strings.Split(html, "<br/>")
+
+	elements := make([]string, 0, len(ss))
+	for _, s := range ss {
+		if s == "" {
+			continue
+		}
+		elements = append(elements, s)
+	}
+
+	if len(elements) != 6 {
+		return "", "", errors.New("number of elements not equal 5")
+	}
+
+	for i := range elements {
+		_ = i
+		for strings.HasPrefix(elements[i], " ") {
+			elements[i] = strings.TrimPrefix(elements[i], " ")
+		}
+		for strings.HasPrefix(elements[i], "- ") {
+			elements[i] = strings.TrimPrefix(elements[i], "- ")
+		}
+		for strings.HasSuffix(elements[i], " ") {
+			elements[i] = strings.TrimSuffix(elements[i], " ")
+		}
+	}
+
+	dateTime := elements[5]
+	year := strconv.Itoa(time_utils.TimeNow().Year())
+	for _, day := range []string{"(пн),", "(вт),", "(ср),", "(чт),", "(пт),", "(сб),", "(вс),"} {
+		dateTime = strings.Replace(dateTime, day, year, 1)
+	}
+
+	return dateTime, "наличными", nil
+}
+
 func getInfoFromStrong(strong string) (string, string) {
 	if strings.HasPrefix(strong, "Игра ") {
 		return "", strings.TrimPrefix(strong, "Игра ")
 	}
+
+	if strings.HasPrefix(strong, "Финал. Сезон ") {
+		sl := strings.Split(strong, ". ")
+		if len(sl) == 2 {
+			return sl[0], sl[1]
+		}
+
+		return "", ""
+	}
+
 	sl := strings.Split(strong, "Игра ")
 	if len(sl) == 2 {
 		return sl[0], sl[1]

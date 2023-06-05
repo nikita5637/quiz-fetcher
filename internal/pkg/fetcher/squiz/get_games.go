@@ -89,7 +89,14 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 		description.Find("span").Remove()
 
 		html, _ := description.Html()
-		dateTime, gameDescription, paymentInfo, err := getInfoFromPopup(ctx, html)
+		var dateTime, gameDescription, paymentInfo string
+		var err error
+		if game.Name == "Финал" {
+			dateTime, paymentInfo, err = getInfoFromFinalGamePopup(ctx, html)
+		} else {
+			dateTime, gameDescription, paymentInfo, err = getInfoFromCommonGamePopup(ctx, html)
+		}
+
 		if err != nil {
 			logger.WarnKV(ctx, "can't parse a game's popup", "html", html, "error", err)
 			return

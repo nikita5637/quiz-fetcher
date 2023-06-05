@@ -10,6 +10,7 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
 )
@@ -70,7 +71,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-23 16:30"),
 				Price:       1000,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  241222,
@@ -82,7 +83,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-24 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  120123,
@@ -94,7 +95,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-12 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  70123,
@@ -106,7 +107,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-07 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  130123,
@@ -118,7 +119,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  281222,
@@ -130,7 +131,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-28 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  291222,
@@ -142,7 +143,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-29 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  301222,
@@ -154,7 +155,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-30 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  50123,
@@ -166,7 +167,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-05 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  60123,
@@ -178,7 +179,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-06 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 		}
 
@@ -241,7 +242,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-14 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  241222,
@@ -253,7 +254,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-24 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  120123,
@@ -265,7 +266,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-12 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  70123,
@@ -277,7 +278,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-07 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  130123,
@@ -289,7 +290,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  281222,
@@ -301,7 +302,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-28 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  291222,
@@ -313,7 +314,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-29 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  301222,
@@ -325,7 +326,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2022-12-30 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  50123,
@@ -337,7 +338,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-05 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  60123,
@@ -349,7 +350,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-06 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 		}
 
@@ -413,7 +414,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-12 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  130123,
@@ -425,7 +426,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  140123,
@@ -437,7 +438,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-14 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  200123,
@@ -449,7 +450,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-20 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  210123,
@@ -461,7 +462,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-21 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  220123,
@@ -473,7 +474,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-22 13:00"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
 			},
 			{
 				ExternalID:  260123,
@@ -485,7 +486,204 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				DateTime:    convertTime("2023-01-26 16:30"),
 				Price:       400,
 				PaymentType: "cash",
-				MaxPlayers:  8,
+				MaxPlayers:  maxPlayers,
+			},
+		}
+
+		assert.ElementsMatch(t, expect, got)
+		assert.NoError(t, err)
+	})
+
+	t.Run("test case 4", func(t *testing.T) {
+		ctx := context.Background()
+
+		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+			r := strings.NewReader(html4)
+			_, err := io.Copy(w, r)
+			assert.NoError(t, err)
+		}))
+		defer svr.Close()
+
+		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+
+		fx := tearUp(t)
+
+		fetcher := GamesFetcher{
+			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
+			placesCache:              make(map[string]int32, 0),
+			registratorServiceClient: mockRegistratorServiceClient,
+			url:                      svr.URL,
+		}
+
+		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
+			Address: "ул. Ломоносова, 16",
+			Name:    "BarBQ Night",
+		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
+			Place: &registrator.Place{
+				Id: 11,
+			},
+		}, nil)
+
+		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
+			Address: "Александровский парк, 4, корп. 3",
+			Name:    "Parkking",
+		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
+			Place: &registrator.Place{
+				Id: 2,
+			},
+		}, nil)
+
+		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
+			Address: "16-я линия В.О., 83",
+			Name:    "Цинь",
+		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
+			Place: &registrator.Place{
+				Id: 1,
+			},
+		}, nil)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(pkgmodel.GameTypeClassic, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант. Подходит всем, идеально для новичков.").Return(pkgmodel.GameTypeClassic, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Вопросы для взрослых, черный юмор, без цензуры. Приходите, только если уверены в себе.").Return(pkgmodel.GameTypeThematic, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра, посвященная музыке девяностых.").Return(pkgmodel.GameTypeThematicMoviesAndMusic, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Пакет из очень простых вопросов - идеально для новичков.").Return(pkgmodel.GameTypeClassic, nil)
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Вопросы только на темы кино, сериалов и музыки. Зарубежное и российское, современное и классическое. Кинофаны и меломаны - вэлкам!").Return(pkgmodel.GameTypeMoviesAndMusic, nil)
+
+		got, err := fetcher.GetGamesList(context.Background())
+		assert.Len(t, got, 11)
+
+		expect := []model.Game{
+			{
+				ExternalID:  80623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Number:      "40",
+				Name:        "Сериалы. Кино. Музыка",
+				PlaceID:     2,
+				DateTime:    convertTime("2023-06-08 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  90623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "353.1",
+				Name:        "",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-09 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  100623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "353.2",
+				Name:        "",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-10 13:00"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  110623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
+				Number:      "13",
+				Name:        "18+",
+				PlaceID:     2,
+				DateTime:    convertTime("2023-06-11 12:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  150623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "10",
+				Name:        "Лига Новичков",
+				PlaceID:     2,
+				DateTime:    convertTime("2023-06-15 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  160623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "354.1",
+				Name:        "",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-16 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  170623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "354.2",
+				Name:        "",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-17 13:00"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  220623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "355",
+				Name:        "",
+				PlaceID:     2,
+				DateTime:    convertTime("2023-06-22 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  230623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Number:      "356",
+				Name:        "",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-23 16:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  0,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_CLOSED),
+				Number:      "Сезон 9",
+				Name:        "Финал",
+				PlaceID:     1,
+				DateTime:    convertTime("2023-06-24 12:00"),
+				Price:       0,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
+			},
+			{
+				ExternalID:  250623,
+				LeagueID:    leagueID,
+				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
+				Number:      "2",
+				Name:        "Музыка 90-х",
+				PlaceID:     11,
+				DateTime:    convertTime("2023-06-25 12:30"),
+				Price:       500,
+				PaymentType: "cash",
+				MaxPlayers:  maxPlayers,
 			},
 		}
 

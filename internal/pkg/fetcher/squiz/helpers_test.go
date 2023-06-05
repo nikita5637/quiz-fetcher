@@ -8,6 +8,7 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/squiz/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
 )
@@ -154,7 +155,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			DateTime:    convertTime("2023-01-21 16:30"),
 			Price:       400,
 			PaymentType: "cash",
-			MaxPlayers:  8,
+			MaxPlayers:  maxPlayers,
 		}, got)
 		assert.NoError(t, err)
 	})
@@ -259,7 +260,7 @@ func Test_getInfoFromHTML(t *testing.T) {
 	}
 }
 
-func Test_getInfoFromPopup(t *testing.T) {
+func Test_getInfoFromCommonGamePopup(t *testing.T) {
 	type args struct {
 		html string
 	}
@@ -424,7 +425,7 @@ func Test_getInfoFromPopup(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			dateTime, gameDescription, gamePaymentInfo, err := getInfoFromPopup(context.Background(), tt.args.html)
+			dateTime, gameDescription, gamePaymentInfo, err := getInfoFromCommonGamePopup(context.Background(), tt.args.html)
 			assert.Equal(t, tt.dateTime, dateTime)
 			assert.Equal(t, tt.gameDescription, gameDescription)
 			assert.Equal(t, tt.paymentInfo, gamePaymentInfo)
@@ -432,6 +433,48 @@ func Test_getInfoFromPopup(t *testing.T) {
 				assert.Error(t, err)
 			} else {
 				assert.NoError(t, err)
+			}
+		})
+	}
+}
+
+func Test_getInfoFromFinalGamePopup(t *testing.T) {
+	time_utils.TimeNow = func() time.Time {
+		return time_utils.ConvertTime("2023-02-10 15:31")
+	}
+	type args struct {
+		ctx  context.Context
+		html string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		want1   string
+		wantErr bool
+	}{
+		{
+			name: "test case 1",
+			args: args{
+				html: `<br/><br/> - Участие в финале возможно только по приглашению организаторов Squiz. <br/>- Приглашается до 35 команд, занимающих наиболее высокие места в турнирной таблице &#34;Squiz. Сезон 9&#34;.<br/>- С опытом 1 и выше.<br/>- Состоит из 1 финальной игры.<br/><br/><br/>- <br/>- 24 июня (сб), 15:00<br/>`,
+			},
+			want:    "24 июня 2023 15:00",
+			want1:   "наличными",
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, got1, err := getInfoFromFinalGamePopup(tt.args.ctx, tt.args.html)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("getInfoFromFinalGamePopup() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("getInfoFromFinalGamePopup() got = %v, want %v", got, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("getInfoFromFinalGamePopup() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}
@@ -563,12 +606,5 @@ func Test_getPlaceKey(t *testing.T) {
 }
 
 func convertTime(str string) time.Time {
-	timeFormat := "2006-01-02 15:04"
-
-	t, err := time.Parse(timeFormat, str)
-	if err != nil {
-		return time.Time{}
-	}
-
-	return t
+	return time_utils.ConvertTime(str)
 }
