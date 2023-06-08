@@ -9,7 +9,7 @@ import (
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher"
+	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
@@ -27,7 +27,7 @@ var (
 // GamesSyncer ...
 type GamesSyncer struct {
 	enabled                  bool
-	gamesFetchers            []fetcher.GamesFetcher
+	gamesFetchers            []game_fetcher.Fetcher
 	disabledGamesFetchers    []string
 	lastSyncAt               time.Time
 	lastSyncID               int
@@ -42,7 +42,7 @@ type GamesSyncer struct {
 // GamesSyncerConfig ...
 type GamesSyncerConfig struct {
 	Enabled                  bool
-	GamesFetchers            []fetcher.GamesFetcher
+	GamesFetchers            []game_fetcher.Fetcher
 	DisabledGamesFetchers    []string
 	Period                   uint64
 	RegistratorServiceClient registrator.RegistratorServiceClient

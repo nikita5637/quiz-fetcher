@@ -30,7 +30,7 @@ type game struct {
 }
 
 // GetGamesList ...
-func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
+func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	gameIDs, err := f.getGameIDs(ctx)
 	if err != nil {
 		return nil, err
@@ -39,7 +39,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	return f.getGames(ctx, gameIDs), nil
 }
 
-func (f *GamesFetcher) getGame(gameID int64) (game, error) {
+func (f *Fetcher) getGame(gameID int64) (game, error) {
 	url := fmt.Sprintf(f.url+f.gameInfoPathFormat, gameID)
 	resp, err := f.client.Get(url)
 	if err != nil {
@@ -65,7 +65,7 @@ func (f *GamesFetcher) getGame(gameID int64) (game, error) {
 // error while getting game occured
 // error while convert game to model.Game occured
 // error while get place id occured
-func (f *GamesFetcher) getGames(ctx context.Context, gameIDs []int64) []model.Game {
+func (f *Fetcher) getGames(ctx context.Context, gameIDs []int64) []model.Game {
 	games := make([]model.Game, 0, len(gameIDs))
 	for _, gameID := range gameIDs {
 		g, err := f.getGame(gameID)
@@ -106,7 +106,7 @@ func (f *GamesFetcher) getGames(ctx context.Context, gameIDs []int64) []model.Ga
 	return games
 }
 
-func (f *GamesFetcher) getGameIDs(ctx context.Context) ([]int64, error) {
+func (f *Fetcher) getGameIDs(ctx context.Context) ([]int64, error) {
 	resp, err := f.client.Get(f.url + f.gamesListPath)
 	if err != nil {
 		return nil, fmt.Errorf("can't get response: %w", err)

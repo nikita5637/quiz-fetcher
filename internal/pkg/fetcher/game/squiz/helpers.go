@@ -15,6 +15,7 @@ import (
 
 const (
 	timeFormatString = "2 Jan 2006 15:04"
+	finalGameName    = "Финал"
 )
 
 var (
@@ -39,7 +40,7 @@ func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (m
 	var gameType int32
 	var err error
 	var ret model.Game
-	if game.Name != "Финал" {
+	if game.Name != finalGameName {
 		h := strings.TrimPrefix(game.Href, "#")
 		externalID, err = strconv.ParseInt(h, 10, 32)
 		if err != nil {

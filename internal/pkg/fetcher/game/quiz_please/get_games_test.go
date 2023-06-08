@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients/mocks"
+	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
@@ -454,7 +454,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 
 		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			client:                   *http.DefaultClient,
 			gameInfoPathFormat:       GameInfoPathFormat,
 			placesCache:              make(map[string]int32, 0),
@@ -626,7 +626,7 @@ func TestGamesFetcher_getGameIDs(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			client:             *http.DefaultClient,
 			gameInfoPathFormat: GameInfoPathFormat,
 			placesCache:        make(map[string]int32, 0),

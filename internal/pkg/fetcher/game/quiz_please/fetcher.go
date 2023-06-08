@@ -1,37 +1,30 @@
-//go:generate mockery --case underscore --name GameTypeMatchStorage --with-expecter
-
-package squiz
+package quiz_please
 
 import (
-	"context"
 	"net/http"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
 	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 )
 
 const (
 	// FetcherName ...
-	FetcherName = "squiz"
+	FetcherName = "quiz, please!"
 	// GamesListPath ...
-	GamesListPath = "/#schedule"
+	GamesListPath = "/schedule"
+	// GameInfoPathFormat ...
+	GameInfoPathFormat = "/ajax/scope-game?id=%d"
 	// URL ...
-	URL = "https://spb.squiz.ru"
+	URL = "https://spb.quizplease.ru"
 
-	leagueID   = pkgmodel.LeagueSquiz
-	maxPlayers = 8
+	leagueID = pkgmodel.LeagueQuizPlease
 )
 
-// GameTypeMatchStorage ...
-type GameTypeMatchStorage interface {
-	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
-}
-
-// GamesFetcher ...
-type GamesFetcher struct {
+// Fetcher ...
+type Fetcher struct {
 	client                   http.Client
+	gameInfoPathFormat       string
 	gamesListPath            string
-	gameTypeMatchStorage     GameTypeMatchStorage
 	name                     string
 	placesCache              map[string]int32
 	registratorServiceClient clients.RegistratorServiceClient
@@ -40,19 +33,19 @@ type GamesFetcher struct {
 
 // Config ...
 type Config struct {
+	GameInfoPathFormat       string
 	GamesListPath            string
-	GameTypeMatchStorage     GameTypeMatchStorage
 	Name                     string
 	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
 }
 
-// NewGamesFetcher ...
-func NewGamesFetcher(cfg Config) *GamesFetcher {
-	return &GamesFetcher{
+// New ...
+func New(cfg Config) *Fetcher {
+	return &Fetcher{
 		client:                   *http.DefaultClient,
+		gameInfoPathFormat:       cfg.GameInfoPathFormat,
 		gamesListPath:            cfg.GamesListPath,
-		gameTypeMatchStorage:     cfg.GameTypeMatchStorage,
 		name:                     cfg.Name,
 		placesCache:              make(map[string]int32, 0),
 		registratorServiceClient: cfg.RegistratorServiceClient,
@@ -61,6 +54,6 @@ func NewGamesFetcher(cfg Config) *GamesFetcher {
 }
 
 // GetName ...
-func (w *GamesFetcher) GetName() string {
-	return w.name
+func (f *Fetcher) GetName() string {
+	return f.name
 }

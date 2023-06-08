@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients/mocks"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
@@ -666,7 +666,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				LeagueID:    leagueID,
 				Type:        int32(registrator.GameType_GAME_TYPE_CLOSED),
 				Number:      "Сезон 9",
-				Name:        "Финал",
+				Name:        finalGameName,
 				PlaceID:     1,
 				DateTime:    convertTime("2023-06-24 12:00"),
 				Price:       0,

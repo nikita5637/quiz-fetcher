@@ -1,29 +1,37 @@
-package quiz_please
+//go:generate mockery --case underscore --name GameTypeMatchStorage --with-expecter
+
+package squiz
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
+	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 )
 
 const (
 	// FetcherName ...
-	FetcherName = "quiz, please!"
+	FetcherName = "squiz"
 	// GamesListPath ...
-	GamesListPath = "/schedule"
-	// GameInfoPathFormat ...
-	GameInfoPathFormat = "/ajax/scope-game?id=%d"
+	GamesListPath = "/#schedule"
 	// URL ...
-	URL = "https://spb.quizplease.ru"
+	URL = "https://spb.squiz.ru"
 
-	leagueID = 1
+	leagueID   = pkgmodel.LeagueSquiz
+	maxPlayers = 8
 )
+
+// GameTypeMatchStorage ...
+type GameTypeMatchStorage interface {
+	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
+}
 
 // GamesFetcher ...
 type GamesFetcher struct {
 	client                   http.Client
-	gameInfoPathFormat       string
 	gamesListPath            string
+	gameTypeMatchStorage     GameTypeMatchStorage
 	name                     string
 	placesCache              map[string]int32
 	registratorServiceClient clients.RegistratorServiceClient
@@ -32,8 +40,8 @@ type GamesFetcher struct {
 
 // Config ...
 type Config struct {
-	GameInfoPathFormat       string
 	GamesListPath            string
+	GameTypeMatchStorage     GameTypeMatchStorage
 	Name                     string
 	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
@@ -43,8 +51,8 @@ type Config struct {
 func NewGamesFetcher(cfg Config) *GamesFetcher {
 	return &GamesFetcher{
 		client:                   *http.DefaultClient,
-		gameInfoPathFormat:       cfg.GameInfoPathFormat,
 		gamesListPath:            cfg.GamesListPath,
+		gameTypeMatchStorage:     cfg.GameTypeMatchStorage,
 		name:                     cfg.Name,
 		placesCache:              make(map[string]int32, 0),
 		registratorServiceClient: cfg.RegistratorServiceClient,

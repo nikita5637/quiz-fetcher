@@ -17,11 +17,13 @@ import (
 // GetGamesList ...
 func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	games := []model.Game{}
+	fmt.Println("AUF")
 	for _, gamesListPath := range []string{f.openLeagueGamesListPath, f.firstLeagueGamesListPath} {
 		if gamesListPath == "" {
 			continue
 		}
 
+		fmt.Println(f.url + gamesListPath)
 		resp, err := f.client.Get(f.url + gamesListPath)
 		if err != nil {
 			return nil, fmt.Errorf("can't get response: %w", err)
@@ -119,6 +121,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			games = append(games, g)
 		})
 	}
+	fmt.Println(games)
 
 	return games, nil
 }

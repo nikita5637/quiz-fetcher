@@ -10,10 +10,10 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
 	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/quiz_please"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/sixty_seconds"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/squiz"
+	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
+	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
@@ -105,14 +105,14 @@ func main() {
 	}
 	syncerFacade := syncer.NewFacade(syncerConfig)
 
-	quizPleaseGamesFetcherConfig := quiz_please.Config{
-		GameInfoPathFormat:       quiz_please.GameInfoPathFormat,
-		GamesListPath:            quiz_please.GamesListPath,
-		Name:                     quiz_please.FetcherName,
+	quizPleaseGamesFetcherConfig := quiz_please_game_fetcher.Config{
+		GameInfoPathFormat:       quiz_please_game_fetcher.GameInfoPathFormat,
+		GamesListPath:            quiz_please_game_fetcher.GamesListPath,
+		Name:                     quiz_please_game_fetcher.FetcherName,
 		RegistratorServiceClient: registratorServiceClient,
-		URL:                      quiz_please.URL,
+		URL:                      quiz_please_game_fetcher.URL,
 	}
-	quizPleaseGamesFetcher := quiz_please.NewGamesFetcher(quizPleaseGamesFetcherConfig)
+	quizPleaseGamesFetcher := quiz_please_game_fetcher.New(quizPleaseGamesFetcherConfig)
 
 	squizFetcherConfig := squiz.Config{
 		GamesListPath:            squiz.GamesListPath,
@@ -134,7 +134,7 @@ func main() {
 
 	gamesSyncerCfg := syncer.GamesSyncerConfig{
 		Enabled: config.GetValue("GamesSyncerEnabled").Bool(),
-		GamesFetchers: []fetcher.GamesFetcher{
+		GamesFetchers: []game_fetcher.Fetcher{
 			quizPleaseGamesFetcher,
 			squizGamesFetcher,
 			sixtySecondsFetcher,

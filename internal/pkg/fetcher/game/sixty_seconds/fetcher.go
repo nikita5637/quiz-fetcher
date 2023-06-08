@@ -3,7 +3,7 @@ package sixty_seconds
 import (
 	"net/http"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
 )
 
 const (

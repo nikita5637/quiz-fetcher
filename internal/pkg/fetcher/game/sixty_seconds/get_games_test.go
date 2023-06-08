@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/clients/mocks"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
