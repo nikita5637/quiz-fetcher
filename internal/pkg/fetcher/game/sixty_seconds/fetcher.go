@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
 )
 
 const (
@@ -25,7 +26,7 @@ type GamesFetcher struct {
 	openLeagueGamesListPath  string
 	firstLeagueGamesListPath string
 	name                     string
-	placesCache              map[string]int32
+	placeStorage             storage.PlaceStorage
 	registratorServiceClient clients.RegistratorServiceClient
 	url                      string
 }
@@ -35,6 +36,7 @@ type Config struct {
 	OpenLeagueGamesListPath  string
 	FirstLeagueGamesListPath string
 	Name                     string
+	PlaceStorage             storage.PlaceStorage
 	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
 }
@@ -46,7 +48,7 @@ func NewGamesFetcher(cfg Config) *GamesFetcher {
 		openLeagueGamesListPath:  cfg.OpenLeagueGamesListPath,
 		firstLeagueGamesListPath: cfg.FirstLeagueGamesListPath,
 		name:                     cfg.Name,
-		placesCache:              make(map[string]int32, 0),
+		placeStorage:             cfg.PlaceStorage,
 		registratorServiceClient: cfg.RegistratorServiceClient,
 		url:                      cfg.URL,
 	}

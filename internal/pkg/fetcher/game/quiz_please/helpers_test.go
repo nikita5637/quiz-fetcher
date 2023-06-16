@@ -208,31 +208,3 @@ func Test_convertGameToModelGame(t *testing.T) {
 		})
 	}
 }
-
-func Test_getPlaceKey(t *testing.T) {
-	type args struct {
-		name    string
-		address string
-	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		{
-			name: "tc1",
-			args: args{
-				address: "address",
-				name:    "name",
-			},
-			want: "name:address",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := getPlaceKey(tt.args.name, tt.args.address); got != tt.want {
-				t.Errorf("getPlaceKey() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}

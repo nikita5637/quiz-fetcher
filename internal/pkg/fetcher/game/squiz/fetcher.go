@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
 	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 )
 
@@ -33,7 +34,7 @@ type GamesFetcher struct {
 	gamesListPath            string
 	gameTypeMatchStorage     GameTypeMatchStorage
 	name                     string
-	placesCache              map[string]int32
+	placeStorage             storage.PlaceStorage
 	registratorServiceClient clients.RegistratorServiceClient
 	url                      string
 }
@@ -43,6 +44,7 @@ type Config struct {
 	GamesListPath            string
 	GameTypeMatchStorage     GameTypeMatchStorage
 	Name                     string
+	PlaceStorage             storage.PlaceStorage
 	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
 }
@@ -54,7 +56,7 @@ func NewGamesFetcher(cfg Config) *GamesFetcher {
 		gamesListPath:            cfg.GamesListPath,
 		gameTypeMatchStorage:     cfg.GameTypeMatchStorage,
 		name:                     cfg.Name,
-		placesCache:              make(map[string]int32, 0),
+		placeStorage:             cfg.PlaceStorage,
 		registratorServiceClient: cfg.RegistratorServiceClient,
 		url:                      cfg.URL,
 	}

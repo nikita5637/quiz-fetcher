@@ -1,3 +1,5 @@
+//go:generate mockery --case underscore --name SyncLogStorage --with-expecter
+
 package storage
 
 import (

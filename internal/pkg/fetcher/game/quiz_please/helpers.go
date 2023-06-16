@@ -1,7 +1,6 @@
 package quiz_please
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -61,8 +60,4 @@ func convertGameToModelGame(game game) (model.Game, error) {
 	}
 
 	return modelGame, nil
-}
-
-func getPlaceKey(name, address string) string {
-	return fmt.Sprintf("%s:%s", name, address)
 }

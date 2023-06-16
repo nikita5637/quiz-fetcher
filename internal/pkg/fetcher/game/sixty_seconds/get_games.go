@@ -17,13 +17,11 @@ import (
 // GetGamesList ...
 func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	games := []model.Game{}
-	fmt.Println("AUF")
 	for _, gamesListPath := range []string{f.openLeagueGamesListPath, f.firstLeagueGamesListPath} {
 		if gamesListPath == "" {
 			continue
 		}
 
-		fmt.Println(f.url + gamesListPath)
 		resp, err := f.client.Get(f.url + gamesListPath)
 		if err != nil {
 			return nil, fmt.Errorf("can't get response: %w", err)
@@ -109,7 +107,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 				logger.WarnKV(ctx, "can't parse place", "error", err, "place", placeStr)
 				return
 			}
-			g.PlaceID = placeID
+			g.PlaceID = int32(placeID)
 
 			price, err := getPrice(priceStr)
 			if err != nil {
@@ -121,7 +119,6 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			games = append(games, g)
 		})
 	}
-	fmt.Println(games)
 
 	return games, nil
 }
@@ -146,7 +143,7 @@ func (f *GamesFetcher) getDateTime(ctx context.Context, gameInfoPath string) (ti
 	return convertDateTime(dateTime)
 }
 
-func (f *GamesFetcher) getPlaceID(ctx context.Context, place string) (int32, error) {
+func (f *GamesFetcher) getPlaceID(ctx context.Context, place string) (int, error) {
 	sl := strings.Split(place, " - ")
 	if len(sl) != 2 {
 		return 0, errors.New("can't parse place string")
@@ -155,15 +152,12 @@ func (f *GamesFetcher) getPlaceID(ctx context.Context, place string) (int32, err
 	name := strings.TrimPrefix(sl[0], "\u00a0")
 	address := sl[1]
 
-	placeResp, err := f.registratorServiceClient.GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-		Address: address,
-		Name:    name,
-	})
+	dbPlace, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, name, address)
 	if err != nil {
 		return 0, err
 	}
 
-	return placeResp.GetPlace().GetId(), nil
+	return dbPlace.ExternalID, nil
 }
 
 func getName(text string) string {

@@ -105,10 +105,13 @@ func main() {
 	}
 	syncerFacade := syncer.NewFacade(syncerConfig)
 
+	placeStorage := storage.NewPlaceStorage(txManager)
+
 	quizPleaseGamesFetcherConfig := quiz_please_game_fetcher.Config{
 		GameInfoPathFormat:       quiz_please_game_fetcher.GameInfoPathFormat,
 		GamesListPath:            quiz_please_game_fetcher.GamesListPath,
 		Name:                     quiz_please_game_fetcher.FetcherName,
+		PlaceStorage:             placeStorage,
 		RegistratorServiceClient: registratorServiceClient,
 		URL:                      quiz_please_game_fetcher.URL,
 	}
@@ -118,6 +121,7 @@ func main() {
 		GamesListPath:            squiz.GamesListPath,
 		GameTypeMatchStorage:     gameTypeMatchStorage,
 		Name:                     squiz.FetcherName,
+		PlaceStorage:             placeStorage,
 		RegistratorServiceClient: registratorServiceClient,
 		URL:                      squiz.URL,
 	}
@@ -127,6 +131,7 @@ func main() {
 		OpenLeagueGamesListPath:  sixty_seconds.OpenLeagueGamesListPath,
 		FirstLeagueGamesListPath: sixty_seconds.FirstLeagueGamesListPath,
 		Name:                     sixty_seconds.FetcherName,
+		PlaceStorage:             placeStorage,
 		RegistratorServiceClient: registratorServiceClient,
 		URL:                      sixty_seconds.URL,
 	}

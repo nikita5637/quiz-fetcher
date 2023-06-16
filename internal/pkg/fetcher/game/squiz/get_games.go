@@ -7,7 +7,6 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -115,26 +114,13 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			continue
 		}
 
-		placeID, ok := f.placesCache[getPlaceKey(game.PlaceName, game.PlaceAddress)]
-		if ok {
-			logger.DebugKV(ctx, "place found in cache", "name", game.PlaceName, "address", game.PlaceAddress, "id", placeID)
-		} else {
-			logger.DebugKV(ctx, "place not found in cache", "name", game.PlaceName, "address", game.PlaceAddress)
-			placeResp, err := f.registratorServiceClient.GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-				Name:    game.PlaceName,
-				Address: game.PlaceAddress,
-			})
-			if err != nil {
-				logger.Warnf(ctx, "can't get place ID: %s", err.Error())
-				continue
-			}
-
-			placeID = placeResp.GetPlace().GetId()
-			f.placesCache[getPlaceKey(game.PlaceName, game.PlaceAddress)] = placeID
-			logger.DebugKV(ctx, "place stored in cache", "name", game.PlaceName, "address", game.PlaceAddress, "id", placeID)
+		place, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, game.PlaceName, game.PlaceAddress)
+		if err != nil {
+			logger.Warnf(ctx, "get place by name and address error: %s", err.Error())
+			continue
 		}
-		modelGame.PlaceID = placeID
 
+		modelGame.PlaceID = int32(place.ExternalID)
 		modelGames = append(modelGames, modelGame)
 	}
 

@@ -241,7 +241,3 @@ func getInfoFromStrong(strong string) (string, string) {
 
 	return "", ""
 }
-
-func getPlaceKey(name, address string) string {
-	return fmt.Sprintf("%s:%s", name, address)
-}

@@ -8,8 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
+	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
@@ -26,33 +27,24 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fx := tearUp(t)
 
 		fetcher := GamesFetcher{
-			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			gameTypeMatchStorage: fx.gameTypeMatchStorage,
+			placeStorage:         mockPlaceStorage,
+			url:                  svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "ул. Ломоносова, 16",
-			Name:    "BarBQ Night",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 11,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "BarBQ Night", "ул. Ломоносова, 16").Times(9).Return(database.Place{
+			ID:         11,
+			ExternalID: 9,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Александровский парк, 4, корп. 3",
-			Name:    "Parkking",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 2,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Parkking", "Александровский парк, 4, корп. 3").Once().Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
 		}, nil)
 
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
@@ -67,7 +59,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "311.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-23 16:30"),
 				Price:       1000,
 				PaymentType: "cash",
@@ -79,7 +71,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "312",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-24 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -103,7 +95,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-07 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -115,7 +107,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -127,7 +119,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "313",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-28 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -139,7 +131,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-29 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -151,7 +143,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-30 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -163,7 +155,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "315",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-05 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -175,7 +167,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-06 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -197,33 +189,24 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fx := tearUp(t)
 
 		fetcher := GamesFetcher{
-			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			gameTypeMatchStorage: fx.gameTypeMatchStorage,
+			placeStorage:         mockPlaceStorage,
+			url:                  svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "ул. Ломоносова, 16",
-			Name:    "BarBQ Night",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 11,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "BarBQ Night", "ул. Ломоносова, 16").Times(9).Return(database.Place{
+			ID:         11,
+			ExternalID: 9,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Александровский парк, 4, корп. 3",
-			Name:    "Parkking",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 2,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Parkking", "Александровский парк, 4, корп. 3").Once().Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
 		}, nil)
 
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
@@ -238,7 +221,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-14 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -250,7 +233,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "312",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-24 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -274,7 +257,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-07 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -286,7 +269,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -298,7 +281,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "313",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-28 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -310,7 +293,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-29 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -322,7 +305,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2022-12-30 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -334,7 +317,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "315",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-05 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -346,7 +329,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-06 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -368,33 +351,24 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fx := tearUp(t)
 
 		fetcher := GamesFetcher{
-			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			gameTypeMatchStorage: fx.gameTypeMatchStorage,
+			placeStorage:         mockPlaceStorage,
+			url:                  svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "ул. Ломоносова, 16",
-			Name:    "BarBQ Night",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 11,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "BarBQ Night", "ул. Ломоносова, 16").Times(5).Return(database.Place{
+			ID:         11,
+			ExternalID: 9,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Александровский парк, 4, корп. 3",
-			Name:    "Parkking",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 2,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Parkking", "Александровский парк, 4, корп. 3").Twice().Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
 		}, nil)
 
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(1, nil)
@@ -422,7 +396,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-13 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -434,7 +408,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-14 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -446,7 +420,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "319.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-20 16:30"),
 				Price:       400,
 				PaymentType: "cash",
@@ -458,7 +432,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "319.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-21 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -470,7 +444,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
 				Number:      "7",
 				Name:        "ТВ-шоу",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-01-22 13:00"),
 				Price:       400,
 				PaymentType: "cash",
@@ -504,42 +478,29 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fx := tearUp(t)
 
 		fetcher := GamesFetcher{
-			gameTypeMatchStorage:     fx.gameTypeMatchStorage,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			gameTypeMatchStorage: fx.gameTypeMatchStorage,
+			placeStorage:         mockPlaceStorage,
+			url:                  svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "ул. Ломоносова, 16",
-			Name:    "BarBQ Night",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 11,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "BarBQ Night", "ул. Ломоносова, 16").Times(6).Return(database.Place{
+			ID:         11,
+			ExternalID: 9,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Александровский парк, 4, корп. 3",
-			Name:    "Parkking",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 2,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Parkking", "Александровский парк, 4, корп. 3").Times(4).Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "16-я линия В.О., 83",
-			Name:    "Цинь",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 1,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Цинь", "16-я линия В.О., 83").Once().Return(database.Place{
+			ID:         23,
+			ExternalID: 1,
 		}, nil)
 
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный и массовый вариант.").Return(pkgmodel.GameTypeClassic, nil)
@@ -571,7 +532,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "353.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-09 16:30"),
 				Price:       500,
 				PaymentType: "cash",
@@ -583,7 +544,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "353.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-10 13:00"),
 				Price:       500,
 				PaymentType: "cash",
@@ -619,7 +580,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "354.1",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-16 16:30"),
 				Price:       500,
 				PaymentType: "cash",
@@ -631,7 +592,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "354.2",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-17 13:00"),
 				Price:       500,
 				PaymentType: "cash",
@@ -655,7 +616,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "356",
 				Name:        "",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-23 16:30"),
 				Price:       500,
 				PaymentType: "cash",
@@ -679,7 +640,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
 				Number:      "2",
 				Name:        "Музыка 90-х",
-				PlaceID:     11,
+				PlaceID:     9,
 				DateTime:    convertTime("2023-06-25 12:30"),
 				Price:       500,
 				PaymentType: "cash",

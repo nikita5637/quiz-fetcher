@@ -8,8 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
+	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
@@ -49,23 +50,18 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fetcher := GamesFetcher{
-			openLeagueGamesListPath:  OpenLeagueGamesListPath,
-			client:                   *http.DefaultClient,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			openLeagueGamesListPath: OpenLeagueGamesListPath,
+			client:                  *http.DefaultClient,
+			placeStorage:            mockPlaceStorage,
+			url:                     svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Литейный пр., д. 14",
-			Name:    "Дворец «Олимпия»",
-		}).Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 1,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(database.Place{
+			ID:         1,
+			ExternalID: 1,
 		}, nil)
 
 		got, err := fetcher.GetGamesList(ctx)
@@ -130,23 +126,18 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fetcher := GamesFetcher{
-			openLeagueGamesListPath:  OpenLeagueGamesListPath,
-			client:                   *http.DefaultClient,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			openLeagueGamesListPath: OpenLeagueGamesListPath,
+			client:                  *http.DefaultClient,
+			placeStorage:            mockPlaceStorage,
+			url:                     svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Литейный пр., д. 14",
-			Name:    "Дворец «Олимпия»",
-		}).Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 1,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(database.Place{
+			ID:         1,
+			ExternalID: 1,
 		}, nil)
 
 		got, err := fetcher.GetGamesList(ctx)
@@ -211,23 +202,18 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fetcher := GamesFetcher{
 			firstLeagueGamesListPath: FirstLeagueGamesListPath,
 			client:                   *http.DefaultClient,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
+			placeStorage:             mockPlaceStorage,
 			url:                      svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Литейный пр., д. 14",
-			Name:    "Дворец «Олимпия»",
-		}).Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 1,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(database.Place{
+			ID:         1,
+			ExternalID: 1,
 		}, nil)
 
 		got, err := fetcher.GetGamesList(ctx)

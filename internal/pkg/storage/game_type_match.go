@@ -1,3 +1,5 @@
+//go:generate mockery --case underscore --name GameTypeMatchStorage --with-expecter
+
 package storage
 
 import (

@@ -10,8 +10,9 @@ import (
 	"testing"
 	"time"
 
-	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/clients/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
+	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"github.com/stretchr/testify/assert"
@@ -452,56 +453,36 @@ func TestGamesFetcher_getGames(t *testing.T) {
 		}))
 		defer svr.Close()
 
-		mockRegistratorServiceClient := mocks.NewRegistratorServiceClient(t)
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
 		fetcher := Fetcher{
-			client:                   *http.DefaultClient,
-			gameInfoPathFormat:       GameInfoPathFormat,
-			placesCache:              make(map[string]int32, 0),
-			registratorServiceClient: mockRegistratorServiceClient,
-			url:                      svr.URL,
+			client:             *http.DefaultClient,
+			gameInfoPathFormat: GameInfoPathFormat,
+			placeStorage:       mockPlaceStorage,
+			url:                svr.URL,
 		}
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Набережная канала Грибоедова, д. 36",
-			Name:    "Grand Bianco",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 7,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Grand Bianco", "Набережная канала Грибоедова, д. 36").Times(3).Return(database.Place{
+			ID:         7,
+			ExternalID: 5,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Литейный пр., д. 14",
-			Name:    "Дворец Олимпия",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 5,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец Олимпия", "Литейный пр., д. 14").Once().Return(database.Place{
+			ID:         5,
+			ExternalID: 3,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "наб. Выборгская, д.47",
-			Name:    "Puberty",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 6,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Puberty", "наб. Выборгская, д.47").Once().Return(database.Place{
+			ID:         6,
+			ExternalID: 4,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "Невский проспект",
-			Name:    "Везде, где есть интернет",
-		}).Once().Return(&registrator.GetPlaceByNameAndAddressResponse{
-			Place: &registrator.Place{
-				Id: 8,
-			},
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Везде, где есть интернет", "Невский проспект").Once().Return(database.Place{
+			ID:         8,
+			ExternalID: 6,
 		}, nil)
 
-		mockRegistratorServiceClient.EXPECT().GetPlaceByNameAndAddress(ctx, &registrator.GetPlaceByNameAndAddressRequest{
-			Address: "16 линия В.О дом 83",
-			Name:    "ЦИНЬ",
-		}).Once().Return(nil, errors.New("some error"))
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "ЦИНЬ", "16 линия В.О дом 83").Once().Return(database.Place{}, errors.New("some error"))
 
 		got := fetcher.getGames(ctx, []int64{
 			50069,
@@ -543,7 +524,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#1",
 				Name:        "Квиз, плиз!.jpeg",
-				PlaceID:     7,
+				PlaceID:     5,
 				DateTime:    dt1,
 				Price:       400,
 				PaymentType: "cash,card",
@@ -555,7 +536,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#608",
 				Name:        "Квиз, плиз!",
-				PlaceID:     5,
+				PlaceID:     3,
 				DateTime:    dt2,
 				Price:       400,
 				PaymentType: "cash,card",
@@ -567,7 +548,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
 				Number:      "#1",
 				Name:        "[music party] кринж эдишн",
-				PlaceID:     6,
+				PlaceID:     4,
 				DateTime:    dt3,
 				Price:       400,
 				PaymentType: "cash,card",
@@ -579,7 +560,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "#70",
 				Name:        "Кино и музыка [стрим]",
-				PlaceID:     8,
+				PlaceID:     6,
 				DateTime:    dt4,
 				Price:       1000,
 				PaymentType: "",
@@ -591,7 +572,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
 				Number:      "#6",
 				Name:        "[18+]",
-				PlaceID:     7,
+				PlaceID:     5,
 				DateTime:    dt5,
 				Price:       400,
 				PaymentType: "cash,card",
@@ -603,7 +584,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "#103",
 				Name:        "[кино и музыка]",
-				PlaceID:     7,
+				PlaceID:     5,
 				DateTime:    dt7,
 				Price:       400,
 				PaymentType: "cash,card",
@@ -629,7 +610,6 @@ func TestGamesFetcher_getGameIDs(t *testing.T) {
 		fetcher := Fetcher{
 			client:             *http.DefaultClient,
 			gameInfoPathFormat: GameInfoPathFormat,
-			placesCache:        make(map[string]int32, 0),
 			url:                svr.URL,
 		}
 		got, err := fetcher.getGameIDs(ctx)
