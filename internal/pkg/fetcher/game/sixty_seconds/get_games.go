@@ -11,7 +11,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 )
 
 // GetGamesList ...
@@ -72,9 +72,9 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			g.Number = number
 
 			if strings.HasPrefix(number, "#") {
-				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
+				g.Type = int32(commonpb.GameType_GAME_TYPE_CLASSIC)
 			} else if number == "Финал" || number == "Финал сезона" {
-				g.Type = int32(registrator.GameType_GAME_TYPE_CLASSIC)
+				g.Type = int32(commonpb.GameType_GAME_TYPE_CLASSIC)
 			}
 
 			if g.Type == 0 {

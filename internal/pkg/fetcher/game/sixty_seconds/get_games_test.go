@@ -12,7 +12,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -69,7 +69,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17630,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#8",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -81,7 +81,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17631,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#9",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -93,7 +93,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17632,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#10",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -145,7 +145,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17631,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#9",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -157,7 +157,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17632,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#10",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -169,7 +169,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  17633,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "Финал",
 				Name:        "Открытая лига",
 				PlaceID:     1,
@@ -221,7 +221,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  18615,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#4",
 				Name:        "Первая лига",
 				PlaceID:     1,
@@ -233,7 +233,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  18616,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#5",
 				Name:        "Первая лига",
 				PlaceID:     1,
@@ -245,7 +245,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  18617,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#6",
 				Name:        "Первая лига",
 				PlaceID:     1,

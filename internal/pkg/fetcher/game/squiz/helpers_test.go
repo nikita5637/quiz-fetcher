@@ -9,7 +9,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -148,7 +148,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 		assert.Equal(t, model.Game{
 			ExternalID:  123,
 			LeagueID:    leagueID,
-			Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+			Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 			Number:      "1",
 			Name:        "name",
 			PlaceID:     0,

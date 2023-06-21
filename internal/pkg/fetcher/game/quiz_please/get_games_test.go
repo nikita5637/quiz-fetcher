@@ -14,7 +14,7 @@ import (
 	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -521,7 +521,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50069,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#1",
 				Name:        "Квиз, плиз!.jpeg",
 				PlaceID:     5,
@@ -533,7 +533,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50071,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#608",
 				Name:        "Квиз, плиз!",
 				PlaceID:     3,
@@ -545,7 +545,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50068,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
 				Number:      "#1",
 				Name:        "[music party] кринж эдишн",
 				PlaceID:     4,
@@ -557,7 +557,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50502,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "#70",
 				Name:        "Кино и музыка [стрим]",
 				PlaceID:     6,
@@ -569,7 +569,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50484,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC),
 				Number:      "#6",
 				Name:        "[18+]",
 				PlaceID:     5,
@@ -581,7 +581,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			{
 				ExternalID:  50495,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "#103",
 				Name:        "[кино и музыка]",
 				PlaceID:     5,

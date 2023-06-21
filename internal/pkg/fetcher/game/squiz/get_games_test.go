@@ -12,7 +12,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -56,7 +56,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  231222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "311.2",
 				Name:        "",
 				PlaceID:     9,
@@ -68,7 +68,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  241222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "312",
 				Name:        "",
 				PlaceID:     9,
@@ -80,7 +80,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  120123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "317",
 				Name:        "",
 				PlaceID:     2,
@@ -92,7 +92,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  70123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.2",
 				Name:        "",
 				PlaceID:     9,
@@ -104,7 +104,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  130123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
 				PlaceID:     9,
@@ -116,7 +116,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  281222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "313",
 				Name:        "",
 				PlaceID:     9,
@@ -128,7 +128,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  291222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.1",
 				Name:        "",
 				PlaceID:     9,
@@ -140,7 +140,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  301222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.2",
 				Name:        "",
 				PlaceID:     9,
@@ -152,7 +152,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  50123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "315",
 				Name:        "",
 				PlaceID:     9,
@@ -164,7 +164,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  60123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.1",
 				Name:        "",
 				PlaceID:     9,
@@ -218,7 +218,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  140123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.2",
 				Name:        "",
 				PlaceID:     9,
@@ -230,7 +230,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  241222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "312",
 				Name:        "",
 				PlaceID:     9,
@@ -242,7 +242,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  120123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "317",
 				Name:        "",
 				PlaceID:     2,
@@ -254,7 +254,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  70123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.2",
 				Name:        "",
 				PlaceID:     9,
@@ -266,7 +266,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  130123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
 				PlaceID:     9,
@@ -278,7 +278,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  281222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "313",
 				Name:        "",
 				PlaceID:     9,
@@ -290,7 +290,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  291222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.1",
 				Name:        "",
 				PlaceID:     9,
@@ -302,7 +302,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  301222,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "314.2",
 				Name:        "",
 				PlaceID:     9,
@@ -314,7 +314,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  50123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "315",
 				Name:        "",
 				PlaceID:     9,
@@ -326,7 +326,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  60123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "316.1",
 				Name:        "",
 				PlaceID:     9,
@@ -381,7 +381,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  120123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "317",
 				Name:        "",
 				PlaceID:     2,
@@ -393,7 +393,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  130123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.1",
 				Name:        "",
 				PlaceID:     9,
@@ -405,7 +405,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  140123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "318.2",
 				Name:        "",
 				PlaceID:     9,
@@ -417,7 +417,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  200123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "319.1",
 				Name:        "",
 				PlaceID:     9,
@@ -429,7 +429,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  210123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "319.2",
 				Name:        "",
 				PlaceID:     9,
@@ -441,7 +441,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  220123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC),
 				Number:      "7",
 				Name:        "ТВ-шоу",
 				PlaceID:     9,
@@ -453,7 +453,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  260123,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "320.1",
 				Name:        "",
 				PlaceID:     2,
@@ -517,7 +517,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  80623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "40",
 				Name:        "Сериалы. Кино. Музыка",
 				PlaceID:     2,
@@ -529,7 +529,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  90623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "353.1",
 				Name:        "",
 				PlaceID:     9,
@@ -541,7 +541,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  100623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "353.2",
 				Name:        "",
 				PlaceID:     9,
@@ -553,7 +553,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  110623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC),
 				Number:      "13",
 				Name:        "18+",
 				PlaceID:     2,
@@ -565,7 +565,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  150623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "10",
 				Name:        "Лига Новичков",
 				PlaceID:     2,
@@ -577,7 +577,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  160623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "354.1",
 				Name:        "",
 				PlaceID:     9,
@@ -589,7 +589,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  170623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "354.2",
 				Name:        "",
 				PlaceID:     9,
@@ -601,7 +601,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  220623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "355",
 				Name:        "",
 				PlaceID:     2,
@@ -613,7 +613,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  230623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "356",
 				Name:        "",
 				PlaceID:     9,
@@ -625,7 +625,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  0,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_CLOSED),
+				Type:        int32(commonpb.GameType_GAME_TYPE_CLOSED),
 				Number:      "Сезон 9",
 				Name:        finalGameName,
 				PlaceID:     1,
@@ -637,7 +637,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			{
 				ExternalID:  250623,
 				LeagueID:    leagueID,
-				Type:        int32(registrator.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
+				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
 				Number:      "2",
 				Name:        "Музыка 90-х",
 				PlaceID:     9,

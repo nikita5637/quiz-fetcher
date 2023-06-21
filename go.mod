@@ -10,7 +10,7 @@ require (
 	github.com/go-xorm/builder v0.3.4
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/google/uuid v1.3.0
-	github.com/nikita5637/quiz-registrator-api v1.2.2
+	github.com/nikita5637/quiz-registrator-api v1.2.13
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.24.0
 	golang.org/x/tools v0.4.0

@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
@@ -158,7 +159,7 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 				pbGame := &registrator.AddGamesRequest_Game{
 					ExternalId:  game.ExternalID,
 					LeagueId:    game.LeagueID,
-					Type:        registrator.GameType(game.Type),
+					Type:        commonpb.GameType(game.Type),
 					Number:      game.Number,
 					Name:        game.Name,
 					PlaceId:     game.PlaceID,
