@@ -1,3 +1,5 @@
+//go:generate mockery --case underscore --name RegistratorServiceClient --with-expecter
+
 package syncer
 
 import (
@@ -8,6 +10,7 @@ import (
 
 	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
 	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
@@ -25,6 +28,11 @@ var (
 	errJobAlreadyInProgress = errors.New("job already in progress")
 )
 
+// RegistratorServiceClient ...
+type RegistratorServiceClient interface {
+	AddGames(ctx context.Context, in *registrator.AddGamesRequest, opts ...grpc.CallOption) (*registrator.AddGamesResponse, error)
+}
+
 // GamesSyncer ...
 type GamesSyncer struct {
 	enabled                  bool
@@ -35,7 +43,7 @@ type GamesSyncer struct {
 	m                        sync.Mutex
 	name                     string
 	period                   time.Duration
-	registratorServiceClient registrator.RegistratorServiceClient
+	registratorServiceClient RegistratorServiceClient
 	syncStatus               model.SyncStatus
 	syncerFacade             Facade
 }
@@ -46,7 +54,7 @@ type GamesSyncerConfig struct {
 	GamesFetchers            []game_fetcher.Fetcher
 	DisabledGamesFetchers    []string
 	Period                   uint64
-	RegistratorServiceClient registrator.RegistratorServiceClient
+	RegistratorServiceClient RegistratorServiceClient
 	SyncerFacade             Facade
 }
 
