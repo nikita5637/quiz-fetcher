@@ -13,7 +13,7 @@ import (
 	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
