@@ -3,9 +3,8 @@ package quiz_please
 import (
 	"net/http"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
+	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
@@ -18,44 +17,46 @@ const (
 	// URL ...
 	URL = "https://spb.quizplease.ru"
 
-	leagueID = pkgmodel.LeagueQuizPlease
+	leagueID = int32(leaguepb.LeagueID_QUIZ_PLEASE)
 )
 
 // Fetcher ...
 type Fetcher struct {
-	client                   http.Client
-	gameInfoPathFormat       string
-	gamesListPath            string
-	name                     string
-	placeStorage             storage.PlaceStorage
-	registratorServiceClient clients.RegistratorServiceClient
-	url                      string
+	client             http.Client
+	gameInfoPathFormat string
+	gamesListPath      string
+	name               string
+	placeStorage       storage.PlaceStorage
+	url                string
 }
 
 // Config ...
 type Config struct {
-	GameInfoPathFormat       string
-	GamesListPath            string
-	Name                     string
-	PlaceStorage             storage.PlaceStorage
-	RegistratorServiceClient clients.RegistratorServiceClient
-	URL                      string
+	GameInfoPathFormat string
+	GamesListPath      string
+	Name               string
+	PlaceStorage       storage.PlaceStorage
+	URL                string
 }
 
 // New ...
 func New(cfg Config) *Fetcher {
 	return &Fetcher{
-		client:                   *http.DefaultClient,
-		gameInfoPathFormat:       cfg.GameInfoPathFormat,
-		gamesListPath:            cfg.GamesListPath,
-		name:                     cfg.Name,
-		placeStorage:             cfg.PlaceStorage,
-		registratorServiceClient: cfg.RegistratorServiceClient,
-		url:                      cfg.URL,
+		client:             *http.DefaultClient,
+		gameInfoPathFormat: cfg.GameInfoPathFormat,
+		gamesListPath:      cfg.GamesListPath,
+		name:               cfg.Name,
+		placeStorage:       cfg.PlaceStorage,
+		url:                cfg.URL,
 	}
 }
 
 // GetName ...
 func (f *Fetcher) GetName() string {
 	return f.name
+}
+
+// GetLeagueID ...
+func (f *Fetcher) GetLeagueID() int32 {
+	return leagueID
 }

@@ -9,9 +9,10 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
-	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 )
 
 // GetGamesList ...
@@ -54,7 +55,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 				logger.WarnKV(ctx, "can't parse externalID", "error", err, "gameInfoPath", gameInfoPath)
 				return
 			}
-			g.ExternalID = externalID
+			g.ExternalID = maybe.Just(externalID)
 
 			h5Text := h5.Text()
 			name := getName(h5Text)
@@ -62,7 +63,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 				logger.WarnKV(ctx, "can't parse game name", "text", h5.Text())
 				return
 			}
-			g.Name = name
+			g.Name = maybe.Just(name)
 
 			number := getNumber(h5Text)
 			if number == "" {
@@ -72,9 +73,9 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			g.Number = number
 
 			if strings.HasPrefix(number, "#") {
-				g.Type = int32(commonpb.GameType_GAME_TYPE_CLASSIC)
+				g.Type = int32(gamepb.GameType_GAME_TYPE_CLASSIC)
 			} else if number == "Финал" || number == "Финал сезона" {
-				g.Type = int32(commonpb.GameType_GAME_TYPE_CLASSIC)
+				g.Type = int32(gamepb.GameType_GAME_TYPE_CLASSIC)
 			}
 
 			if g.Type == 0 {
@@ -89,7 +90,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			}
 			g.DateTime = dateTime
 
-			g.PaymentType = "cash"
+			g.PaymentType = maybe.Just("cash")
 			g.MaxPlayers = 6
 
 			var placeStr, priceStr string
@@ -115,6 +116,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 				return
 			}
 			g.Price = price
+			g.IsInMaster = true
 
 			games = append(games, g)
 		})

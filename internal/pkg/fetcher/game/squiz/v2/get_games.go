@@ -9,9 +9,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
-	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 )
 
 // Characteristic ...
@@ -68,7 +69,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	for _, product := range storeResponse.Products {
 		gameFormat := getGameFormat(product.Characteristics)
 		if gameFormat == "Онлайн" {
-			logger.InfoKV(ctx, "skip online game", "product", product)
+			logger.InfoKV(ctx, "skip online game")
 			continue
 		}
 
@@ -132,22 +133,29 @@ func (f *GamesFetcher) getGameFromProduct(ctx context.Context, product Product) 
 		return model.Game{}, fmt.Errorf("parse price error: %w", err)
 	}
 
+	name := maybe.Nothing[string]()
+	if gameName != "" {
+		name = maybe.Just(gameName)
+	}
+
 	return model.Game{
+		ExternalID:  maybe.Nothing[int32](),
 		LeagueID:    leagueID,
 		Type:        gameType,
 		Number:      product.Descr,
-		Name:        gameName,
+		Name:        name,
 		PlaceID:     int32(place.ExternalID),
 		DateTime:    gameDateTime,
 		Price:       uint32(price),
-		PaymentType: "cash",
+		PaymentType: maybe.Just("cash"),
 		MaxPlayers:  maxPlayers,
+		IsInMaster:  true,
 	}, nil
 }
 
 func (f *GamesFetcher) getGameType(ctx context.Context, gameName, description string) (int32, error) {
 	if gameName == finalGameName {
-		return pkgmodel.GameTypeClosed, nil
+		return int32(gamepb.GameType_GAME_TYPE_CLOSED), nil
 	}
 
 	gameType, err := f.gameTypeMatchStorage.GetGameTypeByDescription(ctx, description)

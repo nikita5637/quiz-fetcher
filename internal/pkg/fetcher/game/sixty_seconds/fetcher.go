@@ -3,8 +3,8 @@ package sixty_seconds
 import (
 	"net/http"
 
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/clients"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
+	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
@@ -17,7 +17,7 @@ const (
 	// URL ...
 	URL = "https://60sec.online"
 
-	leagueID = 3
+	leagueID = int32(leaguepb.LeagueID_SIXTY_SECONDS)
 )
 
 // GamesFetcher ...
@@ -27,7 +27,6 @@ type GamesFetcher struct {
 	firstLeagueGamesListPath string
 	name                     string
 	placeStorage             storage.PlaceStorage
-	registratorServiceClient clients.RegistratorServiceClient
 	url                      string
 }
 
@@ -37,7 +36,6 @@ type Config struct {
 	FirstLeagueGamesListPath string
 	Name                     string
 	PlaceStorage             storage.PlaceStorage
-	RegistratorServiceClient clients.RegistratorServiceClient
 	URL                      string
 }
 
@@ -49,12 +47,16 @@ func NewGamesFetcher(cfg Config) *GamesFetcher {
 		firstLeagueGamesListPath: cfg.FirstLeagueGamesListPath,
 		name:                     cfg.Name,
 		placeStorage:             cfg.PlaceStorage,
-		registratorServiceClient: cfg.RegistratorServiceClient,
 		url:                      cfg.URL,
 	}
 }
 
 // GetName ...
-func (w *GamesFetcher) GetName() string {
-	return w.name
+func (f *GamesFetcher) GetName() string {
+	return f.name
+}
+
+// GetLeagueID ...
+func (f *GamesFetcher) GetLeagueID() int32 {
+	return leagueID
 }

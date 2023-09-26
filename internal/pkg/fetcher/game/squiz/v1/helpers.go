@@ -8,9 +8,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	pkgmodel "github.com/nikita5637/quiz-registrator-api/pkg/model"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 )
 
 const (
@@ -46,7 +47,7 @@ func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (m
 		if err != nil {
 			return model.Game{}, err
 		}
-		ret.ExternalID = int32(externalID)
+		ret.ExternalID = maybe.Just(int32(externalID))
 
 		gameType, err = f.gameTypeMatchStorage.GetGameTypeByDescription(ctx, game.Description)
 		if err != nil {
@@ -68,7 +69,7 @@ func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (m
 		}
 		ret.Price = uint32(price)
 	} else {
-		ret.Type = pkgmodel.GameTypeClosed
+		ret.Type = int32(gamepb.GameType_GAME_TYPE_CLOSED)
 	}
 
 	if game.Number == "" {
@@ -91,12 +92,21 @@ func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (m
 	if i := strings.Index(game.PaymentInfo, "наличными"); i != -1 {
 		paymentType = "cash"
 	}
-	ret.PaymentType = paymentType
+
+	ret.PaymentType = maybe.Nothing[string]()
+	if paymentType != "" {
+		ret.PaymentType = maybe.Just(paymentType)
+	}
+
+	ret.Name = maybe.Nothing[string]()
+	if game.Name != "" {
+		ret.Name = maybe.Just(game.Name)
+	}
 
 	ret.LeagueID = leagueID
-	ret.Name = game.Name
 	ret.PlaceID = 0
 	ret.MaxPlayers = maxPlayers
+	ret.IsInMaster = true
 
 	return ret, nil
 }

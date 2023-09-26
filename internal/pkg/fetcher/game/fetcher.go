@@ -10,4 +10,5 @@ import (
 type Fetcher interface {
 	GetGamesList(ctx context.Context) ([]model.Game, error)
 	GetName() string
+	GetLeagueID() int32
 }

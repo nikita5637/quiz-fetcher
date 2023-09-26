@@ -8,11 +8,11 @@ const (
 )
 
 var (
-	// TimeNow ...
-	TimeNow = time.Now
+	// TimeNow returns time in UTC
+	TimeNow = time.Now().UTC
 )
 
-// ConvertTime ...
+// ConvertTime converts string to time in UTC
 func ConvertTime(str string) time.Time {
 	timeFormat := "2006-01-02 15:04"
 

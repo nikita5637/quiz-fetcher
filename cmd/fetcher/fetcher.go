@@ -19,7 +19,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/syncer"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
@@ -87,7 +87,7 @@ func main() {
 		logger.Panic(ctx, fmt.Errorf("could not connect: %w", err))
 	}
 
-	registratorServiceClient := registrator.NewRegistratorServiceClient(cc)
+	gameServiceClient := gamepb.NewServiceClient(cc)
 
 	db, err := storage.NewDB(ctx)
 	if err != nil {
@@ -108,22 +108,20 @@ func main() {
 	placeStorage := storage.NewPlaceStorage(txManager)
 
 	quizPleaseGamesFetcherConfig := quiz_please_game_fetcher.Config{
-		GameInfoPathFormat:       quiz_please_game_fetcher.GameInfoPathFormat,
-		GamesListPath:            quiz_please_game_fetcher.GamesListPath,
-		Name:                     quiz_please_game_fetcher.FetcherName,
-		PlaceStorage:             placeStorage,
-		RegistratorServiceClient: registratorServiceClient,
-		URL:                      quiz_please_game_fetcher.URL,
+		GameInfoPathFormat: quiz_please_game_fetcher.GameInfoPathFormat,
+		GamesListPath:      quiz_please_game_fetcher.GamesListPath,
+		Name:               quiz_please_game_fetcher.FetcherName,
+		PlaceStorage:       placeStorage,
+		URL:                quiz_please_game_fetcher.URL,
 	}
 	quizPleaseGamesFetcher := quiz_please_game_fetcher.New(quizPleaseGamesFetcherConfig)
 
 	squizFetcherConfig := squiz.Config{
-		GamesListPath:            squiz.GamesListPath,
-		GameTypeMatchStorage:     gameTypeMatchStorage,
-		Name:                     squiz.FetcherName,
-		PlaceStorage:             placeStorage,
-		RegistratorServiceClient: registratorServiceClient,
-		URL:                      squiz.URL,
+		GamesListPath:        squiz.GamesListPath,
+		GameTypeMatchStorage: gameTypeMatchStorage,
+		Name:                 squiz.FetcherName,
+		PlaceStorage:         placeStorage,
+		URL:                  squiz.URL,
 	}
 	squizGamesFetcher := squiz.NewGamesFetcher(squizFetcherConfig)
 
@@ -132,7 +130,6 @@ func main() {
 		FirstLeagueGamesListPath: sixty_seconds.FirstLeagueGamesListPath,
 		Name:                     sixty_seconds.FetcherName,
 		PlaceStorage:             placeStorage,
-		RegistratorServiceClient: registratorServiceClient,
 		URL:                      sixty_seconds.URL,
 	}
 	sixtySecondsFetcher := sixty_seconds.NewGamesFetcher(sixtySecondsFetcherConfig)
@@ -144,10 +141,10 @@ func main() {
 			squizGamesFetcher,
 			sixtySecondsFetcher,
 		},
-		DisabledGamesFetchers:    config.GetValue("DisabledGamesFetchers").Strings(),
-		Period:                   config.GetValue("GamesSyncerPeriod").Uint64(),
-		RegistratorServiceClient: registratorServiceClient,
-		SyncerFacade:             *syncerFacade,
+		DisabledGamesFetchers: config.GetValue("DisabledGamesFetchers").Strings(),
+		Period:                config.GetValue("GamesSyncerPeriod").Uint64(),
+		GameServiceClient:     gameServiceClient,
+		SyncerFacade:          *syncerFacade,
 	}
 
 	gamesSyncer, err := syncer.NewGamesSyncer(ctx, gamesSyncerCfg)

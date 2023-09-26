@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 )
@@ -32,31 +33,37 @@ func convertGameToModelGame(game game) (model.Game, error) {
 	}
 
 	// paymentType
-	paymentType := strings.Builder{}
+	paymentTypeBuilder := strings.Builder{}
 	if strings.Index(game.Text, "наличные") != -1 {
-		paymentType.WriteString("cash")
+		paymentTypeBuilder.WriteString("cash")
 	}
 	if strings.Index(game.Text, "карта") != -1 {
-		if paymentType.Len() > 0 {
-			paymentType.WriteString(",")
+		if paymentTypeBuilder.Len() > 0 {
+			paymentTypeBuilder.WriteString(",")
 		}
-		paymentType.WriteString("card")
+		paymentTypeBuilder.WriteString("card")
 	}
 
 	// name
 	name := strings.ReplaceAll(game.Name, " SPB", "")
 
+	paymentType := maybe.Nothing[string]()
+	if v := paymentTypeBuilder.String(); v != "" {
+		paymentType = maybe.Just(v)
+	}
+
 	modelGame := model.Game{
-		ExternalID:  game.ExternalID,
+		ExternalID:  maybe.Just(game.ExternalID),
 		LeagueID:    leagueID,
 		Type:        game.GameTypeID,
 		Number:      game.Number,
-		Name:        name,
+		Name:        maybe.Just(name),
 		PlaceID:     0,
-		DateTime:    t,
+		DateTime:    t.UTC(),
 		Price:       uint32(price),
-		PaymentType: paymentType.String(),
+		PaymentType: paymentType,
 		MaxPlayers:  game.MaxPlayers,
+		IsInMaster:  true,
 	}
 
 	return modelGame, nil

@@ -110,7 +110,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	for _, game := range games {
 		modelGame, err := f.convertGameToModelGame(ctx, *game)
 		if err != nil {
-			logger.WarnKV(ctx, "can't convert game", "error", err.Error(), "game", game)
+			logger.WarnKV(ctx, "can't convert game", "error", err.Error(), "original_game", game)
 			continue
 		}
 

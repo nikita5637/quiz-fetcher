@@ -1,22 +1,23 @@
-//go:generate mockery --case underscore --name RegistratorServiceClient --with-expecter
+//go:generate mockery --case underscore --name GameServiceClient --with-expecter
 
 package syncer
 
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sync"
 	"time"
 
-	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/registrator"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/types/known/timestamppb"
+	"google.golang.org/protobuf/types/known/fieldmaskpb"
 
 	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
+	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
@@ -28,49 +29,51 @@ var (
 	errJobAlreadyInProgress = errors.New("job already in progress")
 )
 
-// RegistratorServiceClient ...
-type RegistratorServiceClient interface {
-	AddGames(ctx context.Context, in *registrator.AddGamesRequest, opts ...grpc.CallOption) (*registrator.AddGamesResponse, error)
+// GameServiceClient ...
+type GameServiceClient interface {
+	CreateGame(ctx context.Context, in *gamepb.CreateGameRequest, opts ...grpc.CallOption) (*gamepb.Game, error)
+	PatchGame(ctx context.Context, in *gamepb.PatchGameRequest, opts ...grpc.CallOption) (*gamepb.Game, error)
+	SearchGamesByLeagueID(ctx context.Context, in *gamepb.SearchGamesByLeagueIDRequest, opts ...grpc.CallOption) (*gamepb.SearchGamesByLeagueIDResponse, error)
 }
 
 // GamesSyncer ...
 type GamesSyncer struct {
-	enabled                  bool
-	gamesFetchers            []game_fetcher.Fetcher
-	disabledGamesFetchers    []string
-	lastSyncAt               time.Time
-	lastSyncID               int
-	m                        sync.Mutex
-	name                     string
-	period                   time.Duration
-	registratorServiceClient RegistratorServiceClient
-	syncStatus               model.SyncStatus
-	syncerFacade             Facade
+	enabled               bool
+	gameServiceClient     GameServiceClient
+	gamesFetchers         []game_fetcher.Fetcher
+	disabledGamesFetchers []string
+	lastSyncAt            time.Time
+	lastSyncID            int
+	m                     sync.Mutex
+	name                  string
+	period                time.Duration
+	syncStatus            model.SyncStatus
+	syncerFacade          Facade
 }
 
 // GamesSyncerConfig ...
 type GamesSyncerConfig struct {
-	Enabled                  bool
-	GamesFetchers            []game_fetcher.Fetcher
-	DisabledGamesFetchers    []string
-	Period                   uint64
-	RegistratorServiceClient RegistratorServiceClient
-	SyncerFacade             Facade
+	Enabled               bool
+	GameServiceClient     GameServiceClient
+	GamesFetchers         []game_fetcher.Fetcher
+	DisabledGamesFetchers []string
+	Period                uint64
+	SyncerFacade          Facade
 }
 
 // NewGamesSyncer ...
 func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, error) {
 	logger.InfoKV(ctx, "initialize syncer", "name", syncerName)
 	gs := &GamesSyncer{
-		enabled:                  cfg.Enabled,
-		gamesFetchers:            cfg.GamesFetchers,
-		disabledGamesFetchers:    cfg.DisabledGamesFetchers,
-		m:                        sync.Mutex{},
-		name:                     syncerName,
-		period:                   time.Duration(cfg.Period),
-		registratorServiceClient: cfg.RegistratorServiceClient,
-		syncerFacade:             cfg.SyncerFacade,
-		syncStatus:               model.SyncStatusNotSynced,
+		enabled:               cfg.Enabled,
+		gameServiceClient:     cfg.GameServiceClient,
+		gamesFetchers:         cfg.GamesFetchers,
+		disabledGamesFetchers: cfg.DisabledGamesFetchers,
+		m:                     sync.Mutex{},
+		name:                  syncerName,
+		period:                time.Duration(cfg.Period),
+		syncerFacade:          cfg.SyncerFacade,
+		syncStatus:            model.SyncStatusNotSynced,
 	}
 
 	lastSync, err := gs.syncerFacade.GetLastSync(ctx, gs.name)
@@ -142,7 +145,6 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 
 	err = func() error {
 		for _, gamesFetcher := range g.gamesFetchers {
-			var games []model.Game
 			gamesFetcherDisabled := false
 			for _, disabledGamesFetcher := range g.disabledGamesFetchers {
 				if disabledGamesFetcher == gamesFetcher.GetName() {
@@ -156,34 +158,45 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 				continue
 			}
 
-			games, err = gamesFetcher.GetGamesList(ctx)
+			var masterGames []model.Game
+			masterGames, err = gamesFetcher.GetGamesList(ctx)
 			if err != nil {
 				logger.ErrorKV(ctx, "games fetch error", fetcherNameKey, gamesFetcher.GetName(), "error", err)
 				return err
 			}
+			logger.DebugKV(ctx, fmt.Sprintf("there are %d games in a master", len(masterGames)), fetcherNameKey, gamesFetcher.GetName())
 
-			pbGames := make([]*registrator.AddGamesRequest_Game, 0, len(games))
-			for _, game := range games {
-				pbGame := &registrator.AddGamesRequest_Game{
-					ExternalId:  game.ExternalID,
-					LeagueId:    game.LeagueID,
-					Type:        commonpb.GameType(game.Type),
-					Number:      game.Number,
-					Name:        game.Name,
-					PlaceId:     game.PlaceID,
-					Date:        timestamppb.New(game.DateTime),
-					Price:       game.Price,
-					PaymentType: game.PaymentType,
-					MaxPlayers:  game.MaxPlayers,
+			pbLeagueGames := make([]*gamepb.Game, 0)
+			page := uint64(1)
+			for {
+				var leagueGamesResp *gamepb.SearchGamesByLeagueIDResponse
+				leagueGamesResp, err = g.gameServiceClient.SearchGamesByLeagueID(ctx, &gamepb.SearchGamesByLeagueIDRequest{
+					Id:       leaguepb.LeagueID(gamesFetcher.GetLeagueID()),
+					Page:     page,
+					PageSize: 50,
+				})
+				if err != nil {
+					logger.ErrorKV(ctx, "get league games error", fetcherNameKey, gamesFetcher.GetName(), "error", err)
+					return err
 				}
 
-				pbGames = append(pbGames, pbGame)
+				if len(leagueGamesResp.GetGames()) == 0 {
+					break
+				}
+
+				pbLeagueGames = append(pbLeagueGames, leagueGamesResp.GetGames()...)
+				page++
 			}
 
-			if _, err2 := g.registratorServiceClient.AddGames(ctx, &registrator.AddGamesRequest{
-				Games: pbGames,
-			}); err2 != nil {
-				return err2
+			leagueGames := make([]model.Game, 0, len(pbLeagueGames))
+			for _, pbLeagueGame := range pbLeagueGames {
+				leagueGames = append(leagueGames, convertProtoGameToModelGame(pbLeagueGame))
+			}
+			logger.DebugKV(ctx, fmt.Sprintf("there are %d games in a database", len(leagueGames)), fetcherNameKey, gamesFetcher.GetName())
+
+			if err = g.handleGames(ctx, gamesFetcher.GetName(), masterGames, leagueGames); err != nil {
+				logger.ErrorKV(ctx, "handle games error", fetcherNameKey, gamesFetcher.GetName(), "error", err)
+				return err
 			}
 		}
 
@@ -222,6 +235,129 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 
 	logger.DebugKV(ctx, "sync done", "name", g.name, "duration(ms)", time_utils.TimeNow().Sub(begin).Milliseconds())
 	return nil
+}
+
+func (g *GamesSyncer) handleGames(ctx context.Context, gamesFetcherName string, masterGames, dbGames []model.Game) error {
+	var gamesToCreate []model.Game
+	var gamesInBoth []model.Game
+	for _, masterGame := range masterGames {
+		found := false
+		for _, dbGame := range dbGames {
+			if isEqual(masterGame, dbGame) {
+				found = true
+				break
+			}
+		}
+		if !found {
+			gamesToCreate = append(gamesToCreate, masterGame)
+		} else {
+			gamesInBoth = append(gamesInBoth, masterGame)
+		}
+	}
+
+	logger.DebugKV(ctx, fmt.Sprintf("there are %d games to create", len(gamesToCreate)), fetcherNameKey, gamesFetcherName)
+	logger.DebugKV(ctx, fmt.Sprintf("there are %d games in both the master and the database", len(gamesInBoth)), fetcherNameKey, gamesFetcherName)
+
+	for _, gameToCreate := range gamesToCreate {
+		logger.InfoKV(ctx, "creating new game", "game", gameToCreate)
+		_, err := g.gameServiceClient.CreateGame(ctx, &gamepb.CreateGameRequest{
+			Game: convertModelGameToProtoGame(gameToCreate),
+		})
+		if err != nil {
+			logger.ErrorKV(ctx, "create game error", fetcherNameKey, gamesFetcherName, "error", err)
+		}
+	}
+
+	var gamesToPatch []model.Game
+	for _, gameInBoth := range gamesInBoth {
+		for _, dbGame := range dbGames {
+			if isEqual(gameInBoth, dbGame) {
+				if !isDeepEqual(gameInBoth, dbGame) {
+					g := gameInBoth
+					g.ID = dbGame.ID
+					gamesToPatch = append(gamesToPatch, g)
+				}
+			}
+		}
+	}
+
+	logger.DebugKV(ctx, fmt.Sprintf("there are %d games to patch", len(gamesToPatch)), fetcherNameKey, gamesFetcherName)
+
+	for _, gameToPatch := range gamesToPatch {
+		logger.InfoKV(ctx, "patching existing game", "game", gameToPatch)
+		_, err := g.gameServiceClient.PatchGame(ctx, &gamepb.PatchGameRequest{
+			Game: convertModelGameToProtoGame(gameToPatch),
+			UpdateMask: &fieldmaskpb.FieldMask{
+				Paths: []string{
+					"type",
+					"name",
+					"price",
+					"payment_type",
+					"max_players",
+					"is_in_master",
+				},
+			},
+		})
+		if err != nil {
+			logger.ErrorKV(ctx, "patch game error", fetcherNameKey, gamesFetcherName, "error", err)
+		}
+	}
+
+	var gamesToDelete []model.Game
+	for _, dbGame := range dbGames {
+		found := false
+		for _, masterGame := range masterGames {
+			if isEqual(dbGame, masterGame) {
+				found = true
+				break
+			}
+		}
+		if !found && dbGame.IsInMaster {
+			g := dbGame
+			g.IsInMaster = false
+			gamesToDelete = append(gamesToDelete, g)
+		}
+	}
+
+	logger.DebugKV(ctx, fmt.Sprintf("there are %d games to delete", len(gamesToDelete)), fetcherNameKey, gamesFetcherName)
+
+	for _, gameToDelete := range gamesToDelete {
+		logger.InfoKV(ctx, "deleting existing game", "game", gameToDelete)
+		_, err := g.gameServiceClient.PatchGame(ctx, &gamepb.PatchGameRequest{
+			Game: convertModelGameToProtoGame(gameToDelete),
+			UpdateMask: &fieldmaskpb.FieldMask{
+				Paths: []string{
+					"is_in_master",
+				},
+			},
+		})
+		if err != nil {
+			logger.ErrorKV(ctx, "patch game error", fetcherNameKey, gamesFetcherName, "error", err)
+		}
+	}
+	return nil
+}
+
+func isEqual(game1, game2 model.Game) bool {
+	return game1.ExternalID == game2.ExternalID &&
+		game1.LeagueID == game2.LeagueID &&
+		game1.Number == game2.Number &&
+		game1.PlaceID == game2.PlaceID &&
+		game1.DateTime == game2.DateTime
+}
+
+func isDeepEqual(game1, game2 model.Game) bool {
+	return game1.ExternalID == game2.ExternalID &&
+		game1.LeagueID == game2.LeagueID &&
+		game1.Type == game2.Type &&
+		game1.Number == game2.Number &&
+		game1.Name == game2.Name &&
+		game1.PlaceID == game2.PlaceID &&
+		game1.DateTime == game2.DateTime &&
+		game1.Price == game2.Price &&
+		game1.PaymentType == game2.PaymentType &&
+		game1.MaxPlayers == game2.MaxPlayers &&
+		game1.IsInMaster == game2.IsInMaster
 }
 
 func (g *GamesSyncer) prepare(ctx context.Context) error {

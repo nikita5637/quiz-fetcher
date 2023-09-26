@@ -6,10 +6,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v1/mocks"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -146,16 +147,17 @@ func Test_convertGameToModelGame(t *testing.T) {
 
 		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{
-			ExternalID:  123,
+			ExternalID:  maybe.Just(int32(123)),
 			LeagueID:    leagueID,
-			Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+			Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 			Number:      "1",
-			Name:        "name",
+			Name:        maybe.Just("name"),
 			PlaceID:     0,
 			DateTime:    convertTime("2023-01-21 16:30"),
 			Price:       400,
-			PaymentType: "cash",
+			PaymentType: maybe.Just("cash"),
 			MaxPlayers:  maxPlayers,
+			IsInMaster:  true,
 		}, got)
 		assert.NoError(t, err)
 	})

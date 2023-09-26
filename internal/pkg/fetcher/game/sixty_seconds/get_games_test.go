@@ -8,11 +8,12 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -67,40 +68,43 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		got, err := fetcher.GetGamesList(ctx)
 		assert.Equal(t, []model.Game{
 			{
-				ExternalID:  17630,
+				ExternalID:  maybe.Just(int32(17630)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#8",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-06 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  17631,
+				ExternalID:  maybe.Just(int32(17631)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#9",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-13 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  17632,
+				ExternalID:  maybe.Just(int32(17632)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#10",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-20 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 		}, got)
 		assert.NoError(t, err)
@@ -143,40 +147,43 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		got, err := fetcher.GetGamesList(ctx)
 		assert.Equal(t, []model.Game{
 			{
-				ExternalID:  17631,
+				ExternalID:  maybe.Just(int32(17631)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#9",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-13 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  17632,
+				ExternalID:  maybe.Just(int32(17632)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#10",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-20 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  17633,
+				ExternalID:  maybe.Just(int32(17633)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "Финал",
-				Name:        "Открытая лига",
+				Name:        maybe.Just("Открытая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-02-27 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 		}, got)
 		assert.NoError(t, err)
@@ -219,40 +226,43 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		got, err := fetcher.GetGamesList(ctx)
 		assert.Equal(t, []model.Game{
 			{
-				ExternalID:  18615,
+				ExternalID:  maybe.Just(int32(18615)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#4",
-				Name:        "Первая лига",
+				Name:        maybe.Just("Первая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-04-04 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  18616,
+				ExternalID:  maybe.Just(int32(18616)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#5",
-				Name:        "Первая лига",
+				Name:        maybe.Just("Первая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-04-11 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  18617,
+				ExternalID:  maybe.Just(int32(18617)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#6",
-				Name:        "Первая лига",
+				Name:        maybe.Just("Первая лига"),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-04-18 16:30"),
 				Price:       1200,
-				PaymentType: "cash",
+				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
+				IsInMaster:  true,
 			},
 		}, got)
 		assert.NoError(t, err)

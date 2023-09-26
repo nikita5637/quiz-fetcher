@@ -15,6 +15,7 @@ import (
 type game struct {
 	ExternalID int32  `json:"gameId"`
 	GameTypeID int32  `json:"game_type_id"`
+	GameType   int32  `json:"game_type"`
 	Name       string `json:"nameGame"`
 	Number     string `json:"numberGame"`
 
@@ -76,6 +77,11 @@ func (f *Fetcher) getGames(ctx context.Context, gameIDs []int64) []model.Game {
 		modelGame, err := convertGameToModelGame(g)
 		if err != nil {
 			logger.Warnf(ctx, "can't convert game: %s", err.Error())
+			continue
+		}
+
+		if g.GameType == 1 {
+			logger.InfoKV(ctx, "skip online game")
 			continue
 		}
 

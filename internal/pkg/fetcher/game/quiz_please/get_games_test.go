@@ -10,11 +10,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
-	commonpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/common"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -477,11 +478,6 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			ExternalID: 4,
 		}, nil)
 
-		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Везде, где есть интернет", "Невский проспект").Once().Return(database.Place{
-			ID:         8,
-			ExternalID: 6,
-		}, nil)
-
 		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "ЦИНЬ", "16 линия В.О дом 83").Once().Return(database.Place{}, errors.New("some error"))
 
 		got := fetcher.getGames(ctx, []int64{
@@ -508,87 +504,77 @@ func TestGamesFetcher_getGames(t *testing.T) {
 		dt3, err := time.ParseInLocation(timeFormatString, "15.01.23 16:00", loc)
 		assert.NoError(t, err)
 
-		dt4, err := time.ParseInLocation(timeFormatString, "15.01.23 20:00", loc)
+		dt4, err := time.ParseInLocation(timeFormatString, "18.01.23 19:30", loc)
 		assert.NoError(t, err)
 
-		dt5, err := time.ParseInLocation(timeFormatString, "18.01.23 19:30", loc)
-		assert.NoError(t, err)
-
-		dt7, err := time.ParseInLocation(timeFormatString, "22.01.23 15:30", loc)
+		dt6, err := time.ParseInLocation(timeFormatString, "22.01.23 15:30", loc)
 		assert.NoError(t, err)
 
 		expect := []model.Game{
 			{
-				ExternalID:  50069,
+				ExternalID:  maybe.Just(int32(50069)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#1",
-				Name:        "Квиз, плиз!.jpeg",
+				Name:        maybe.Just("Квиз, плиз!.jpeg"),
 				PlaceID:     5,
-				DateTime:    dt1,
+				DateTime:    dt1.UTC(),
 				Price:       400,
-				PaymentType: "cash,card",
+				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  50071,
+				ExternalID:  maybe.Just(int32(50071)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_CLASSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "#608",
-				Name:        "Квиз, плиз!",
+				Name:        maybe.Just("Квиз, плиз!"),
 				PlaceID:     3,
-				DateTime:    dt2,
+				DateTime:    dt2.UTC(),
 				Price:       400,
-				PaymentType: "cash,card",
+				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  50068,
+				ExternalID:  maybe.Just(int32(50068)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_THEMATIC_MOVIES_AND_MUSIC),
 				Number:      "#1",
-				Name:        "[music party] кринж эдишн",
+				Name:        maybe.Just("[music party] кринж эдишн"),
 				PlaceID:     4,
-				DateTime:    dt3,
+				DateTime:    dt3.UTC(),
 				Price:       400,
-				PaymentType: "cash,card",
+				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  50502,
+				ExternalID:  maybe.Just(int32(50484)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
-				Number:      "#70",
-				Name:        "Кино и музыка [стрим]",
-				PlaceID:     6,
-				DateTime:    dt4,
-				Price:       1000,
-				PaymentType: "",
-				MaxPlayers:  9,
-			},
-			{
-				ExternalID:  50484,
-				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_THEMATIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_THEMATIC),
 				Number:      "#6",
-				Name:        "[18+]",
+				Name:        maybe.Just("[18+]"),
 				PlaceID:     5,
-				DateTime:    dt5,
+				DateTime:    dt4.UTC(),
 				Price:       400,
-				PaymentType: "cash,card",
+				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
+				IsInMaster:  true,
 			},
 			{
-				ExternalID:  50495,
+				ExternalID:  maybe.Just(int32(50495)),
 				LeagueID:    leagueID,
-				Type:        int32(commonpb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Type:        int32(gamepb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
 				Number:      "#103",
-				Name:        "[кино и музыка]",
+				Name:        maybe.Just("[кино и музыка]"),
 				PlaceID:     5,
-				DateTime:    dt7,
+				DateTime:    dt6.UTC(),
 				Price:       400,
-				PaymentType: "cash,card",
+				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
+				IsInMaster:  true,
 			},
 		}
 
