@@ -8,8 +8,8 @@ const (
 )
 
 var (
-	// TimeNow returns time in UTC
-	TimeNow = time.Now().UTC
+	// TimeNow returns time in local timezone
+	TimeNow = time.Now
 )
 
 // ConvertTime converts string to time in UTC

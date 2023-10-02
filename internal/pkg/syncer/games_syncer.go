@@ -83,7 +83,7 @@ func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, e
 
 	// TODO change to error
 	if lastSync.Name == "" {
-		now := time_utils.TimeNow()
+		now := time_utils.TimeNow().UTC()
 		lastSyncID, err := gs.syncerFacade.Insert(ctx, model.SyncLog{
 			Name:       gs.name,
 			LastSyncAt: now,
@@ -132,7 +132,7 @@ func (g *GamesSyncer) GetSyncStatus() model.SyncStatus {
 
 // Sync ...
 func (g *GamesSyncer) Sync(ctx context.Context) error {
-	begin := time_utils.TimeNow()
+	begin := time_utils.TimeNow().UTC()
 
 	err := g.prepare(ctx)
 	if err != nil {
@@ -203,7 +203,7 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 		return nil
 	}()
 	if err != nil {
-		now := time_utils.TimeNow()
+		now := time_utils.TimeNow().UTC()
 		updateErr := g.syncerFacade.Update(ctx, model.SyncLog{
 			ID:         g.lastSyncID,
 			Name:       g.name,
@@ -220,7 +220,7 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 		return err
 	}
 
-	now := time_utils.TimeNow()
+	now := time_utils.TimeNow().UTC()
 	err = g.syncerFacade.Update(ctx, model.SyncLog{
 		ID:         g.lastSyncID,
 		Name:       g.name,
@@ -233,7 +233,7 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 	g.lastSyncAt = now
 	g.syncStatus = model.SyncStatusOK
 
-	logger.DebugKV(ctx, "sync done", "name", g.name, "duration(ms)", time_utils.TimeNow().Sub(begin).Milliseconds())
+	logger.DebugKV(ctx, "sync done", "name", g.name, "duration(ms)", time_utils.TimeNow().UTC().Sub(begin).Milliseconds())
 	return nil
 }
 
@@ -365,7 +365,7 @@ func (g *GamesSyncer) prepare(ctx context.Context) error {
 	defer g.m.Unlock()
 
 	if g.syncStatus == model.SyncStatusOK || g.syncStatus == model.SyncStatusFailed {
-		now := time_utils.TimeNow()
+		now := time_utils.TimeNow().UTC()
 		lastSyncID, err := g.syncerFacade.Insert(ctx, model.SyncLog{
 			Name:       g.name,
 			LastSyncAt: now,
