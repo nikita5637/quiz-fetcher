@@ -5,7 +5,6 @@ package storage
 import (
 	"context"
 
-	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
@@ -17,9 +16,9 @@ type PlaceStorage interface {
 }
 
 // NewPlaceStorage ...
-func NewPlaceStorage(txManager *tx.Manager) PlaceStorage {
-	switch config.GetValue("Driver").String() {
-	case config.DriverMySQL:
+func NewPlaceStorage(driver string, txManager *tx.Manager) PlaceStorage {
+	switch driver {
+	case mysql.DriverName:
 		return mysql.NewPlaceStorageAdapter(txManager)
 	}
 

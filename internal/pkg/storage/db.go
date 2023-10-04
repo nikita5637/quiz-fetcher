@@ -9,10 +9,10 @@ import (
 )
 
 // NewDB ...
-func NewDB(ctx context.Context) (*sql.DB, error) {
-	switch config.GetValue("Driver").String() {
-	case config.DriverMySQL:
-		return mysql.NewDB(ctx, config.DriverMySQL, config.GetDatabaseDSN())
+func NewDB(ctx context.Context, driver string) (*sql.DB, error) {
+	switch driver {
+	case mysql.DriverName:
+		return mysql.NewDB(ctx, config.GetMySQLDatabaseDSN())
 	}
 
 	return nil, nil

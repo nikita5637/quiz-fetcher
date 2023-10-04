@@ -5,7 +5,6 @@ package storage
 import (
 	"context"
 
-	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
@@ -19,9 +18,9 @@ type SyncLogStorage interface {
 }
 
 // NewSyncLogStorage ...
-func NewSyncLogStorage(txManager *tx.Manager) SyncLogStorage {
-	switch config.GetValue("Driver").String() {
-	case config.DriverMySQL:
+func NewSyncLogStorage(driver string, txManager *tx.Manager) SyncLogStorage {
+	switch driver {
+	case mysql.DriverName:
 		return mysql.NewSyncLogStorageAdapter(txManager)
 	}
 

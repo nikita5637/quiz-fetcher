@@ -1,24 +1,26 @@
-#Log level
-log_level = "info"
-elastic_address = "elasticsearch"
-elastic_port = 9200
-elastic_index = "quiz_regbot"
-elastic_logs_enabled = true
-
-#
-# Syncer config
-#
-disabled_games_fetchers = []
-games_syncer_enabled = true
-games_syncer_period = 3600
-registrator_api_address = "registrator-api"
-registrator_api_port = 8080
-
-#
-# DB Settings
-#
+[database]
+address = "database"
+dbname = "fetcher"
 driver = "mysql"
-database_address = "mysql"
-database_name = "fetcher"
-database_port = 3306
-database_username = "quiz_regbot"
+port = 3306
+	[database.credentials]
+	username = "quiz_regbot"
+	password = "TOPSECRET"
+
+[fetcher]
+	[fetcher.games]
+	disabled_leagues = []
+	enabled = true
+	period = 3600
+	[fetcher.registrator_api]
+	address = "registrator-api"
+	port = 8080
+
+[log]
+level = "info"
+module_name = "fetcher"
+	[log.elastic]
+	address = "elasticsearch"
+	enabled = true
+	index = "quiz_regbot"
+	port = 9200

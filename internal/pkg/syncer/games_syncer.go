@@ -57,7 +57,7 @@ type GamesSyncerConfig struct {
 	GameServiceClient     GameServiceClient
 	GamesFetchers         []game_fetcher.Fetcher
 	DisabledGamesFetchers []string
-	Period                uint64
+	Period                time.Duration
 	SyncerFacade          Facade
 }
 
@@ -71,7 +71,7 @@ func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, e
 		disabledGamesFetchers: cfg.DisabledGamesFetchers,
 		m:                     sync.Mutex{},
 		name:                  syncerName,
-		period:                time.Duration(cfg.Period),
+		period:                cfg.Period,
 		syncerFacade:          cfg.SyncerFacade,
 		syncStatus:            model.SyncStatusNotSynced,
 	}

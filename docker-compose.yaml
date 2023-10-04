@@ -11,7 +11,7 @@ services:
     command: "/bin/fetcher --config /etc/config.toml"
     container_name: fetcher
     environment:
-      DATABASE_PASSWORD: quiz_regbot
+      DATABASE_CREDENTIALS_PASSWORD: quiz_regbot
     networks:
       - network
 

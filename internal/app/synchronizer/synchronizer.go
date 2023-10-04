@@ -46,7 +46,7 @@ func (s *Synchronizer) Start(ctx context.Context) error {
 					continue
 				}
 
-				if (time_utils.TimeNow().After(syncer.GetLastSyncAt().Add(syncer.GetPeriod()*time.Second)) && syncer.GetSyncStatus() != model.SyncStatusInProgress) ||
+				if (time_utils.TimeNow().After(syncer.GetLastSyncAt().Add(syncer.GetPeriod())) && syncer.GetSyncStatus() != model.SyncStatusInProgress) ||
 					syncer.GetSyncStatus() == model.SyncStatusNotSynced {
 					go func(ctx context.Context, syncer Syncer) {
 						defer func() {

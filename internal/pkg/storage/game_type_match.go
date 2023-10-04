@@ -5,7 +5,6 @@ package storage
 import (
 	"context"
 
-	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
 )
@@ -16,9 +15,9 @@ type GameTypeMatchStorage interface {
 }
 
 // NewGameTypeMatchStorage ...
-func NewGameTypeMatchStorage(txManager *tx.Manager) GameTypeMatchStorage {
-	switch config.GetValue("Driver").String() {
-	case config.DriverMySQL:
+func NewGameTypeMatchStorage(driver string, txManager *tx.Manager) GameTypeMatchStorage {
+	switch driver {
+	case mysql.DriverName:
 		return mysql.NewGameTypeMatchStorageAdapter(txManager)
 	}
 

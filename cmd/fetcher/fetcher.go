@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
 	"github.com/nikita5637/quiz-fetcher/internal/config"
@@ -20,40 +20,37 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/syncer"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var (
-	configPath string
-)
-
 func init() {
-	flag.StringVar(&configPath, "config", "./config.toml", "path to config file")
+	pflag.StringP("config", "c", "", "path to config file")
+	_ = viper.BindPFlag("config", pflag.Lookup("config"))
 }
 
 func main() {
-	flag.Parse()
+	pflag.Parse()
 
-	ctx := context.Background()
-
-	var err error
-	err = config.ParseConfigFile(configPath)
-	if err != nil {
+	if err := config.ReadConfig(); err != nil {
 		panic(err)
 	}
+
+	ctx := context.Background()
 
 	logsCombiner := &logger.Combiner{}
 	logsCombiner = logsCombiner.WithWriter(os.Stdout)
 
-	elasticLogsEnabled := config.GetValue("ElasticLogsEnabled").Bool()
+	elasticLogsEnabled := viper.GetBool("log.elastic.enabled")
 	if elasticLogsEnabled {
 		var elasticClient *elasticsearch.Client
-		elasticClient, err = elasticsearch.New(elasticsearch.Config{
+		elasticClient, err := elasticsearch.New(elasticsearch.Config{
 			ElasticAddress: config.GetElasticAddress(),
-			ElasticIndex:   config.GetValue("ElasticIndex").String(),
+			ElasticIndex:   viper.GetString("log.elastic.index"),
 		})
 		if err != nil {
 			panic(err)
@@ -65,7 +62,7 @@ func main() {
 
 	logLevel := config.GetLogLevel()
 	logger.SetGlobalLogger(logger.NewLogger(logLevel, logsCombiner, zap.Fields(
-		zap.String("module", "fetcher"),
+		zap.String("module", viper.GetString("log.module_name")),
 	)))
 	logger.Infof(ctx, "initialized logger with log level: %s", logLevel)
 
@@ -89,7 +86,8 @@ func main() {
 
 	gameServiceClient := gamepb.NewServiceClient(cc)
 
-	db, err := storage.NewDB(ctx)
+	driverName := viper.GetString("database.driver")
+	db, err := storage.NewDB(ctx, driverName)
 	if err != nil {
 		panic(err)
 	}
@@ -97,15 +95,15 @@ func main() {
 
 	txManager := tx.NewManager(db)
 
-	gameTypeMatchStorage := storage.NewGameTypeMatchStorage(txManager)
+	gameTypeMatchStorage := storage.NewGameTypeMatchStorage(driverName, txManager)
 
-	syncLogStorage := storage.NewSyncLogStorage(txManager)
+	syncLogStorage := storage.NewSyncLogStorage(driverName, txManager)
 	syncerConfig := syncer.Config{
 		SyncLogStorage: syncLogStorage,
 	}
 	syncerFacade := syncer.NewFacade(syncerConfig)
 
-	placeStorage := storage.NewPlaceStorage(txManager)
+	placeStorage := storage.NewPlaceStorage(driverName, txManager)
 
 	quizPleaseGamesFetcherConfig := quiz_please_game_fetcher.Config{
 		GameInfoPathFormat: quiz_please_game_fetcher.GameInfoPathFormat,
@@ -135,14 +133,14 @@ func main() {
 	sixtySecondsFetcher := sixty_seconds.NewGamesFetcher(sixtySecondsFetcherConfig)
 
 	gamesSyncerCfg := syncer.GamesSyncerConfig{
-		Enabled: config.GetValue("GamesSyncerEnabled").Bool(),
+		Enabled: viper.GetBool("fetcher.games.enabled"),
 		GamesFetchers: []game_fetcher.Fetcher{
 			quizPleaseGamesFetcher,
 			squizGamesFetcher,
 			sixtySecondsFetcher,
 		},
-		DisabledGamesFetchers: config.GetValue("DisabledGamesFetchers").Strings(),
-		Period:                config.GetValue("GamesSyncerPeriod").Uint64(),
+		DisabledGamesFetchers: viper.GetStringSlice("fetcher.games.disabled_leagues"),
+		Period:                viper.GetDuration("fetcher.games.period") * time.Second,
 		GameServiceClient:     gameServiceClient,
 		SyncerFacade:          *syncerFacade,
 	}
