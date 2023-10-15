@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GITHUB_PATH: https://github.com/nikita5637/quiz-fetcher.git
+        BRANCH: v1.0
+    command: "/bin/fetcher --config /etc/config.yaml"
+    container_name: fetcher
+    environment:
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
