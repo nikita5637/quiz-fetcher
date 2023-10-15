@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       args:
         GITHUB_PATH: https://github.com/nikita5637/quiz-fetcher.git
-        BRANCH: v1.0
+        BRANCH: v1.1
     command: "/bin/fetcher --config /etc/config.yaml"
     container_name: fetcher
     environment:
