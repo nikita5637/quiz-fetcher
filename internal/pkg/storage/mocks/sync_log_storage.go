@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	model "github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	mysql "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -22,15 +22,62 @@ func (_m *SyncLogStorage) EXPECT() *SyncLogStorage_Expecter {
 	return &SyncLogStorage_Expecter{mock: &_m.Mock}
 }
 
+// CreateSyncLog provides a mock function with given fields: ctx, sync
+func (_m *SyncLogStorage) CreateSyncLog(ctx context.Context, sync mysql.SyncLog) (int, error) {
+	ret := _m.Called(ctx, sync)
+
+	var r0 int
+	if rf, ok := ret.Get(0).(func(context.Context, mysql.SyncLog) int); ok {
+		r0 = rf(ctx, sync)
+	} else {
+		r0 = ret.Get(0).(int)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, mysql.SyncLog) error); ok {
+		r1 = rf(ctx, sync)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SyncLogStorage_CreateSyncLog_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateSyncLog'
+type SyncLogStorage_CreateSyncLog_Call struct {
+	*mock.Call
+}
+
+// CreateSyncLog is a helper method to define mock.On call
+//  - ctx context.Context
+//  - sync mysql.SyncLog
+func (_e *SyncLogStorage_Expecter) CreateSyncLog(ctx interface{}, sync interface{}) *SyncLogStorage_CreateSyncLog_Call {
+	return &SyncLogStorage_CreateSyncLog_Call{Call: _e.mock.On("CreateSyncLog", ctx, sync)}
+}
+
+func (_c *SyncLogStorage_CreateSyncLog_Call) Run(run func(ctx context.Context, sync mysql.SyncLog)) *SyncLogStorage_CreateSyncLog_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(mysql.SyncLog))
+	})
+	return _c
+}
+
+func (_c *SyncLogStorage_CreateSyncLog_Call) Return(_a0 int, _a1 error) *SyncLogStorage_CreateSyncLog_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
 // FindLastSync provides a mock function with given fields: ctx, name
-func (_m *SyncLogStorage) FindLastSync(ctx context.Context, name string) (model.SyncLog, error) {
+func (_m *SyncLogStorage) FindLastSync(ctx context.Context, name string) ([]mysql.SyncLog, error) {
 	ret := _m.Called(ctx, name)
 
-	var r0 model.SyncLog
-	if rf, ok := ret.Get(0).(func(context.Context, string) model.SyncLog); ok {
+	var r0 []mysql.SyncLog
+	if rf, ok := ret.Get(0).(func(context.Context, string) []mysql.SyncLog); ok {
 		r0 = rf(ctx, name)
 	} else {
-		r0 = ret.Get(0).(model.SyncLog)
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]mysql.SyncLog)
+		}
 	}
 
 	var r1 error
@@ -62,62 +109,17 @@ func (_c *SyncLogStorage_FindLastSync_Call) Run(run func(ctx context.Context, na
 	return _c
 }
 
-func (_c *SyncLogStorage_FindLastSync_Call) Return(_a0 model.SyncLog, _a1 error) *SyncLogStorage_FindLastSync_Call {
+func (_c *SyncLogStorage_FindLastSync_Call) Return(_a0 []mysql.SyncLog, _a1 error) *SyncLogStorage_FindLastSync_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-// Insert provides a mock function with given fields: ctx, sync
-func (_m *SyncLogStorage) Insert(ctx context.Context, sync model.SyncLog) (int, error) {
-	ret := _m.Called(ctx, sync)
-
-	var r0 int
-	if rf, ok := ret.Get(0).(func(context.Context, model.SyncLog) int); ok {
-		r0 = rf(ctx, sync)
-	} else {
-		r0 = ret.Get(0).(int)
-	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, model.SyncLog) error); ok {
-		r1 = rf(ctx, sync)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// SyncLogStorage_Insert_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Insert'
-type SyncLogStorage_Insert_Call struct {
-	*mock.Call
-}
-
-// Insert is a helper method to define mock.On call
-//  - ctx context.Context
-//  - sync model.SyncLog
-func (_e *SyncLogStorage_Expecter) Insert(ctx interface{}, sync interface{}) *SyncLogStorage_Insert_Call {
-	return &SyncLogStorage_Insert_Call{Call: _e.mock.On("Insert", ctx, sync)}
-}
-
-func (_c *SyncLogStorage_Insert_Call) Run(run func(ctx context.Context, sync model.SyncLog)) *SyncLogStorage_Insert_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(model.SyncLog))
-	})
-	return _c
-}
-
-func (_c *SyncLogStorage_Insert_Call) Return(_a0 int, _a1 error) *SyncLogStorage_Insert_Call {
-	_c.Call.Return(_a0, _a1)
-	return _c
-}
-
-// Update provides a mock function with given fields: ctx, sync
-func (_m *SyncLogStorage) Update(ctx context.Context, sync model.SyncLog) error {
+// PatchSyncLog provides a mock function with given fields: ctx, sync
+func (_m *SyncLogStorage) PatchSyncLog(ctx context.Context, sync mysql.SyncLog) error {
 	ret := _m.Called(ctx, sync)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, model.SyncLog) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, mysql.SyncLog) error); ok {
 		r0 = rf(ctx, sync)
 	} else {
 		r0 = ret.Error(0)
@@ -126,26 +128,26 @@ func (_m *SyncLogStorage) Update(ctx context.Context, sync model.SyncLog) error 
 	return r0
 }
 
-// SyncLogStorage_Update_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Update'
-type SyncLogStorage_Update_Call struct {
+// SyncLogStorage_PatchSyncLog_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'PatchSyncLog'
+type SyncLogStorage_PatchSyncLog_Call struct {
 	*mock.Call
 }
 
-// Update is a helper method to define mock.On call
+// PatchSyncLog is a helper method to define mock.On call
 //  - ctx context.Context
-//  - sync model.SyncLog
-func (_e *SyncLogStorage_Expecter) Update(ctx interface{}, sync interface{}) *SyncLogStorage_Update_Call {
-	return &SyncLogStorage_Update_Call{Call: _e.mock.On("Update", ctx, sync)}
+//  - sync mysql.SyncLog
+func (_e *SyncLogStorage_Expecter) PatchSyncLog(ctx interface{}, sync interface{}) *SyncLogStorage_PatchSyncLog_Call {
+	return &SyncLogStorage_PatchSyncLog_Call{Call: _e.mock.On("PatchSyncLog", ctx, sync)}
 }
 
-func (_c *SyncLogStorage_Update_Call) Run(run func(ctx context.Context, sync model.SyncLog)) *SyncLogStorage_Update_Call {
+func (_c *SyncLogStorage_PatchSyncLog_Call) Run(run func(ctx context.Context, sync mysql.SyncLog)) *SyncLogStorage_PatchSyncLog_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(model.SyncLog))
+		run(args[0].(context.Context), args[1].(mysql.SyncLog))
 	})
 	return _c
 }
 
-func (_c *SyncLogStorage_Update_Call) Return(_a0 error) *SyncLogStorage_Update_Call {
+func (_c *SyncLogStorage_PatchSyncLog_Call) Return(_a0 error) *SyncLogStorage_PatchSyncLog_Call {
 	_c.Call.Return(_a0)
 	return _c
 }

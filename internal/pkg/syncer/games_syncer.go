@@ -1,4 +1,5 @@
 //go:generate mockery --case underscore --name GameServiceClient --with-expecter
+//go:generate mockery --case underscore --name SyncLogFacade --with-expecter
 
 package syncer
 
@@ -9,20 +10,20 @@ import (
 	"sync"
 	"time"
 
-	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/types/known/fieldmaskpb"
-
+	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
 	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
+	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
+	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
 const (
 	fetcherNameKey = "fetcher name"
-	syncerName     = "games syncer"
+	syncerName     = "games"
 )
 
 var (
@@ -36,6 +37,13 @@ type GameServiceClient interface {
 	SearchGamesByLeagueID(ctx context.Context, in *gamepb.SearchGamesByLeagueIDRequest, opts ...grpc.CallOption) (*gamepb.SearchGamesByLeagueIDResponse, error)
 }
 
+// SyncLogFacade ...
+type SyncLogFacade interface {
+	CreateSyncLog(ctx context.Context, syncLog model.SyncLog) (model.SyncLog, error)
+	GetLastSync(ctx context.Context, name string) (model.SyncLog, error)
+	PatchSyncLog(ctx context.Context, syncLog model.SyncLog) (model.SyncLog, error)
+}
+
 // GamesSyncer ...
 type GamesSyncer struct {
 	enabled               bool
@@ -47,8 +55,8 @@ type GamesSyncer struct {
 	m                     sync.Mutex
 	name                  string
 	period                time.Duration
+	syncLogFacade         SyncLogFacade
 	syncStatus            model.SyncStatus
-	syncerFacade          Facade
 }
 
 // GamesSyncerConfig ...
@@ -58,7 +66,7 @@ type GamesSyncerConfig struct {
 	GamesFetchers         []game_fetcher.Fetcher
 	DisabledGamesFetchers []string
 	Period                time.Duration
-	SyncerFacade          Facade
+	SyncLogFacade         SyncLogFacade
 }
 
 // NewGamesSyncer ...
@@ -72,34 +80,34 @@ func NewGamesSyncer(ctx context.Context, cfg GamesSyncerConfig) (*GamesSyncer, e
 		m:                     sync.Mutex{},
 		name:                  syncerName,
 		period:                cfg.Period,
-		syncerFacade:          cfg.SyncerFacade,
 		syncStatus:            model.SyncStatusNotSynced,
+		syncLogFacade:         cfg.SyncLogFacade,
 	}
 
-	lastSync, err := gs.syncerFacade.GetLastSync(ctx, gs.name)
+	lastSync, err := gs.syncLogFacade.GetLastSync(ctx, gs.name)
 	if err != nil {
-		return nil, err
-	}
+		if errors.Is(err, synclog.ErrSyncLogNotFound) {
+			now := time_utils.TimeNow().UTC()
+			var createdSyncLog model.SyncLog
+			createdSyncLog, err = gs.syncLogFacade.CreateSyncLog(ctx, model.SyncLog{
+				Name:       gs.name,
+				LastSyncAt: now,
+				Status:     gs.syncStatus,
+			})
+			if err != nil {
+				return nil, fmt.Errorf("creating sync log error: %w", err)
+			}
 
-	// TODO change to error
-	if lastSync.Name == "" {
-		now := time_utils.TimeNow().UTC()
-		lastSyncID, err := gs.syncerFacade.Insert(ctx, model.SyncLog{
-			Name:       gs.name,
-			LastSyncAt: now,
-			Status:     gs.syncStatus,
-		})
-		if err != nil {
-			return nil, err
+			gs.lastSyncAt = now
+			gs.lastSyncID = createdSyncLog.ID
+		} else {
+			return nil, fmt.Errorf("getting last sync error: %w", err)
 		}
-
-		gs.lastSyncAt = now
-		gs.lastSyncID = lastSyncID
-	} else {
-		gs.syncStatus = lastSync.Status
-		gs.lastSyncAt = lastSync.LastSyncAt
-		gs.lastSyncID = lastSync.ID
 	}
+
+	gs.syncStatus = lastSync.Status
+	gs.lastSyncAt = lastSync.LastSyncAt
+	gs.lastSyncID = lastSync.ID
 
 	logger.InfoKV(ctx, "initialize syncer done", "name", gs.name, "status", gs.syncStatus.String(), "sync period", cfg.Period, "enabled", cfg.Enabled)
 	return gs, nil
@@ -204,14 +212,13 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 	}()
 	if err != nil {
 		now := time_utils.TimeNow().UTC()
-		updateErr := g.syncerFacade.Update(ctx, model.SyncLog{
+		if _, err = g.syncLogFacade.PatchSyncLog(ctx, model.SyncLog{
 			ID:         g.lastSyncID,
 			Name:       g.name,
 			LastSyncAt: now,
 			Status:     model.SyncStatusFailed,
-		})
-		if updateErr != nil {
-			return updateErr
+		}); err != nil {
+			return err
 		}
 
 		g.lastSyncAt = now
@@ -221,7 +228,7 @@ func (g *GamesSyncer) Sync(ctx context.Context) error {
 	}
 
 	now := time_utils.TimeNow().UTC()
-	err = g.syncerFacade.Update(ctx, model.SyncLog{
+	_, err = g.syncLogFacade.PatchSyncLog(ctx, model.SyncLog{
 		ID:         g.lastSyncID,
 		Name:       g.name,
 		LastSyncAt: now,
@@ -366,7 +373,7 @@ func (g *GamesSyncer) prepare(ctx context.Context) error {
 
 	if g.syncStatus == model.SyncStatusOK || g.syncStatus == model.SyncStatusFailed {
 		now := time_utils.TimeNow().UTC()
-		lastSyncID, err := g.syncerFacade.Insert(ctx, model.SyncLog{
+		createdSyncLog, err := g.syncLogFacade.CreateSyncLog(ctx, model.SyncLog{
 			Name:       g.name,
 			LastSyncAt: now,
 			Status:     model.SyncStatusNotSynced,
@@ -376,14 +383,14 @@ func (g *GamesSyncer) prepare(ctx context.Context) error {
 		}
 
 		g.lastSyncAt = now
-		g.lastSyncID = lastSyncID
+		g.lastSyncID = createdSyncLog.ID
 		g.syncStatus = model.SyncStatusNotSynced
 	} else if g.syncStatus == model.SyncStatusInProgress {
 		// skip if status is "In progress"
 		return errJobAlreadyInProgress
 	}
 
-	if err := g.syncerFacade.Update(ctx, model.SyncLog{
+	if _, err := g.syncLogFacade.PatchSyncLog(ctx, model.SyncLog{
 		ID:         g.lastSyncID,
 		Name:       g.name,
 		LastSyncAt: g.lastSyncAt,

@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 	"time"
@@ -10,6 +9,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
 	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
+	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
 	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
@@ -81,7 +81,7 @@ func main() {
 		middleware.ModuleNameInterceptor,
 	))
 	if err != nil {
-		logger.Panic(ctx, fmt.Errorf("could not connect: %w", err))
+		logger.Fatalf(ctx, "could not connect: %s", err.Error())
 	}
 
 	gameServiceClient := gamepb.NewServiceClient(cc)
@@ -89,7 +89,7 @@ func main() {
 	driverName := viper.GetString("database.driver")
 	db, err := storage.NewDB(ctx, driverName)
 	if err != nil {
-		panic(err)
+		logger.Fatalf(ctx, "connecting to DB error: %s", err.Error())
 	}
 	defer db.Close()
 
@@ -98,10 +98,11 @@ func main() {
 	gameTypeMatchStorage := storage.NewGameTypeMatchStorage(driverName, txManager)
 
 	syncLogStorage := storage.NewSyncLogStorage(driverName, txManager)
-	syncerConfig := syncer.Config{
+	syncLogFacadeConfig := synclog.Config{
 		SyncLogStorage: syncLogStorage,
+		TxManager:      txManager,
 	}
-	syncerFacade := syncer.NewFacade(syncerConfig)
+	syncLogFacade := synclog.New(syncLogFacadeConfig)
 
 	placeStorage := storage.NewPlaceStorage(driverName, txManager)
 
@@ -142,18 +143,18 @@ func main() {
 		DisabledGamesFetchers: viper.GetStringSlice("fetcher.games.disabled_leagues"),
 		Period:                viper.GetDuration("fetcher.games.period") * time.Second,
 		GameServiceClient:     gameServiceClient,
-		SyncerFacade:          *syncerFacade,
+		SyncLogFacade:         syncLogFacade,
 	}
 
 	gamesSyncer, err := syncer.NewGamesSyncer(ctx, gamesSyncerCfg)
 	if err != nil {
-		logger.Panic(ctx, err)
+		logger.Fatalf(ctx, "creating games syncer error: %s", err.Error())
 	}
 
 	syncronizer := synchronizer.NewSynchronizer(
 		gamesSyncer,
 	)
 	if err := syncronizer.Start(ctx); err != nil {
-		logger.Panic(ctx, err)
+		logger.Fatalf(ctx, "starting syncronizer error: %s", err.Error())
 	}
 }
