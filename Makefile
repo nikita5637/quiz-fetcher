@@ -65,7 +65,7 @@ migrations:
 
 .PHONY: run
 run:
-	go run ./cmd/fetcher --config ./config.toml
+	go run ./cmd/fetcher --config ./config.yaml
 
 .PHONY: test
 test:

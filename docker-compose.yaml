@@ -8,10 +8,9 @@ services:
       args:
         GITHUB_PATH: https://github.com/nikita5637/quiz-fetcher.git
         BRANCH: v1.0
-    command: "/bin/fetcher --config /etc/config.toml"
+    command: "/bin/fetcher --config /etc/config.yaml"
     container_name: fetcher
     environment:
-      DATABASE_CREDENTIALS_PASSWORD: quiz_regbot
     networks:
       - network
 

@@ -1,0 +1,26 @@
+database:
+  address: "database"
+  dbname: "fetcher"
+  driver: "mysql"
+  port: 3306
+  credentials:
+    username: "quiz_regbot"
+    password: "TOPSECRET"
+
+fetcher:
+  games:
+    disabled_leagues: []
+    enabled: true
+    period: 3600
+  registrator_api:
+    address: "registrator-api"
+    port: 8080
+
+log:
+  level: "info"
+  elastic:
+    address: "elasticsearch"
+    enabled: true
+    index: "quiz_regbot"
+    port: 9200
+  module_name: "fetcher"

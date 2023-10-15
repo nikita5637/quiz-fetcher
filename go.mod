@@ -3,7 +3,6 @@ module github.com/nikita5637/quiz-fetcher
 go 1.18
 
 require (
-	github.com/BurntSushi/toml v1.2.1
 	github.com/PuerkitoBio/goquery v1.8.0
 	github.com/elastic/go-elasticsearch/v6 v6.8.10
 	github.com/go-sql-driver/mysql v1.7.0
@@ -12,6 +11,8 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/mono83/maybe v1.0.0
 	github.com/nikita5637/quiz-registrator-api v1.3.24
+	github.com/spf13/pflag v1.0.5
+	github.com/spf13/viper v1.12.0
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.24.0
 	golang.org/x/tools v0.4.0
@@ -24,6 +25,7 @@ require (
 	github.com/Abirdcfly/dupword v0.0.7 // indirect
 	github.com/Antonboom/errname v0.1.7 // indirect
 	github.com/Antonboom/nilnil v0.1.1 // indirect
+	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/Djarvur/go-err113 v0.0.0-20210108212216-aea10b59be24 // indirect
 	github.com/GaijinEntertainment/go-exhaustruct/v2 v2.3.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
@@ -150,8 +152,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/cobra v1.6.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.12.0 // indirect
 	github.com/ssgreg/nlreturn/v2 v2.2.1 // indirect
 	github.com/stbenjam/no-sprintf-host-port v0.1.1 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect

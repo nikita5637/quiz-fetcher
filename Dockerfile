@@ -14,6 +14,6 @@ RUN make build
 FROM golang:1.18.3 as server
 
 COPY --from=builder /go/src/quiz-fetcher/fetcher /bin/
-COPY --from=builder /go/src/quiz-fetcher/config.toml /etc/
+COPY --from=builder /go/src/quiz-fetcher/config.yaml /etc/
 
 CMD ["/bin/fetcher"]
