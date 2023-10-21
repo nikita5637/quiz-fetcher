@@ -1,9 +1,7 @@
 package main
 
 import (
-	"context"
 	"os"
-	"os/signal"
 	"time"
 
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
@@ -20,6 +18,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/syncer"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+	"github.com/posener/ctxutil"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
@@ -34,13 +33,13 @@ func init() {
 }
 
 func main() {
+	ctx := ctxutil.Interrupt()
+
 	pflag.Parse()
 
 	if err := config.ReadConfig(); err != nil {
 		panic(err)
 	}
-
-	ctx := context.Background()
 
 	logsCombiner := &logger.Combiner{}
 	logsCombiner = logsCombiner.WithWriter(os.Stdout)
@@ -65,17 +64,6 @@ func main() {
 		zap.String("module", viper.GetString("log.module_name")),
 	)))
 	logger.Infof(ctx, "initialized logger with log level: %s", logLevel)
-
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
-
-	ctx, cancel := context.WithCancel(ctx)
-
-	go func() {
-		oscall := <-c
-		logger.Infof(ctx, "system call recieved: %+v", oscall)
-		cancel()
-	}()
 
 	cc, err := grpc.Dial(config.GetRegistratorAPIAddress(), grpc.WithInsecure(), grpc.WithChainUnaryInterceptor(
 		middleware.ModuleNameInterceptor,
