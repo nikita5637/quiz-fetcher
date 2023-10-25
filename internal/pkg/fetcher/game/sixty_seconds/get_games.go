@@ -151,7 +151,7 @@ func (f *GamesFetcher) getPlaceID(ctx context.Context, place string) (int, error
 		return 0, errors.New("can't parse place string")
 	}
 
-	name := strings.TrimPrefix(sl[0], "\u00a0")
+	name := strings.TrimSpace(sl[0])
 	address := sl[1]
 
 	dbPlace, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, name, address)

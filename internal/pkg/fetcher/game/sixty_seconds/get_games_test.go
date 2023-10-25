@@ -28,6 +28,11 @@ const (
 	game18615 = "/game/18615/"
 	game18616 = "/game/18616/"
 	game18617 = "/game/18617/"
+
+	// first league
+	game21281 = "/game/21281/"
+	game21282 = "/game/21282/"
+	game21283 = "/game/21283/"
 )
 
 func TestGamesFetcher_GetGamesList(t *testing.T) {
@@ -260,6 +265,90 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2023-04-18 16:30"),
 				Price:       1200,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+		}, got)
+		assert.NoError(t, err)
+	})
+
+	t.Run("test case 4 (first league only)", func(t *testing.T) {
+		ctx := context.Background()
+
+		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+			var r io.Reader
+			switch req.URL.Path {
+			case FirstLeagueGamesListPath:
+				r = strings.NewReader(html4)
+			case game21281:
+				r = strings.NewReader(html21281)
+			case game21282:
+				r = strings.NewReader(html21282)
+			case game21283:
+				r = strings.NewReader(html21283)
+			}
+			_, err := io.Copy(w, r)
+			assert.NoError(t, err)
+		}))
+		defer svr.Close()
+
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
+
+		fetcher := GamesFetcher{
+			firstLeagueGamesListPath: FirstLeagueGamesListPath,
+			client:                   *http.DefaultClient,
+			placeStorage:             mockPlaceStorage,
+			url:                      svr.URL,
+		}
+
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Rossi's Club", "ул. Зодчего Росси, 1-3").Return(database.Place{
+			ID:         1,
+			ExternalID: 1,
+		}, nil)
+
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
+		}, nil)
+
+		got, err := fetcher.GetGamesList(ctx)
+		assert.Equal(t, []model.Game{
+			{
+				ExternalID:  maybe.Just(int32(21281)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#8",
+				Name:        maybe.Just("Первая лига"),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2023-10-31 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(21282)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#9",
+				Name:        maybe.Just("Первая лига"),
+				PlaceID:     2,
+				DateTime:    time_utils.ConvertTime("2023-11-07 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(21283)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#10",
+				Name:        maybe.Just("Первая лига"),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2023-11-14 16:30"),
+				Price:       1500,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
