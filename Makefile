@@ -28,7 +28,7 @@ endif
 
 .PHONY: build
 build:
-	go build -o fetcher ./cmd/fetcher
+	go build -buildvcs=auto -o fetcher ./cmd/fetcher
 
 .PHONY: clean
 clean:

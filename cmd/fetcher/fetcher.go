@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"runtime/debug"
 	"time"
 
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
@@ -142,6 +143,15 @@ func main() {
 	syncronizer := synchronizer.NewSynchronizer(
 		gamesSyncer,
 	)
+
+	if buildInfo, ok := debug.ReadBuildInfo(); ok {
+		for _, setting := range buildInfo.Settings {
+			if setting.Key == "vcs.revision" {
+				logger.InfoKV(ctx, "application started", zap.String("vcs.revision", setting.Value))
+			}
+		}
+	}
+
 	if err := syncronizer.Start(ctx); err != nil {
 		logger.Fatalf(ctx, "starting syncronizer error: %s", err.Error())
 	}
