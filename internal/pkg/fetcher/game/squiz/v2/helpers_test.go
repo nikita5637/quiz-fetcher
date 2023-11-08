@@ -10,8 +10,8 @@ import (
 )
 
 type fixture struct {
-	ctx          context.Context
-	gamesFetcher *GamesFetcher
+	ctx     context.Context
+	fetcher *Fetcher
 
 	gameTypeMatchStorage *mocks.GameTypeMatchStorage
 }
@@ -23,7 +23,7 @@ func tearUp(t *testing.T) *fixture {
 		gameTypeMatchStorage: mocks.NewGameTypeMatchStorage(t),
 	}
 
-	fx.gamesFetcher = &GamesFetcher{
+	fx.fetcher = &Fetcher{
 		gameTypeMatchStorage: fx.gameTypeMatchStorage,
 	}
 

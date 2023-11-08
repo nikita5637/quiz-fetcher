@@ -36,7 +36,7 @@ var (
 	}
 )
 
-func (f *GamesFetcher) convertGameToModelGame(ctx context.Context, game game) (model.Game, error) {
+func (f *Fetcher) convertGameToModelGame(ctx context.Context, game game) (model.Game, error) {
 	var externalID int64
 	var gameType int32
 	var err error

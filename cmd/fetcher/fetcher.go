@@ -5,20 +5,24 @@ import (
 	"runtime/debug"
 	"time"
 
+	_ "github.com/nikita5637/quiz-fetcher/internal/app/info"
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"
 	"github.com/nikita5637/quiz-fetcher/internal/config"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
 	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
-	game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
+	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
+	quiz_please_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/quiz_please"
+	sixty_seconds_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/sixty_seconds"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	"github.com/nikita5637/quiz-fetcher/internal/pkg/syncer"
+	gamessyncer "github.com/nikita5637/quiz-fetcher/internal/pkg/syncer/games"
+	resultssyncer "github.com/nikita5637/quiz-fetcher/internal/pkg/syncer/results"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+	gameresultmanagerpb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game_result_manager"
 	"github.com/posener/ctxutil"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -74,6 +78,7 @@ func main() {
 	}
 
 	gameServiceClient := gamepb.NewServiceClient(cc)
+	gameResultManagerServiceClient := gameresultmanagerpb.NewServiceClient(cc)
 
 	driverName := viper.GetString("database.driver")
 	db, err := storage.NewDB(ctx, driverName)
@@ -91,58 +96,88 @@ func main() {
 		SyncLogStorage: syncLogStorage,
 		TxManager:      txManager,
 	}
-	syncLogFacade := synclog.New(syncLogFacadeConfig)
+	syncLogsFacade := synclog.New(syncLogFacadeConfig)
 
 	placeStorage := storage.NewPlaceStorage(driverName, txManager)
 
 	quizPleaseGamesFetcherConfig := quiz_please_game_fetcher.Config{
-		GameInfoPathFormat: quiz_please_game_fetcher.GameInfoPathFormat,
-		GamesListPath:      quiz_please_game_fetcher.GamesListPath,
-		Name:               quiz_please_game_fetcher.FetcherName,
-		PlaceStorage:       placeStorage,
-		URL:                quiz_please_game_fetcher.URL,
+		PlaceStorage: placeStorage,
 	}
 	quizPleaseGamesFetcher := quiz_please_game_fetcher.New(quizPleaseGamesFetcherConfig)
 
-	squizFetcherConfig := squiz.Config{
-		GamesListPath:        squiz.GamesListPath,
+	squizGamesFetcherConfig := squiz.Config{
 		GameTypeMatchStorage: gameTypeMatchStorage,
-		Name:                 squiz.FetcherName,
 		PlaceStorage:         placeStorage,
-		URL:                  squiz.URL,
 	}
-	squizGamesFetcher := squiz.NewGamesFetcher(squizFetcherConfig)
+	squizGamesFetcher := squiz.New(squizGamesFetcherConfig)
 
-	sixtySecondsFetcherConfig := sixty_seconds.Config{
-		OpenLeagueGamesListPath:  sixty_seconds.OpenLeagueGamesListPath,
-		FirstLeagueGamesListPath: sixty_seconds.FirstLeagueGamesListPath,
-		Name:                     sixty_seconds.FetcherName,
-		PlaceStorage:             placeStorage,
-		URL:                      sixty_seconds.URL,
+	sixtySecondsGamesFetcherConfig := sixty_seconds_game_fetcher.Config{
+		PlaceStorage: placeStorage,
 	}
-	sixtySecondsFetcher := sixty_seconds.NewGamesFetcher(sixtySecondsFetcherConfig)
+	sixtySecondsGamesFetcher := sixty_seconds_game_fetcher.New(sixtySecondsGamesFetcherConfig)
 
-	gamesSyncerCfg := syncer.GamesSyncerConfig{
-		Enabled: viper.GetBool("fetcher.games.enabled"),
-		GamesFetchers: []game_fetcher.Fetcher{
+	gamesSyncerName := viper.GetString("synchronizer.syncer.games.name")
+	logger.InfoKV(ctx, "initialize syncer", zap.String("syncer", gamesSyncerName))
+	gamesSyncerCfg := gamessyncer.Config{
+		DisabledGamesFetchers: viper.GetStringSlice("synchronizer.syncer.games.disabled_leagues"),
+		Enabled:               viper.GetBool("synchronizer.syncer.games.enabled"),
+		Fetchers: []gamessyncer.Fetcher{
 			quizPleaseGamesFetcher,
 			squizGamesFetcher,
-			sixtySecondsFetcher,
+			sixtySecondsGamesFetcher,
 		},
-		DisabledGamesFetchers: viper.GetStringSlice("fetcher.games.disabled_leagues"),
-		Period:                viper.GetDuration("fetcher.games.period") * time.Second,
-		GameServiceClient:     gameServiceClient,
-		SyncLogFacade:         syncLogFacade,
+		GameServiceClient: gameServiceClient,
+		Name:              gamesSyncerName,
+		Period:            viper.GetDuration("synchronizer.syncer.games.period") * time.Second,
 	}
+	gamesSyncer := gamessyncer.New(gamesSyncerCfg)
+	logger.InfoKV(ctx, "syncer initialization done",
+		zap.String("syncer", gamesSyncer.GetName()),
+		zap.Duration("syncPeriod", gamesSyncer.GetPeriod()),
+		zap.Bool("enabled", gamesSyncer.Enabled()))
 
-	gamesSyncer, err := syncer.NewGamesSyncer(ctx, gamesSyncerCfg)
-	if err != nil {
-		logger.Fatalf(ctx, "creating games syncer error: %s", err.Error())
+	quizPleaseResultsFetcherConfig := quiz_please_result_fetcher.Config{
+		Team: viper.GetString("synchronizer.syncer.results.team"),
 	}
+	quizPleaseResultsFetcher := quiz_please_result_fetcher.New(quizPleaseResultsFetcherConfig)
 
-	syncronizer := synchronizer.NewSynchronizer(
-		gamesSyncer,
-	)
+	sixtySecondsResultsFetcherConfig := sixty_seconds_result_fetcher.Config{
+		Team: "Улица плохих снов",
+	}
+	sixtySecondsResultsFetcher := sixty_seconds_result_fetcher.New(sixtySecondsResultsFetcherConfig)
+
+	resultsSyncerName := viper.GetString("synchronizer.syncer.results.name")
+	logger.InfoKV(ctx, "initialize syncer", "syncer", resultsSyncerName)
+	resultsSyncerConfig := resultssyncer.Config{
+		DisabledResultsFetchers: viper.GetStringSlice("synchronizer.syncer.results.disabled_leagues"),
+		Enabled:                 viper.GetBool("synchronizer.syncer.results.enabled"),
+		Fetchers: []resultssyncer.Fetcher{
+			quizPleaseResultsFetcher,
+			sixtySecondsResultsFetcher,
+		},
+		GameServiceClient:              gameServiceClient,
+		GameResultManagerServiceClient: gameResultManagerServiceClient,
+		Name:                           resultsSyncerName,
+		Period:                         viper.GetDuration("synchronizer.syncer.results.period") * time.Second,
+	}
+	resultsSyncer := resultssyncer.New(resultsSyncerConfig)
+	logger.InfoKV(ctx, "initialize syncer done",
+		zap.String("syncer", resultsSyncer.GetName()),
+		zap.Duration("sync_period", resultsSyncer.GetPeriod()),
+		zap.Bool("enabled", resultsSyncer.Enabled()))
+
+	logger.InfoKV(ctx, "initialize synchronizer")
+	timeout := viper.GetDuration("synchronizer.sync.timeout") * time.Second
+	synchronizerConfig := synchronizer.Config{
+		Syncers: []synchronizer.Syncer{
+			gamesSyncer,
+			resultsSyncer,
+		},
+		SyncLogsfacade: syncLogsFacade,
+		Timeout:        timeout,
+	}
+	synchronizer := synchronizer.New(synchronizerConfig)
+	logger.InfoKV(ctx, "initialize synchronizer done", zap.Duration("timeout", timeout))
 
 	if buildInfo, ok := debug.ReadBuildInfo(); ok {
 		for _, setting := range buildInfo.Settings {
@@ -152,7 +187,9 @@ func main() {
 		}
 	}
 
-	if err := syncronizer.Start(ctx); err != nil {
-		logger.Fatalf(ctx, "starting syncronizer error: %s", err.Error())
+	if err := synchronizer.Sync(ctx); err != nil {
+		logger.Fatalf(ctx, "Sync error: %s", err.Error())
 	}
+
+	logger.Info(ctx, "synchronizer gracefully stopped")
 }

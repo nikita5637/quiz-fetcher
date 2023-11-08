@@ -8,16 +8,11 @@ import (
 )
 
 const (
-	// FetcherName ...
-	FetcherName = "quiz, please!"
-	// GamesListPath ...
-	GamesListPath = "/schedule"
-	// GameInfoPathFormat ...
-	GameInfoPathFormat = "/ajax/scope-game?id=%d"
-	// URL ...
-	URL = "https://spb.quizplease.ru"
-
-	leagueID = int32(leaguepb.LeagueID_QUIZ_PLEASE)
+	fetcherName        = "quiz, please!"
+	gameInfoPathFormat = "/ajax/scope-game?id=%d"
+	gamesListPath      = "/schedule"
+	leagueID           = int32(leaguepb.LeagueID_QUIZ_PLEASE)
+	url                = "https://spb.quizplease.ru"
 )
 
 // Fetcher ...
@@ -25,6 +20,7 @@ type Fetcher struct {
 	client             http.Client
 	gameInfoPathFormat string
 	gamesListPath      string
+	leagueID           int32
 	name               string
 	placeStorage       storage.PlaceStorage
 	url                string
@@ -32,22 +28,19 @@ type Fetcher struct {
 
 // Config ...
 type Config struct {
-	GameInfoPathFormat string
-	GamesListPath      string
-	Name               string
-	PlaceStorage       storage.PlaceStorage
-	URL                string
+	PlaceStorage storage.PlaceStorage
 }
 
 // New ...
 func New(cfg Config) *Fetcher {
 	return &Fetcher{
 		client:             *http.DefaultClient,
-		gameInfoPathFormat: cfg.GameInfoPathFormat,
-		gamesListPath:      cfg.GamesListPath,
-		name:               cfg.Name,
+		gameInfoPathFormat: gameInfoPathFormat,
+		gamesListPath:      gamesListPath,
+		leagueID:           leagueID,
+		name:               fetcherName,
 		placeStorage:       cfg.PlaceStorage,
-		url:                cfg.URL,
+		url:                url,
 	}
 }
 
@@ -58,5 +51,5 @@ func (f *Fetcher) GetName() string {
 
 // GetLeagueID ...
 func (f *Fetcher) GetLeagueID() int32 {
-	return leagueID
+	return f.leagueID
 }

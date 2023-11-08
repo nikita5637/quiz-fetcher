@@ -27,7 +27,7 @@ type game struct {
 }
 
 // GetGamesList ...
-func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
+func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	resp, err := f.client.Get(f.url + f.gamesListPath)
 	if err != nil {
 		return nil, fmt.Errorf("can't get games list: %w", err)

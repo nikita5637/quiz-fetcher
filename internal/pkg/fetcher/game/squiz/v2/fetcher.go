@@ -11,16 +11,12 @@ import (
 )
 
 const (
-	// FetcherName ...
-	FetcherName = "squiz"
-	// GamesListPath ...
-	GamesListPath = "/api/getproductslist/"
-	// URL ...
-	URL = "https://store.tildacdn.com"
-
+	fetcherName    = "squiz"
+	gamesListPath  = "/api/getproductslist/"
 	gamesListQuery = "?storepartuid=111979372401&getparts=true&getoptions=true&slice=1&size=100"
 	leagueID       = int32(leaguepb.LeagueID_SQUIZ)
 	maxPlayers     = 8
+	url            = "https://store.tildacdn.com"
 )
 
 // GameTypeMatchStorage ...
@@ -28,11 +24,12 @@ type GameTypeMatchStorage interface {
 	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
 }
 
-// GamesFetcher ...
-type GamesFetcher struct {
+// Fetcher ...
+type Fetcher struct {
 	client               http.Client
 	gamesListPath        string
 	gameTypeMatchStorage GameTypeMatchStorage
+	leagueID             int32
 	name                 string
 	placeStorage         storage.PlaceStorage
 	url                  string
@@ -40,31 +37,29 @@ type GamesFetcher struct {
 
 // Config ...
 type Config struct {
-	GamesListPath        string
 	GameTypeMatchStorage GameTypeMatchStorage
-	Name                 string
 	PlaceStorage         storage.PlaceStorage
-	URL                  string
 }
 
-// NewGamesFetcher ...
-func NewGamesFetcher(cfg Config) *GamesFetcher {
-	return &GamesFetcher{
+// New ...
+func New(cfg Config) *Fetcher {
+	return &Fetcher{
 		client:               *http.DefaultClient,
-		gamesListPath:        cfg.GamesListPath,
+		gamesListPath:        gamesListPath,
 		gameTypeMatchStorage: cfg.GameTypeMatchStorage,
-		name:                 cfg.Name,
+		leagueID:             leagueID,
+		name:                 fetcherName,
 		placeStorage:         cfg.PlaceStorage,
-		url:                  cfg.URL,
+		url:                  url,
 	}
 }
 
 // GetName ...
-func (f *GamesFetcher) GetName() string {
+func (f *Fetcher) GetName() string {
 	return f.name
 }
 
 // GetLeagueID ...
-func (f *GamesFetcher) GetLeagueID() int32 {
-	return leagueID
+func (f *Fetcher) GetLeagueID() int32 {
+	return f.leagueID
 }

@@ -458,7 +458,7 @@ func TestGamesFetcher_getGames(t *testing.T) {
 
 		fetcher := Fetcher{
 			client:             *http.DefaultClient,
-			gameInfoPathFormat: GameInfoPathFormat,
+			gameInfoPathFormat: gameInfoPathFormat,
 			placeStorage:       mockPlaceStorage,
 			url:                svr.URL,
 		}
@@ -595,7 +595,7 @@ func TestGamesFetcher_getGameIDs(t *testing.T) {
 
 		fetcher := Fetcher{
 			client:             *http.DefaultClient,
-			gameInfoPathFormat: GameInfoPathFormat,
+			gameInfoPathFormat: gameInfoPathFormat,
 			url:                svr.URL,
 		}
 		got, err := fetcher.getGameIDs(ctx)

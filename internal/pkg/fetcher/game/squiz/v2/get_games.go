@@ -36,7 +36,7 @@ type StoreResponse struct {
 }
 
 // GetGamesList ...
-func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
+func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	req, err := http.NewRequest(http.MethodGet, f.url+f.gamesListPath+gamesListQuery, nil)
 	if err != nil {
 		return nil, fmt.Errorf("create new http request error: %w", err)
@@ -85,7 +85,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	return modelGames, nil
 }
 
-func (f *GamesFetcher) getGameFromProduct(ctx context.Context, product Product) (model.Game, error) {
+func (f *Fetcher) getGameFromProduct(ctx context.Context, product Product) (model.Game, error) {
 	gameDescription := getGameDescription(product.Text)
 	if gameDescription == "" {
 		return model.Game{}, errors.New("empty description")
@@ -153,7 +153,7 @@ func (f *GamesFetcher) getGameFromProduct(ctx context.Context, product Product) 
 	}, nil
 }
 
-func (f *GamesFetcher) getGameType(ctx context.Context, gameName, description string) (int32, error) {
+func (f *Fetcher) getGameType(ctx context.Context, gameName, description string) (int32, error) {
 	if gameName == finalGameName {
 		return int32(gamepb.GameType_GAME_TYPE_CLOSED), nil
 	}

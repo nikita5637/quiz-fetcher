@@ -15,8 +15,8 @@ import (
 )
 
 type fixture struct {
-	ctx          context.Context
-	gamesFetcher *GamesFetcher
+	ctx     context.Context
+	fetcher *Fetcher
 
 	gameTypeMatchStorage *mocks.GameTypeMatchStorage
 }
@@ -28,7 +28,7 @@ func tearUp(t *testing.T) *fixture {
 		gameTypeMatchStorage: mocks.NewGameTypeMatchStorage(t),
 	}
 
-	fx.gamesFetcher = &GamesFetcher{
+	fx.fetcher = &Fetcher{
 		gameTypeMatchStorage: fx.gameTypeMatchStorage,
 	}
 
@@ -45,7 +45,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			Href: "#href",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -60,7 +60,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			Description: "invalid description",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -75,7 +75,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			Description: "description",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -91,7 +91,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			Number:      "",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -108,7 +108,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			DateTime:    "invalid date time",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -126,7 +126,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			PaymentInfo: "invalid payment info",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{}, got)
 		assert.Error(t, err)
 	})
@@ -145,7 +145,7 @@ func Test_convertGameToModelGame(t *testing.T) {
 			PaymentInfo: "400 рублей с человека, оплата только наличными",
 		}
 
-		got, err := fx.gamesFetcher.convertGameToModelGame(fx.ctx, g)
+		got, err := fx.fetcher.convertGameToModelGame(fx.ctx, g)
 		assert.Equal(t, model.Game{
 			ExternalID:  maybe.Just(int32(123)),
 			LeagueID:    leagueID,

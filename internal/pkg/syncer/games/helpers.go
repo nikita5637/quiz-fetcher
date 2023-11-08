@@ -1,4 +1,4 @@
-package syncer
+package games
 
 import (
 	"github.com/mono83/maybe"

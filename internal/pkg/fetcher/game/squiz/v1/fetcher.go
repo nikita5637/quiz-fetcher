@@ -11,15 +11,11 @@ import (
 )
 
 const (
-	// FetcherName ...
-	FetcherName = "squiz"
-	// GamesListPath ...
-	GamesListPath = "/#schedule"
-	// URL ...
-	URL = "https://spb.squiz.ru"
-
-	leagueID   = int32(leaguepb.LeagueID_SQUIZ)
-	maxPlayers = 8
+	fetcherName   = "squiz"
+	gamesListPath = "/#schedule"
+	leagueID      = int32(leaguepb.LeagueID_SQUIZ)
+	maxPlayers    = 8
+	url           = "https://spb.squiz.ru"
 )
 
 // GameTypeMatchStorage ...
@@ -27,8 +23,8 @@ type GameTypeMatchStorage interface {
 	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
 }
 
-// GamesFetcher ...
-type GamesFetcher struct {
+// Fetcher ...
+type Fetcher struct {
 	client               http.Client
 	gamesListPath        string
 	gameTypeMatchStorage GameTypeMatchStorage
@@ -39,26 +35,23 @@ type GamesFetcher struct {
 
 // Config ...
 type Config struct {
-	GamesListPath        string
 	GameTypeMatchStorage GameTypeMatchStorage
-	Name                 string
 	PlaceStorage         storage.PlaceStorage
-	URL                  string
 }
 
-// NewGamesFetcher ...
-func NewGamesFetcher(cfg Config) *GamesFetcher {
-	return &GamesFetcher{
+// New ...
+func New(cfg Config) *Fetcher {
+	return &Fetcher{
 		client:               *http.DefaultClient,
-		gamesListPath:        cfg.GamesListPath,
+		gamesListPath:        gamesListPath,
 		gameTypeMatchStorage: cfg.GameTypeMatchStorage,
-		name:                 cfg.Name,
+		name:                 fetcherName,
 		placeStorage:         cfg.PlaceStorage,
-		url:                  cfg.URL,
+		url:                  url,
 	}
 }
 
 // GetName ...
-func (w *GamesFetcher) GetName() string {
-	return w.name
+func (f *Fetcher) GetName() string {
+	return f.name
 }

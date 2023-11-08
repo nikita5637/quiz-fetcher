@@ -31,7 +31,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		fx := tearUp(t)
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			gameTypeMatchStorage: fx.gameTypeMatchStorage,
 			placeStorage:         mockPlaceStorage,
 			url:                  svr.URL,
@@ -203,7 +203,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		fx := tearUp(t)
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			gameTypeMatchStorage: fx.gameTypeMatchStorage,
 			placeStorage:         mockPlaceStorage,
 			url:                  svr.URL,
@@ -375,7 +375,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		fx := tearUp(t)
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			gameTypeMatchStorage: fx.gameTypeMatchStorage,
 			placeStorage:         mockPlaceStorage,
 			url:                  svr.URL,
@@ -509,7 +509,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		fx := tearUp(t)
 
-		fetcher := GamesFetcher{
+		fetcher := Fetcher{
 			gameTypeMatchStorage: fx.gameTypeMatchStorage,
 			placeStorage:         mockPlaceStorage,
 			url:                  svr.URL,

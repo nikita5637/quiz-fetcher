@@ -8,23 +8,19 @@ import (
 )
 
 const (
-	// FetcherName ...
-	FetcherName = "60 seconds"
-	// OpenLeagueGamesListPath ...
-	OpenLeagueGamesListPath = "/league/117/"
-	// FirstLeagueGamesListPath ...
-	FirstLeagueGamesListPath = "/league/118/"
-	// URL ...
-	URL = "https://60sec.online"
-
-	leagueID = int32(leaguepb.LeagueID_SIXTY_SECONDS)
+	fetcherName              = "60 seconds"
+	firstLeagueGamesListPath = "/league/118/"
+	leagueID                 = int32(leaguepb.LeagueID_SIXTY_SECONDS)
+	openLeagueGamesListPath  = "/league/117/"
+	url                      = "https://60sec.online"
 )
 
-// GamesFetcher ...
-type GamesFetcher struct {
+// Fetcher ...
+type Fetcher struct {
 	client                   http.Client
 	openLeagueGamesListPath  string
 	firstLeagueGamesListPath string
+	leagueID                 int32
 	name                     string
 	placeStorage             storage.PlaceStorage
 	url                      string
@@ -32,31 +28,28 @@ type GamesFetcher struct {
 
 // Config ...
 type Config struct {
-	OpenLeagueGamesListPath  string
-	FirstLeagueGamesListPath string
-	Name                     string
-	PlaceStorage             storage.PlaceStorage
-	URL                      string
+	PlaceStorage storage.PlaceStorage
 }
 
-// NewGamesFetcher ...
-func NewGamesFetcher(cfg Config) *GamesFetcher {
-	return &GamesFetcher{
+// New ...
+func New(cfg Config) *Fetcher {
+	return &Fetcher{
 		client:                   *http.DefaultClient,
-		openLeagueGamesListPath:  cfg.OpenLeagueGamesListPath,
-		firstLeagueGamesListPath: cfg.FirstLeagueGamesListPath,
-		name:                     cfg.Name,
+		openLeagueGamesListPath:  openLeagueGamesListPath,
+		firstLeagueGamesListPath: firstLeagueGamesListPath,
+		leagueID:                 leagueID,
+		name:                     fetcherName,
 		placeStorage:             cfg.PlaceStorage,
-		url:                      cfg.URL,
+		url:                      url,
 	}
 }
 
 // GetName ...
-func (f *GamesFetcher) GetName() string {
+func (f *Fetcher) GetName() string {
 	return f.name
 }
 
 // GetLeagueID ...
-func (f *GamesFetcher) GetLeagueID() int32 {
-	return leagueID
+func (f *Fetcher) GetLeagueID() int32 {
+	return f.leagueID
 }

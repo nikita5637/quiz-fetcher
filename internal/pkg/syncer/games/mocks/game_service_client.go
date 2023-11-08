@@ -6,6 +6,7 @@ import (
 	context "context"
 
 	game "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+
 	grpc "google.golang.org/grpc"
 
 	mock "github.com/stretchr/testify/mock"

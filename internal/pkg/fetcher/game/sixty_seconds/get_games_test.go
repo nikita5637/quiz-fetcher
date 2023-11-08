@@ -42,7 +42,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 			var r io.Reader
 			switch req.URL.Path {
-			case OpenLeagueGamesListPath:
+			case openLeagueGamesListPath:
 				r = strings.NewReader(html1)
 			case game17630:
 				r = strings.NewReader(html17630)
@@ -58,8 +58,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
-		fetcher := GamesFetcher{
-			openLeagueGamesListPath: OpenLeagueGamesListPath,
+		fetcher := Fetcher{
+			openLeagueGamesListPath: openLeagueGamesListPath,
 			client:                  *http.DefaultClient,
 			placeStorage:            mockPlaceStorage,
 			url:                     svr.URL,
@@ -121,7 +121,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 			var r io.Reader
 			switch req.URL.Path {
-			case OpenLeagueGamesListPath:
+			case openLeagueGamesListPath:
 				r = strings.NewReader(html2)
 			case game17631:
 				r = strings.NewReader(html17631)
@@ -137,8 +137,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
-		fetcher := GamesFetcher{
-			openLeagueGamesListPath: OpenLeagueGamesListPath,
+		fetcher := Fetcher{
+			openLeagueGamesListPath: openLeagueGamesListPath,
 			client:                  *http.DefaultClient,
 			placeStorage:            mockPlaceStorage,
 			url:                     svr.URL,
@@ -200,7 +200,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 			var r io.Reader
 			switch req.URL.Path {
-			case FirstLeagueGamesListPath:
+			case firstLeagueGamesListPath:
 				r = strings.NewReader(html3)
 			case game18615:
 				r = strings.NewReader(html18615)
@@ -216,8 +216,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
-		fetcher := GamesFetcher{
-			firstLeagueGamesListPath: FirstLeagueGamesListPath,
+		fetcher := Fetcher{
+			firstLeagueGamesListPath: firstLeagueGamesListPath,
 			client:                   *http.DefaultClient,
 			placeStorage:             mockPlaceStorage,
 			url:                      svr.URL,
@@ -279,7 +279,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 			var r io.Reader
 			switch req.URL.Path {
-			case FirstLeagueGamesListPath:
+			case firstLeagueGamesListPath:
 				r = strings.NewReader(html4)
 			case game21281:
 				r = strings.NewReader(html21281)
@@ -295,8 +295,8 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 
 		mockPlaceStorage := mocks.NewPlaceStorage(t)
 
-		fetcher := GamesFetcher{
-			firstLeagueGamesListPath: FirstLeagueGamesListPath,
+		fetcher := Fetcher{
+			firstLeagueGamesListPath: firstLeagueGamesListPath,
 			client:                   *http.DefaultClient,
 			placeStorage:             mockPlaceStorage,
 			url:                      svr.URL,

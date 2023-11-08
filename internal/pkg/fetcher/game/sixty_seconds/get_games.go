@@ -16,7 +16,7 @@ import (
 )
 
 // GetGamesList ...
-func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
+func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	games := []model.Game{}
 	for _, gamesListPath := range []string{f.openLeagueGamesListPath, f.firstLeagueGamesListPath} {
 		if gamesListPath == "" {
@@ -125,7 +125,7 @@ func (f *GamesFetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	return games, nil
 }
 
-func (f *GamesFetcher) getDateTime(ctx context.Context, gameInfoPath string) (time.Time, error) {
+func (f *Fetcher) getDateTime(ctx context.Context, gameInfoPath string) (time.Time, error) {
 	resp, err := f.client.Get(f.url + gameInfoPath)
 	if err != nil {
 		return time.Time{}, fmt.Errorf("can't get response: %w", err)
@@ -145,7 +145,7 @@ func (f *GamesFetcher) getDateTime(ctx context.Context, gameInfoPath string) (ti
 	return convertDateTime(dateTime)
 }
 
-func (f *GamesFetcher) getPlaceID(ctx context.Context, place string) (int, error) {
+func (f *Fetcher) getPlaceID(ctx context.Context, place string) (int, error) {
 	sl := strings.Split(place, " - ")
 	if len(sl) != 2 {
 		return 0, errors.New("can't parse place string")
