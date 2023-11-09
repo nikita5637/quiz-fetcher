@@ -2,14 +2,12 @@ package quiz_please
 
 import (
 	"net/http"
-
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName    = "quiz, please!"
 	gameResultPath = "/game-page?id=%d"
-	leagueID       = int32(leaguepb.LeagueID_QUIZ_PLEASE)
+	leagueID       = int32(1)
 	url            = "https://spb.quizplease.ru"
 )
 

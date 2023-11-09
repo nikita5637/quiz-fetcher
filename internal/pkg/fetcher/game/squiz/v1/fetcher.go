@@ -7,13 +7,12 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName   = "squiz"
 	gamesListPath = "/#schedule"
-	leagueID      = int32(leaguepb.LeagueID_SQUIZ)
+	leagueID      = int32(2)
 	maxPlayers    = 8
 	url           = "https://spb.squiz.ru"
 )

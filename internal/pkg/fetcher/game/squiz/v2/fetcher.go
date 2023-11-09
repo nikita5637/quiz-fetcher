@@ -7,14 +7,13 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName    = "squiz"
 	gamesListPath  = "/api/getproductslist/"
 	gamesListQuery = "?storepartuid=111979372401&getparts=true&getoptions=true&slice=1&size=100"
-	leagueID       = int32(leaguepb.LeagueID_SQUIZ)
+	leagueID       = int32(2)
 	maxPlayers     = 8
 	url            = "https://store.tildacdn.com"
 )

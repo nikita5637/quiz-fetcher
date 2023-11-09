@@ -7,7 +7,6 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	timeutils "github.com/nikita5637/quiz-fetcher/utils/time"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
 )
@@ -51,7 +50,7 @@ func (s *Syncer) Sync(ctx context.Context) error {
 		for {
 			var leagueGamesResp *gamepb.SearchGamesByLeagueIDResponse
 			leagueGamesResp, err = s.gameServiceClient.SearchGamesByLeagueID(fetcherCtx, &gamepb.SearchGamesByLeagueIDRequest{
-				Id:       leaguepb.LeagueID(fetcher.GetLeagueID()),
+				Id:       fetcher.GetLeagueID(),
 				Page:     page,
 				PageSize: 50,
 			})

@@ -7,7 +7,6 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
 	gameresultmanager "github.com/nikita5637/quiz-registrator-api/pkg/pb/game_result_manager"
-	"github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -35,7 +34,7 @@ func (s *Syncer) Sync(ctx context.Context) error {
 		}
 
 		for _, fetcher := range s.fetchers {
-			if gameResp.GetLeagueId() != league.LeagueID(fetcher.GetLeagueID()) {
+			if gameResp.GetLeagueId() != fetcher.GetLeagueID() {
 				continue
 			}
 

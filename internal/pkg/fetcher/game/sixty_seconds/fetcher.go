@@ -4,13 +4,12 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName              = "60 seconds"
 	firstLeagueGamesListPath = "/league/118/"
-	leagueID                 = int32(leaguepb.LeagueID_SIXTY_SECONDS)
+	leagueID                 = int32(3)
 	openLeagueGamesListPath  = "/league/117/"
 	url                      = "https://60sec.online"
 )

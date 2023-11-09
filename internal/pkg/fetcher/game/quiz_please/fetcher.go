@@ -4,14 +4,13 @@ import (
 	"net/http"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName        = "quiz, please!"
 	gameInfoPathFormat = "/ajax/scope-game?id=%d"
 	gamesListPath      = "/schedule"
-	leagueID           = int32(leaguepb.LeagueID_QUIZ_PLEASE)
+	leagueID           = int32(1)
 	url                = "https://spb.quizplease.ru"
 )
 

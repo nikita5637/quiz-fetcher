@@ -4,7 +4,6 @@ import (
 	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -12,7 +11,7 @@ import (
 func convertModelGameToProtoGame(game model.Game) *gamepb.Game {
 	ret := &gamepb.Game{
 		Id:         game.ID,
-		LeagueId:   leaguepb.LeagueID(game.LeagueID),
+		LeagueId:   game.LeagueID,
 		Type:       gamepb.GameType(game.Type),
 		Number:     game.Number,
 		PlaceId:    game.PlaceID,

@@ -398,8 +398,8 @@ github.com/nakabonne/nestif v0.3.1/go.mod h1:9EtoZochLn5iUprVDmDjqGKPofoUEBL8U4N
 github.com/nbutton23/zxcvbn-go v0.0.0-20210217022336-fa2cb2858354 h1:4kuARK6Y6FxaNu/BnU2OAaLF86eTVhP2hjTB6iMvItA=
 github.com/nbutton23/zxcvbn-go v0.0.0-20210217022336-fa2cb2858354/go.mod h1:KSVJerMDfblTH7p5MZaTt+8zaT2iEk3AkVb9PQdZuE8=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
-github.com/nikita5637/quiz-registrator-api v1.4.13 h1:vVyTJ7RIv51Q2v6hX4vC1hjXw1uiyi49kjGN2WRWcF4=
-github.com/nikita5637/quiz-registrator-api v1.4.13/go.mod h1:74FExoy3uXw1vZ9RBHYFj05/1WQP6gcg6yZgX57wUKM=
+github.com/nikita5637/quiz-registrator-api v1.4.14 h1:v1PkNu3ghxqW3YZl2xUcMa8qu7T0vwHZdi6S9ZZawfs=
+github.com/nikita5637/quiz-registrator-api v1.4.14/go.mod h1:74FExoy3uXw1vZ9RBHYFj05/1WQP6gcg6yZgX57wUKM=
 github.com/nishanths/exhaustive v0.8.3 h1:pw5O09vwg8ZaditDp/nQRqVnrMczSJDxRDJMowvhsrM=
 github.com/nishanths/exhaustive v0.8.3/go.mod h1:qj+zJJUgJ76tR92+25+03oYUhzF4R7/2Wk7fGTfCHmg=
 github.com/nishanths/predeclared v0.2.2 h1:V2EPdZPliZymNAn79T8RkNApBjMmVKh5XRpLm/w98Vk=

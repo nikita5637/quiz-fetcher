@@ -2,14 +2,12 @@ package sixty_seconds
 
 import (
 	"net/http"
-
-	leaguepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/league"
 )
 
 const (
 	fetcherName    = "60 seconds"
 	gameResultPath = "/get_game_results/?csrfmiddlewaretoken=gpR7OPhHMBehi8efDiGSLK6ICFkoL9WwKhOUsKRr8EUymyfhZ8gMEzqtAQQvA4Nf&game_id=%d&key=1000"
-	leagueID       = int32(leaguepb.LeagueID_SIXTY_SECONDS)
+	leagueID       = int32(3)
 	url            = "https://60sec.online"
 )
 
