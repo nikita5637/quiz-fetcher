@@ -13,6 +13,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+	"go.uber.org/zap"
 )
 
 // Characteristic ...
@@ -65,21 +66,26 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 		return nil, fmt.Errorf("json unmarshal error: %w", err)
 	}
 
+	countOnlineGames := 0
 	modelGames := make([]model.Game, 0)
 	for _, product := range storeResponse.Products {
 		gameFormat := getGameFormat(product.Characteristics)
 		if gameFormat == "Онлайн" {
-			logger.InfoKV(ctx, "skip online game")
+			countOnlineGames++
 			continue
 		}
 
 		game, err := f.getGameFromProduct(ctx, product)
 		if err != nil {
-			logger.WarnKV(ctx, "get game from product error", "error", err.Error(), "product", product)
+			logger.WarnKV(ctx, "getting game from product error", zap.Error(err), zap.Reflect("product", product))
 			continue
 		}
 
 		modelGames = append(modelGames, game)
+	}
+
+	if countOnlineGames > 0 {
+		logger.Infof(ctx, "skipped %d online games", countOnlineGames)
 	}
 
 	return modelGames, nil
@@ -125,6 +131,7 @@ func (f *Fetcher) getGameFromProduct(ctx context.Context, product Product) (mode
 
 	place, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, gamePlaceName, gamePlaceAddress)
 	if err != nil {
+		logger.WarnKV(ctx, "getting place by name and address error", zap.Error(err), zap.String("place_name", gamePlaceName), zap.String("place_address", gamePlaceAddress))
 		return model.Game{}, fmt.Errorf("get place by name and address error: %w", err)
 	}
 

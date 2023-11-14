@@ -10,6 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	"go.uber.org/zap"
 )
 
 type game struct {
@@ -67,32 +68,37 @@ func (f *Fetcher) getGame(gameID int64) (game, error) {
 // error while get place id occured
 func (f *Fetcher) getGames(ctx context.Context, gameIDs []int64) []model.Game {
 	games := make([]model.Game, 0, len(gameIDs))
+	countOnlineGames := 0
 	for _, gameID := range gameIDs {
 		g, err := f.getGame(gameID)
 		if err != nil {
-			logger.Warnf(ctx, "can't get game: %s", err.Error())
+			logger.WarnKV(ctx, "getting game error", zap.Error(err))
 			continue
 		}
 
 		modelGame, err := convertGameToModelGame(g)
 		if err != nil {
-			logger.Warnf(ctx, "can't convert game: %s", err.Error())
+			logger.WarnKV(ctx, "converting game error", zap.Error(err))
 			continue
 		}
 
 		if g.GameType == 1 {
-			logger.InfoKV(ctx, "skip online game")
+			countOnlineGames++
 			continue
 		}
 
 		place, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, g.PlaceName, g.PlaceAddress)
 		if err != nil {
-			logger.Warnf(ctx, "get place by name and address error: %s", err.Error())
+			logger.WarnKV(ctx, "getting place by name and address error", zap.Error(err), zap.String("place_name", g.PlaceName), zap.String("place_address", g.PlaceAddress))
 			continue
 		}
 
 		modelGame.PlaceID = int32(place.ExternalID)
 		games = append(games, modelGame)
+	}
+
+	if countOnlineGames > 0 {
+		logger.Infof(ctx, "skipped %d online games", countOnlineGames)
 	}
 
 	return games
@@ -114,9 +120,9 @@ func (f *Fetcher) getGameIDs(ctx context.Context) ([]int64, error) {
 		w1.Find(".schedule-column").Each(func(_ int, game *goquery.Selection) {
 			if value, exists := game.Attr("id"); exists {
 				if gameID, err := strconv.ParseInt(value, 10, 64); err != nil {
-					logger.Warnf(ctx, "can't parse game ID \"%s\": %s", value, err.Error())
+					logger.WarnKV(ctx, "parsing gameID error", zap.Error(err))
 				} else {
-					logger.Debugf(ctx, "found game ID: %d", gameID)
+					logger.Debugf(ctx, "game ID %d found", gameID)
 					gameIDs = append(gameIDs, gameID)
 				}
 			}

@@ -29,7 +29,7 @@ func (s *Syncer) Sync(ctx context.Context) error {
 			Id: gameResult.GetGameId(),
 		})
 		if err != nil {
-			logger.ErrorKV(ctx, "getting game error", zap.Error(err), zap.Int32("gameID", gameResult.GameId))
+			logger.ErrorKV(ctx, "getting game error", zap.Error(err), zap.Int32("game_id", gameResult.GameId))
 			continue
 		}
 
@@ -45,7 +45,7 @@ func (s *Syncer) Sync(ctx context.Context) error {
 			if externalID := gameResp.GetExternalId(); externalID != nil {
 				fetchedGameResult, err := fetcher.GetGameResult(fetchCtx, externalID.GetValue())
 				if err != nil {
-					logger.ErrorKV(fetchCtx, "getting game result from master error", zap.Error(err), zap.Int32("externalID", externalID.GetValue()))
+					logger.ErrorKV(fetchCtx, "getting game result from master error", zap.Error(err), zap.Int32("external_id", externalID.GetValue()))
 					break
 				}
 
@@ -63,11 +63,11 @@ func (s *Syncer) Sync(ctx context.Context) error {
 					},
 				})
 				if err != nil {
-					logger.ErrorKV(fetchCtx, "patching game result error", zap.Error(err), zap.Int32("gameResultID", gameResult.GetId()))
+					logger.ErrorKV(fetchCtx, "patching game result error", zap.Error(err), zap.Int32("game_result_id", gameResult.GetId()))
 					break
 				}
 
-				logger.InfoKV(fetchCtx, "game result has been patched", zap.Int32("gameResultID", gameResult.GetId()))
+				logger.InfoKV(fetchCtx, "game result has been patched", zap.Int32("game_result_id", gameResult.GetId()))
 			}
 
 			break

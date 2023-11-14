@@ -13,6 +13,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"
+	"go.uber.org/zap"
 )
 
 // GetGamesList ...
@@ -52,7 +53,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 			externalID, err := getExternalID(gameInfoPath)
 			if err != nil {
-				logger.WarnKV(ctx, "can't parse externalID", "error", err, "gameInfoPath", gameInfoPath)
+				logger.WarnKV(ctx, "parsing externalID erro", zap.Error(err), zap.String("game_info_path", gameInfoPath))
 				return
 			}
 			g.ExternalID = maybe.Just(externalID)
@@ -60,14 +61,14 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			h5Text := h5.Text()
 			name := getName(h5Text)
 			if name == "" {
-				logger.WarnKV(ctx, "can't parse game name", "text", h5.Text())
+				logger.WarnKV(ctx, "game name is empty", zap.String("text", h5.Text()))
 				return
 			}
 			g.Name = maybe.Just(name)
 
 			number := getNumber(h5Text)
 			if number == "" {
-				logger.WarnKV(ctx, "can't parse game number", "text", h5.Text())
+				logger.WarnKV(ctx, "game number is empty", zap.String("text", h5.Text()))
 				return
 			}
 			g.Number = number
@@ -79,13 +80,13 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			}
 
 			if g.Type == 0 {
-				logger.WarnKV(ctx, "can't parse game type", "number", number)
+				logger.WarnKV(ctx, "game type is empty", zap.String("number", number))
 				return
 			}
 
 			dateTime, err := f.getDateTime(ctx, gameInfoPath)
 			if err != nil {
-				logger.Warnf(ctx, "can't parse game dateTime: %s", err.Error())
+				logger.WarnKV(ctx, "parsing game date and time error", zap.Error(err))
 				return
 			}
 			g.DateTime = dateTime
@@ -105,14 +106,14 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 			placeID, err := f.getPlaceID(ctx, placeStr)
 			if err != nil {
-				logger.WarnKV(ctx, "can't parse place", "error", err, "place", placeStr)
+				logger.WarnKV(ctx, "parsing place error", zap.Error(err), zap.String("place", placeStr))
 				return
 			}
 			g.PlaceID = int32(placeID)
 
 			price, err := getPrice(priceStr)
 			if err != nil {
-				logger.WarnKV(ctx, "can't parse price", "error", err, "price", priceStr)
+				logger.WarnKV(ctx, "parsing price error", zap.Error(err), zap.String("price", priceStr))
 				return
 			}
 			g.Price = price

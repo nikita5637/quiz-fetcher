@@ -101,7 +101,7 @@ func (s *Syncer) handleGames(ctx context.Context, masterGames, dbGames []model.G
 	logger.Debugf(ctx, "there are %d games in both the master and the database", len(gamesInBoth))
 
 	for _, gameToCreate := range gamesToCreate {
-		logger.InfoKV(ctx, "creating new game", "game", gameToCreate)
+		logger.InfoKV(ctx, "creating new game", zap.Reflect("game", gameToCreate))
 		_, err := s.gameServiceClient.CreateGame(ctx, &gamepb.CreateGameRequest{
 			Game: convertModelGameToProtoGame(gameToCreate),
 		})
@@ -126,7 +126,7 @@ func (s *Syncer) handleGames(ctx context.Context, masterGames, dbGames []model.G
 	logger.Debugf(ctx, "there are %d games to patch", len(gamesToPatch))
 
 	for _, gameToPatch := range gamesToPatch {
-		logger.InfoKV(ctx, "patching existing game", "game", gameToPatch)
+		logger.InfoKV(ctx, "patching existing game", zap.Reflect("game", gameToPatch))
 		_, err := s.gameServiceClient.PatchGame(ctx, &gamepb.PatchGameRequest{
 			Game: convertModelGameToProtoGame(gameToPatch),
 			UpdateMask: &fieldmaskpb.FieldMask{
@@ -164,7 +164,7 @@ func (s *Syncer) handleGames(ctx context.Context, masterGames, dbGames []model.G
 	logger.Debugf(ctx, "there are %d games to delete", len(gamesToDelete))
 
 	for _, gameToDelete := range gamesToDelete {
-		logger.InfoKV(ctx, "deleting existing game", "game", gameToDelete)
+		logger.InfoKV(ctx, "deleting existing game", zap.Reflect("game", gameToDelete))
 		_, err := s.gameServiceClient.PatchGame(ctx, &gamepb.PatchGameRequest{
 			Game: convertModelGameToProtoGame(gameToDelete),
 			UpdateMask: &fieldmaskpb.FieldMask{

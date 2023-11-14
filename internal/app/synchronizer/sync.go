@@ -11,6 +11,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
 	timeutils "github.com/nikita5637/quiz-fetcher/utils/time"
+	"go.uber.org/zap"
 )
 
 // Sync ...
@@ -27,7 +28,7 @@ func (s *Synchronizer) Sync(ctx context.Context) error {
 				defer func() {
 					close(ch)
 					if r := recover(); r != nil {
-						logger.ErrorKV(ctx, "panic recovered", "r", r, "stack", string(debug.Stack()))
+						logger.ErrorKV(ctx, "panic recovered", zap.Reflect("r", r), zap.String("stack", string(debug.Stack())))
 					}
 				}()
 
@@ -36,7 +37,7 @@ func (s *Synchronizer) Sync(ctx context.Context) error {
 
 			select {
 			case <-ctx.Done():
-				logger.Errorf(ctx, "synchronization interrupted: %s", ctx.Err().Error())
+				logger.ErrorKV(ctx, "synchronization interrupted", zap.Error(ctx.Err()))
 				if errors.Is(ctx.Err(), context.DeadlineExceeded) {
 					// don't stop app when context deadline exceeded
 					continue
@@ -79,12 +80,12 @@ func (s *Synchronizer) sync(ctx context.Context) {
 						LastSyncAt: timeutils.TimeNow(),
 						Status:     model.SyncStatusNotSynced,
 					}); err != nil {
-						logger.Errorf(syncerCtx, "creating sync log error: %s", err.Error())
+						logger.ErrorKV(syncerCtx, "creating sync log error", zap.Error(err))
 						continue
 					}
 					s.syncLogs[syncerName] = lastSyncLog
 				} else {
-					logger.Errorf(syncerCtx, "getting last sync error: %s", err.Error())
+					logger.ErrorKV(syncerCtx, "getting last sync error", zap.Error(err))
 					continue
 				}
 			}
@@ -98,7 +99,7 @@ func (s *Synchronizer) sync(ctx context.Context) {
 			if lastSyncLog.Status == model.SyncStatusNotSynced {
 				lastSyncLog.Status = model.SyncStatusInProgress
 				if _, err = s.syncLogsFacade.PatchSyncLog(syncerCtx, lastSyncLog); err != nil {
-					logger.Errorf(syncerCtx, "patching sync log error: %s", err.Error())
+					logger.ErrorKV(syncerCtx, "patching sync log error", zap.Error(err))
 					continue
 				}
 			} else {
@@ -107,7 +108,7 @@ func (s *Synchronizer) sync(ctx context.Context) {
 					LastSyncAt: timeutils.TimeNow(),
 					Status:     model.SyncStatusInProgress,
 				}); err != nil {
-					logger.Errorf(syncerCtx, "creating sync log error: %s", err.Error())
+					logger.ErrorKV(syncerCtx, "creating sync log error", zap.Error(err))
 					continue
 				}
 			}
@@ -116,18 +117,18 @@ func (s *Synchronizer) sync(ctx context.Context) {
 			if err := syncer.Sync(syncerCtx); err != nil {
 				lastSyncLog.Status = model.SyncStatusFailed
 				if _, err2 := s.syncLogsFacade.PatchSyncLog(syncerCtx, lastSyncLog); err2 != nil {
-					logger.Errorf(syncerCtx, "patching sync log error: %s", err2.Error())
+					logger.ErrorKV(syncerCtx, "patching sync log error", zap.Error(err2))
 					continue
 				}
 				s.syncLogs[syncerName] = lastSyncLog
 
-				logger.Errorf(syncerCtx, "syncing error: %s", err.Error())
+				logger.ErrorKV(syncerCtx, "syncing error", zap.Error(err))
 				continue
 			}
 
 			lastSyncLog.Status = model.SyncStatusOK
 			if _, err := s.syncLogsFacade.PatchSyncLog(syncerCtx, lastSyncLog); err != nil {
-				logger.Errorf(syncerCtx, "patching sync log error: %s", err.Error())
+				logger.ErrorKV(syncerCtx, "patching sync log error", zap.Error(err))
 				continue
 			}
 			s.syncLogs[syncerName] = lastSyncLog

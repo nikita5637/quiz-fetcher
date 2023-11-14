@@ -68,13 +68,13 @@ func main() {
 	logger.SetGlobalLogger(logger.NewLogger(logLevel, logsCombiner, zap.Fields(
 		zap.String("module", viper.GetString("log.module_name")),
 	)))
-	logger.Infof(ctx, "initialized logger with log level: %s", logLevel)
+	logger.InfoKV(ctx, "initialized logger", zap.String("log_level", logLevel.String()))
 
 	cc, err := grpc.Dial(config.GetRegistratorAPIAddress(), grpc.WithInsecure(), grpc.WithChainUnaryInterceptor(
 		middleware.ModuleNameInterceptor,
 	))
 	if err != nil {
-		logger.Fatalf(ctx, "could not connect: %s", err.Error())
+		logger.FatalKV(ctx, "dialing registrator-api error", zap.Error(err))
 	}
 
 	gameServiceClient := gamepb.NewServiceClient(cc)
@@ -83,7 +83,7 @@ func main() {
 	driverName := viper.GetString("database.driver")
 	db, err := storage.NewDB(ctx, driverName)
 	if err != nil {
-		logger.Fatalf(ctx, "connecting to DB error: %s", err.Error())
+		logger.FatalKV(ctx, "connecting to DB error", zap.Error(err))
 	}
 	defer db.Close()
 
@@ -133,7 +133,7 @@ func main() {
 	gamesSyncer := gamessyncer.New(gamesSyncerCfg)
 	logger.InfoKV(ctx, "syncer initialization done",
 		zap.String("syncer", gamesSyncer.GetName()),
-		zap.Duration("syncPeriod", gamesSyncer.GetPeriod()),
+		zap.Duration("sync_period", gamesSyncer.GetPeriod()),
 		zap.Bool("enabled", gamesSyncer.Enabled()))
 
 	quizPleaseResultsFetcherConfig := quiz_please_result_fetcher.Config{
@@ -147,7 +147,7 @@ func main() {
 	sixtySecondsResultsFetcher := sixty_seconds_result_fetcher.New(sixtySecondsResultsFetcherConfig)
 
 	resultsSyncerName := viper.GetString("synchronizer.syncer.results.name")
-	logger.InfoKV(ctx, "initialize syncer", "syncer", resultsSyncerName)
+	logger.InfoKV(ctx, "initialize syncer", zap.String("syncer", resultsSyncerName))
 	resultsSyncerConfig := resultssyncer.Config{
 		DisabledResultsFetchers: viper.GetStringSlice("synchronizer.syncer.results.disabled_leagues"),
 		Enabled:                 viper.GetBool("synchronizer.syncer.results.enabled"),
@@ -166,7 +166,7 @@ func main() {
 		zap.Duration("sync_period", resultsSyncer.GetPeriod()),
 		zap.Bool("enabled", resultsSyncer.Enabled()))
 
-	logger.InfoKV(ctx, "initialize synchronizer")
+	logger.Info(ctx, "initialize synchronizer")
 	timeout := viper.GetDuration("synchronizer.sync.timeout") * time.Second
 	synchronizerConfig := synchronizer.Config{
 		Syncers: []synchronizer.Syncer{
@@ -188,7 +188,7 @@ func main() {
 	}
 
 	if err := synchronizer.Sync(ctx); err != nil {
-		logger.Fatalf(ctx, "Sync error: %s", err.Error())
+		logger.FatalKV(ctx, "Sync error", zap.Error(err))
 	}
 
 	logger.Info(ctx, "synchronizer gracefully stopped")

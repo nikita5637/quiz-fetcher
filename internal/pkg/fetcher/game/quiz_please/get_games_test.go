@@ -12,7 +12,7 @@ import (
 
 	"github.com/mono83/maybe"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
-	mocks "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mocks"
 	database "github.com/nikita5637/quiz-fetcher/internal/pkg/storage/mysql"
 	time_utils "github.com/nikita5637/quiz-fetcher/utils/time"
 	gamepb "github.com/nikita5637/quiz-registrator-api/pkg/pb/game"

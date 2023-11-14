@@ -7,6 +7,7 @@ import (
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/model"
+	"go.uber.org/zap"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -56,7 +57,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 				text := parentTText.Text()
 				place, address, err := getInfoFromHTML(text)
 				if err != nil {
-					logger.WarnKV(ctx, "can't parse a game's info", "text", text, "error", err)
+					logger.WarnKV(ctx, "parsing game's info error", zap.Error(err), zap.String("text", text))
 					return
 				}
 
@@ -97,7 +98,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 		}
 
 		if err != nil {
-			logger.WarnKV(ctx, "can't parse a game's popup", "html", html, "error", err)
+			logger.WarnKV(ctx, "parsing game's popup error", zap.Error(err), zap.String("html", html))
 			return
 		}
 
@@ -110,13 +111,13 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	for _, game := range games {
 		modelGame, err := f.convertGameToModelGame(ctx, *game)
 		if err != nil {
-			logger.WarnKV(ctx, "can't convert game", "error", err.Error(), "original_game", game)
+			logger.WarnKV(ctx, "converting game error", zap.Error(err), zap.Reflect("original_game", game))
 			continue
 		}
 
 		place, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, game.PlaceName, game.PlaceAddress)
 		if err != nil {
-			logger.Warnf(ctx, "get place by name and address error: %s", err.Error())
+			logger.WarnKV(ctx, "getting place by name and address error", zap.Error(err), zap.String("place_name", game.PlaceName), zap.String("place_address", game.PlaceAddress))
 			continue
 		}
 
