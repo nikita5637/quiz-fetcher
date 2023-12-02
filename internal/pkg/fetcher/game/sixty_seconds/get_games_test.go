@@ -24,6 +24,10 @@ const (
 	game17632 = "/game/17632/"
 	game17633 = "/game/17633/"
 
+	// open league
+	game22678 = "/game/22678/"
+	game22679 = "/game/22679/"
+
 	// first league
 	game18615 = "/game/18615/"
 	game18616 = "/game/18616/"
@@ -356,4 +360,117 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		}, got)
 		assert.NoError(t, err)
 	})
+
+	t.Run("test case 5 (open league only)", func(t *testing.T) {
+		ctx := context.Background()
+
+		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+			var r io.Reader
+			switch req.URL.Path {
+			case openLeagueGamesListPath:
+				r = strings.NewReader(html5)
+			case game22678:
+				r = strings.NewReader(html22678)
+			case game22679:
+				r = strings.NewReader(html22679)
+			}
+			_, err := io.Copy(w, r)
+			assert.NoError(t, err)
+		}))
+		defer svr.Close()
+
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
+
+		fetcher := Fetcher{
+			openLeagueGamesListPath: openLeagueGamesListPath,
+			client:                  *http.DefaultClient,
+			placeStorage:            mockPlaceStorage,
+			url:                     svr.URL,
+		}
+
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(database.Place{
+			ID:         1,
+			ExternalID: 1,
+		}, nil)
+
+		got, err := fetcher.GetGamesList(ctx)
+		assert.Equal(t, []model.Game{
+			{
+				ExternalID:  maybe.Just(int32(22678)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#1",
+				Name:        maybe.Just("Открытая лига"),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2023-12-04 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(22679)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#2",
+				Name:        maybe.Just("Открытая лига"),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2023-12-18 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+		}, got)
+		assert.NoError(t, err)
+	})
+}
+
+func Test_getPrice(t *testing.T) {
+	type args struct {
+		price string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    uint32
+		wantErr bool
+	}{
+		{
+			name: "tc1",
+			args: args{
+				price: string([]byte{194, 160, 52, 48, 48, 32, 209, 128, 209, 131, 208, 177, 46, 32, 209, 129, 32, 209, 135, 208, 181, 208, 187, 208, 190, 208, 178, 208, 181, 208, 186, 208, 176}),
+			},
+			want:    400,
+			wantErr: false,
+		},
+		{
+			name: "tc2",
+			args: args{
+				price: string([]byte{194, 160, 49, 53, 48, 48, 32, 209, 128, 209, 131, 208, 177, 46, 32, 209, 129, 32, 208, 186, 208, 190, 208, 188, 208, 176, 208, 189, 208, 180, 209, 139}),
+			},
+			want:    1500,
+			wantErr: false,
+		},
+		{
+			name: "invalid string",
+			args: args{
+				price: "invalid price",
+			},
+			want:    0,
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := getPrice(tt.args.price)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("getPrice() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("getPrice() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

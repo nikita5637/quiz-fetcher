@@ -196,7 +196,13 @@ func getExternalID(path string) (int32, error) {
 }
 
 func getPrice(price string) (uint32, error) {
-	s := strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с команды")
+	s := price
+	if strings.HasSuffix(price, " руб. с команды") {
+		s = strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с команды")
+	} else if strings.HasSuffix(price, " руб. с человека") {
+		s = strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с человека")
+	}
+
 	p, err := strconv.Atoi(s)
 	if err != nil {
 		return 0, err
