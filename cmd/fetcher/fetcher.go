@@ -14,7 +14,7 @@ import (
 	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
 	quiz_please_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/quiz_please"
-	sixty_seconds_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/sixty_seconds"
+	sixty_seconds_result_fetcher_v2 "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/sixty_seconds/v2"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/middleware"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/storage"
@@ -141,10 +141,10 @@ func main() {
 	}
 	quizPleaseResultsFetcher := quiz_please_result_fetcher.New(quizPleaseResultsFetcherConfig)
 
-	sixtySecondsResultsFetcherConfig := sixty_seconds_result_fetcher.Config{
+	sixtySecondsResultsFetcherConfig := sixty_seconds_result_fetcher_v2.Config{
 		Team: "Улица плохих снов",
 	}
-	sixtySecondsResultsFetcher := sixty_seconds_result_fetcher.New(sixtySecondsResultsFetcherConfig)
+	sixtySecondsResultsFetcher := sixty_seconds_result_fetcher_v2.New(sixtySecondsResultsFetcherConfig)
 
 	resultsSyncerName := viper.GetString("synchronizer.syncer.results.name")
 	logger.InfoKV(ctx, "initialize syncer", zap.String("syncer", resultsSyncerName))
