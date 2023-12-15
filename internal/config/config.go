@@ -12,6 +12,7 @@ func init() {
 	initDatabaseConfigureParams()
 	initFetcherConfigureParams()
 	initLoggerConfigureParams()
+	initSynchronizerConfigureParams()
 }
 
 // ReadConfig ...
