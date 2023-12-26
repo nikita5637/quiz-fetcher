@@ -34,6 +34,14 @@ func Test_convertDateTime(t *testing.T) {
 			want:    time_utils.ConvertTime("2024-01-09 16:30"),
 			wantErr: false,
 		},
+		{
+			name: "ok",
+			args: args{
+				dateTime: "9 января 2024 г. 19:30",
+			},
+			want:    time_utils.ConvertTime("2024-01-09 16:30"),
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
