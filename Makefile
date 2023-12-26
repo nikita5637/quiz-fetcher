@@ -1,6 +1,7 @@
 LOCAL_BIN:=$(CURDIR)/bin
 GOIMPORTS_BIN:=$(LOCAL_BIN)/goimports
 GOLANGCI_BIN:=$(LOCAL_BIN)/golangci-lint
+GOTESTSUM_BIN=$(LOCAL_BIN)/gotestsum
 XO_BIN:=$(LOCAL_BIN)/xo
 
 .PHONY: .install-bin-deps
@@ -8,6 +9,10 @@ XO_BIN:=$(LOCAL_BIN)/xo
 ifeq ($(wildcard $(GOIMPORTS_BIN)),)
 	$(info Installing binary dependency goimports)
 	GOBIN=$(LOCAL_BIN) go install golang.org/x/tools/cmd/goimports 
+endif
+ifeq ($(wildcard $(GOTESTSUM_BIN)),)
+	$(info Installing binary dependency gotestsum)
+	GOBIN=$(LOCAL_BIN) go install gotest.tools/gotestsum
 endif
 
 .PHONY: .install-lint
@@ -69,4 +74,5 @@ run:
 
 .PHONY: test
 test:
-	go test -v ./...
+	$(GOTESTSUM_BIN) --format pkgname -- -coverprofile=cover.out ./internal/... ./utils/...
+	go tool cover -html=cover.out
