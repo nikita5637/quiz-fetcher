@@ -11,7 +11,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
 	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
-	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds"
+	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds/v2"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
 	quiz_please_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/quiz_please"
 	sixty_seconds_result_fetcher_v2 "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/sixty_seconds/v2"

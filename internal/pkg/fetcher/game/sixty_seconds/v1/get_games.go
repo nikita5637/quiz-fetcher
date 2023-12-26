@@ -53,7 +53,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 			externalID, err := getExternalID(gameInfoPath)
 			if err != nil {
-				logger.WarnKV(ctx, "parsing externalID erro", zap.Error(err), zap.String("game_info_path", gameInfoPath))
+				logger.WarnKV(ctx, "parsing externalID error", zap.Error(err), zap.String("game_info_path", gameInfoPath))
 				return
 			}
 			g.ExternalID = maybe.Just(externalID)
