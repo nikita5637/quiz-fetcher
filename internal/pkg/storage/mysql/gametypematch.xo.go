@@ -4,6 +4,7 @@ package mysql
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/go-xorm/builder"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/logger"
@@ -13,9 +14,10 @@ import (
 
 // GameTypeMatch represents a row from 'game_type_match'.
 type GameTypeMatch struct {
-	ID          int    `json:"id"`          // id
-	Description string `json:"description"` // description
-	GameType    uint8  `json:"game_type"`   // game_type
+	ID          int            `json:"id"`          // id
+	Description sql.NullString `json:"description"` // description
+	Name        sql.NullString `json:"name"`        // name
+	GameType    uint8          `json:"game_type"`   // game_type
 }
 
 // GameTypeMatchStorage is GameTypeMatch service implementation
@@ -37,7 +39,7 @@ func (s *GameTypeMatchStorage) GetAll(ctx context.Context) ([]GameTypeMatch, err
 
 // Find perform find request by params
 func (s *GameTypeMatchStorage) Find(ctx context.Context, q builder.Cond, sort string) ([]GameTypeMatch, error) {
-	query := `SELECT id, description, game_type FROM game_type_match`
+	query := `SELECT id, description, name, game_type FROM game_type_match`
 
 	var args []interface{}
 
@@ -68,6 +70,7 @@ func (s *GameTypeMatchStorage) Find(ctx context.Context, q builder.Cond, sort st
 		if err := rows.Scan(
 			&item.ID,
 			&item.Description,
+			&item.Name,
 			&item.GameType,
 		); err != nil {
 			return nil, err
@@ -81,7 +84,7 @@ func (s *GameTypeMatchStorage) Find(ctx context.Context, q builder.Cond, sort st
 
 // FindWithLimit perform find request by params, offset and limit
 func (s *GameTypeMatchStorage) FindWithLimit(ctx context.Context, q builder.Cond, sort string, offset, limit uint64) ([]GameTypeMatch, error) {
-	query := `SELECT id, description, game_type FROM game_type_match`
+	query := `SELECT id, description, name, game_type FROM game_type_match`
 
 	var args []interface{}
 
@@ -118,6 +121,7 @@ func (s *GameTypeMatchStorage) FindWithLimit(ctx context.Context, q builder.Cond
 		if err := rows.Scan(
 			&item.ID,
 			&item.Description,
+			&item.Name,
 			&item.GameType,
 		); err != nil {
 			return nil, err
@@ -168,14 +172,14 @@ func (s *GameTypeMatchStorage) Total(ctx context.Context, q builder.Cond) (uint6
 func (s *GameTypeMatchStorage) Insert(ctx context.Context, item GameTypeMatch) (int, error) {
 	// insert (primary key generated and returned by database)
 	const sqlstr = `INSERT INTO game_type_match (` +
-		`description, game_type` +
+		`description, name, game_type` +
 		`) VALUES (` +
-		`?, ?` +
+		`?, ?, ?` +
 		`)`
 	// run
-	logger.Debugf(ctx, sqlstr, item.Description, item.GameType)
+	logger.Debugf(ctx, sqlstr, item.Description, item.Name, item.GameType)
 
-	res, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.Description, item.GameType)
+	res, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.Description, item.Name, item.GameType)
 	if err != nil {
 		return 0, err
 	}
@@ -192,11 +196,11 @@ func (s *GameTypeMatchStorage) Insert(ctx context.Context, item GameTypeMatch) (
 func (s *GameTypeMatchStorage) Update(ctx context.Context, item GameTypeMatch) error {
 	// update with primary key
 	const sqlstr = `UPDATE game_type_match SET ` +
-		`description = ?, game_type = ? ` +
+		`description = ?, name = ?, game_type = ? ` +
 		`WHERE id = ?`
 	// run
-	logger.Debugf(ctx, sqlstr, item.Description, item.GameType, item.ID)
-	if _, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.Description, item.GameType, item.ID); err != nil {
+	logger.Debugf(ctx, sqlstr, item.Description, item.Name, item.GameType, item.ID)
+	if _, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.Description, item.Name, item.GameType, item.ID); err != nil {
 		return err
 	}
 
@@ -207,15 +211,15 @@ func (s *GameTypeMatchStorage) Update(ctx context.Context, item GameTypeMatch) e
 func (s *GameTypeMatchStorage) Upsert(ctx context.Context, item GameTypeMatch) error {
 	// upsert
 	const sqlstr = `INSERT INTO game_type_match (` +
-		`id, description, game_type` +
+		`id, description, name, game_type` +
 		`) VALUES (` +
-		`?, ?, ?` +
+		`?, ?, ?, ?` +
 		`)` +
 		` ON DUPLICATE KEY UPDATE ` +
-		`description = VALUES(description), game_type = VALUES(game_type)`
+		`description = VALUES(description), name = VALUES(name), game_type = VALUES(game_type)`
 	// run
-	logger.Debugf(ctx, sqlstr, item.ID, item.Description, item.GameType)
-	if _, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.ID, item.Description, item.GameType); err != nil {
+	logger.Debugf(ctx, sqlstr, item.ID, item.Description, item.Name, item.GameType)
+	if _, err := s.db.Master(ctx).ExecContext(ctx, sqlstr, item.ID, item.Description, item.Name, item.GameType); err != nil {
 		return err
 	}
 
@@ -240,16 +244,16 @@ func (s *GameTypeMatchStorage) Delete(ctx context.Context, id int) error {
 // GetGameTypeMatchByDescription retrieves a row from 'game_type_match' as a GameTypeMatch.
 //
 // Generated from index 'description'.
-func (s *GameTypeMatchStorage) GetGameTypeMatchByDescription(ctx context.Context, description string) (*GameTypeMatch, error) {
+func (s *GameTypeMatchStorage) GetGameTypeMatchByDescription(ctx context.Context, description sql.NullString) (*GameTypeMatch, error) {
 	// query
 	const sqlstr = `SELECT ` +
-		`id, description, game_type ` +
+		`id, description, name, game_type ` +
 		`FROM game_type_match ` +
 		`WHERE description = ?`
 	// run
 	logger.Debugf(ctx, sqlstr, description)
 	gtm := GameTypeMatch{}
-	if err := s.db.Sync(ctx).QueryRowContext(ctx, sqlstr, description).Scan(&gtm.ID, &gtm.Description, &gtm.GameType); err != nil {
+	if err := s.db.Sync(ctx).QueryRowContext(ctx, sqlstr, description).Scan(&gtm.ID, &gtm.Description, &gtm.Name, &gtm.GameType); err != nil {
 		return nil, err
 	}
 	return &gtm, nil
@@ -261,13 +265,31 @@ func (s *GameTypeMatchStorage) GetGameTypeMatchByDescription(ctx context.Context
 func (s *GameTypeMatchStorage) GetGameTypeMatchByID(ctx context.Context, id int) (*GameTypeMatch, error) {
 	// query
 	const sqlstr = `SELECT ` +
-		`id, description, game_type ` +
+		`id, description, name, game_type ` +
 		`FROM game_type_match ` +
 		`WHERE id = ?`
 	// run
 	logger.Debugf(ctx, sqlstr, id)
 	gtm := GameTypeMatch{}
-	if err := s.db.Sync(ctx).QueryRowContext(ctx, sqlstr, id).Scan(&gtm.ID, &gtm.Description, &gtm.GameType); err != nil {
+	if err := s.db.Sync(ctx).QueryRowContext(ctx, sqlstr, id).Scan(&gtm.ID, &gtm.Description, &gtm.Name, &gtm.GameType); err != nil {
+		return nil, err
+	}
+	return &gtm, nil
+}
+
+// GetGameTypeMatchByName retrieves a row from 'game_type_match' as a GameTypeMatch.
+//
+// Generated from index 'name'.
+func (s *GameTypeMatchStorage) GetGameTypeMatchByName(ctx context.Context, name sql.NullString) (*GameTypeMatch, error) {
+	// query
+	const sqlstr = `SELECT ` +
+		`id, description, name, game_type ` +
+		`FROM game_type_match ` +
+		`WHERE name = ?`
+	// run
+	logger.Debugf(ctx, sqlstr, name)
+	gtm := GameTypeMatch{}
+	if err := s.db.Sync(ctx).QueryRowContext(ctx, sqlstr, name).Scan(&gtm.ID, &gtm.Description, &gtm.Name, &gtm.GameType); err != nil {
 		return nil, err
 	}
 	return &gtm, nil

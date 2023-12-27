@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/tx"
 )
@@ -20,7 +21,10 @@ func NewGameTypeMatchStorageAdapter(txManager *tx.Manager) *GameTypeMatchStorage
 
 // GetGameTypeByDescription ...
 func (a *GameTypeMatchStorageAdapter) GetGameTypeByDescription(ctx context.Context, description string) (int32, error) {
-	gameTypeMatchDB, err := a.gameTypeMatchStorage.GetGameTypeMatchByDescription(ctx, description)
+	gameTypeMatchDB, err := a.gameTypeMatchStorage.GetGameTypeMatchByDescription(ctx, sql.NullString{
+		String: description,
+		Valid:  description != "",
+	})
 	if err != nil {
 		return 0, err
 	}
