@@ -12,6 +12,7 @@ import (
 // GameTypeMatchStorage ...
 type GameTypeMatchStorage interface {
 	GetGameTypeByDescription(ctx context.Context, description string) (int32, error)
+	GetGameTypeByName(ctx context.Context, name string) (int32, error)
 }
 
 // NewGameTypeMatchStorage ...

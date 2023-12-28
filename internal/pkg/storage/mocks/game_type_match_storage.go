@@ -74,6 +74,59 @@ func (_c *GameTypeMatchStorage_GetGameTypeByDescription_Call) RunAndReturn(run f
 	return _c
 }
 
+// GetGameTypeByName provides a mock function with given fields: ctx, name
+func (_m *GameTypeMatchStorage) GetGameTypeByName(ctx context.Context, name string) (int32, error) {
+	ret := _m.Called(ctx, name)
+
+	var r0 int32
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) (int32, error)); ok {
+		return rf(ctx, name)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, string) int32); ok {
+		r0 = rf(ctx, name)
+	} else {
+		r0 = ret.Get(0).(int32)
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(ctx, name)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GameTypeMatchStorage_GetGameTypeByName_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetGameTypeByName'
+type GameTypeMatchStorage_GetGameTypeByName_Call struct {
+	*mock.Call
+}
+
+// GetGameTypeByName is a helper method to define mock.On call
+//   - ctx context.Context
+//   - name string
+func (_e *GameTypeMatchStorage_Expecter) GetGameTypeByName(ctx interface{}, name interface{}) *GameTypeMatchStorage_GetGameTypeByName_Call {
+	return &GameTypeMatchStorage_GetGameTypeByName_Call{Call: _e.mock.On("GetGameTypeByName", ctx, name)}
+}
+
+func (_c *GameTypeMatchStorage_GetGameTypeByName_Call) Run(run func(ctx context.Context, name string)) *GameTypeMatchStorage_GetGameTypeByName_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string))
+	})
+	return _c
+}
+
+func (_c *GameTypeMatchStorage_GetGameTypeByName_Call) Return(_a0 int32, _a1 error) *GameTypeMatchStorage_GetGameTypeByName_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *GameTypeMatchStorage_GetGameTypeByName_Call) RunAndReturn(run func(context.Context, string) (int32, error)) *GameTypeMatchStorage_GetGameTypeByName_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 type mockConstructorTestingTNewGameTypeMatchStorage interface {
 	mock.TestingT
 	Cleanup(func())

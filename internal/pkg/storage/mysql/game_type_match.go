@@ -31,3 +31,16 @@ func (a *GameTypeMatchStorageAdapter) GetGameTypeByDescription(ctx context.Conte
 
 	return int32(gameTypeMatchDB.GameType), nil
 }
+
+// GetGameTypeByName ...
+func (a *GameTypeMatchStorageAdapter) GetGameTypeByName(ctx context.Context, name string) (int32, error) {
+	gameTypeMatchDB, err := a.gameTypeMatchStorage.GetGameTypeMatchByName(ctx, sql.NullString{
+		String: name,
+		Valid:  name != "",
+	})
+	if err != nil {
+		return 0, err
+	}
+
+	return int32(gameTypeMatchDB.GameType), nil
+}

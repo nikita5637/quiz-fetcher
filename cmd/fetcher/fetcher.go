@@ -11,6 +11,7 @@ import (
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/elasticsearch"
 	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
+	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/shaker"
 	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds/v2"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
 	quiz_please_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/quiz_please"
@@ -116,6 +117,12 @@ func main() {
 	}
 	sixtySecondsGamesFetcher := sixty_seconds_game_fetcher.New(sixtySecondsGamesFetcherConfig)
 
+	shakerGamesFetcherConfig := shaker.Config{
+		GameTypeMatchStorage: gameTypeMatchStorage,
+		PlaceStorage:         placeStorage,
+	}
+	shakerGamesFetcher := shaker.New(shakerGamesFetcherConfig)
+
 	gamesSyncerName := viper.GetString("synchronizer.syncer.games.name")
 	logger.InfoKV(ctx, "initialize syncer", zap.String("syncer", gamesSyncerName))
 	gamesSyncerCfg := gamessyncer.Config{
@@ -125,6 +132,7 @@ func main() {
 			quizPleaseGamesFetcher,
 			squizGamesFetcher,
 			sixtySecondsGamesFetcher,
+			shakerGamesFetcher,
 		},
 		GameServiceClient: gameServiceClient,
 		Name:              gamesSyncerName,
