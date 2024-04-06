@@ -1,17 +1,14 @@
 # Builder
-FROM golang:1.18.3 AS builder
+FROM golang:1.18.10-alpine3.17 AS builder
 
-ARG GITHUB_PATH
-ARG BRANCH
+COPY ./ /go/src/quiz-fetcher
 
-WORKDIR /go/src/
-RUN git clone --branch $BRANCH $GITHUB_PATH
 WORKDIR /go/src/quiz-fetcher
-RUN make build
+RUN go build -buildvcs=auto -o fetcher ./cmd/fetcher
 
 # fetcher
 
-FROM golang:1.18.3 as server
+FROM alpine:3.17 as server
 
 COPY --from=builder /go/src/quiz-fetcher/fetcher /bin/
 COPY --from=builder /go/src/quiz-fetcher/config.yaml /etc/
