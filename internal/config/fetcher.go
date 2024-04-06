@@ -8,6 +8,7 @@ import (
 
 func initFetcherConfigureParams() {
 	_ = viper.BindEnv("fetcher.registrator_api.address")
+	_ = viper.BindEnv("fetcher.registrator_api.port")
 }
 
 // GetRegistratorAPIAddress ...

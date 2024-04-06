@@ -3,13 +3,15 @@ version: "3.9"
 services:
   fetcher:
     build:
+      args:
+        BASE_IMAGE: ${BASE_IMAGE}
       context: .
       dockerfile: Dockerfile
     command: "/bin/fetcher --config /etc/config.yaml"
     container_name: fetcher
     env_file:
       - path: .env
-        required: true
+        required: false
     networks:
       - network
 

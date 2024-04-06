@@ -4,6 +4,7 @@ import (
 	"os"
 	"runtime/debug"
 	"time"
+	_ "time/tzdata"
 
 	_ "github.com/nikita5637/quiz-fetcher/internal/app/info"
 	"github.com/nikita5637/quiz-fetcher/internal/app/synchronizer"

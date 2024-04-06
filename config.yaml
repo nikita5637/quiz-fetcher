@@ -10,7 +10,7 @@ database:
 fetcher:
   registrator_api:
     address: "registrator-api"
-    port: 8080
+    port: 8082
 
 log:
   level: "info"
