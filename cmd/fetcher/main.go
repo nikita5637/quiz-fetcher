@@ -13,7 +13,7 @@ import (
 	synclog "github.com/nikita5637/quiz-fetcher/internal/pkg/facade/sync_log"
 	quiz_please_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/quiz_please"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/shaker"
-	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds/v2"
+	sixty_seconds_game_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/sixty_seconds/v3"
 	"github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/game/squiz/v2"
 	quiz_please_result_fetcher "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/quiz_please"
 	sixty_seconds_result_fetcher_v2 "github.com/nikita5637/quiz-fetcher/internal/pkg/fetcher/result/sixty_seconds/v2"
@@ -115,6 +115,9 @@ func main() {
 
 	sixtySecondsGamesFetcherConfig := sixty_seconds_game_fetcher.Config{
 		PlaceStorage: placeStorage,
+
+		SchedulePath: sixty_seconds_game_fetcher.SchedulePath,
+		URL:          sixty_seconds_game_fetcher.URL,
 	}
 	sixtySecondsGamesFetcher := sixty_seconds_game_fetcher.New(sixtySecondsGamesFetcherConfig)
 
