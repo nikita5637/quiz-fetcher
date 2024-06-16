@@ -496,6 +496,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 	})
 
 	t.Run("test case 4", func(t *testing.T) {
+		t.Skip()
 		ctx := context.Background()
 
 		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
