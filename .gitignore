@@ -1,5 +1,6 @@
-.DS_Store
+.local_env
 .vscode
+.DS_Store
 cover.out
 bin
 fetcher

@@ -1,5 +1,5 @@
 # Builder
-ARG BASE_IMAGE=golang:1.18.10-alpine3.17
+ARG BASE_IMAGE
 FROM ${BASE_IMAGE} AS builder
 
 COPY ./ /go/src/quiz-fetcher
