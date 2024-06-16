@@ -4,5 +4,5 @@ import (
 	"testing"
 )
 
-func TestNewSyncLogStorage(t *testing.T) {
+func TestNewSyncLogStorage(_ *testing.T) {
 }

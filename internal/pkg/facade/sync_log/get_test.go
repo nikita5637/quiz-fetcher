@@ -4,5 +4,5 @@ import (
 	"testing"
 )
 
-func TestFacade_GetLastSync(t *testing.T) {
+func TestFacade_GetLastSync(_ *testing.T) {
 }

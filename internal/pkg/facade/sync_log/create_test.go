@@ -4,5 +4,5 @@ import (
 	"testing"
 )
 
-func TestFacade_CreateSyncLog(t *testing.T) {
+func TestFacade_CreateSyncLog(_ *testing.T) {
 }

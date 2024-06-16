@@ -126,7 +126,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	return games, nil
 }
 
-func (f *Fetcher) getDateTime(ctx context.Context, gameInfoPath string) (time.Time, error) {
+func (f *Fetcher) getDateTime(_ context.Context, gameInfoPath string) (time.Time, error) {
 	resp, err := f.client.Get(f.url + gameInfoPath)
 	if err != nil {
 		return time.Time{}, fmt.Errorf("can't get response: %w", err)

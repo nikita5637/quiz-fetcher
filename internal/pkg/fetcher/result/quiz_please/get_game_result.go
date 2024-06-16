@@ -34,7 +34,7 @@ var (
 )
 
 // GetGameResult ...
-func (f *Fetcher) GetGameResult(ctx context.Context, externalID int32) (model.GameResult, error) {
+func (f *Fetcher) GetGameResult(_ context.Context, externalID int32) (model.GameResult, error) {
 	url := fmt.Sprintf(f.url+f.gameResultPath, externalID)
 	resp, err := f.client.Get(url)
 	if err != nil {

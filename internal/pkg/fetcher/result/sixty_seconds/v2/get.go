@@ -25,7 +25,7 @@ type Response struct {
 }
 
 // GetGameResult ...
-func (f *Fetcher) GetGameResult(ctx context.Context, externalID int32) (model.GameResult, error) {
+func (f *Fetcher) GetGameResult(_ context.Context, externalID int32) (model.GameResult, error) {
 	req, err := http.NewRequest(http.MethodPost, f.url+f.gameResultPath, strings.NewReader(fmt.Sprintf("game_id=%d", externalID)))
 	if err != nil {
 		return model.GameResult{}, fmt.Errorf("creating HTTP request error: %w", err)

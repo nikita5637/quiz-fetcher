@@ -153,7 +153,7 @@ func getInfoFromHTML(text string) (string, string, error) {
 	return ss[1], ss[2], nil
 }
 
-func getInfoFromCommonGamePopup(ctx context.Context, html string) (string, string, string, error) {
+func getInfoFromCommonGamePopup(_ context.Context, html string) (string, string, string, error) {
 	if html == "" {
 		return "", "", "", errors.New("empty text")
 	}
@@ -189,7 +189,7 @@ func getInfoFromCommonGamePopup(ctx context.Context, html string) (string, strin
 	return dateTime, description, paymentInfo, nil
 }
 
-func getInfoFromFinalGamePopup(ctx context.Context, html string) (string, string, error) {
+func getInfoFromFinalGamePopup(_ context.Context, html string) (string, string, error) {
 	if html == "" {
 		return "", "", errors.New("empty text")
 	}

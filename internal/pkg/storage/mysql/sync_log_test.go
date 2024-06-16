@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-func TestNewSyncLogStorageAdapter(t *testing.T) {
+func TestNewSyncLogStorageAdapter(_ *testing.T) {
 }
 
-func TestSyncLogStorageAdapter_CreateSyncLog(t *testing.T) {
+func TestSyncLogStorageAdapter_CreateSyncLog(_ *testing.T) {
 }
 
-func TestSyncLogStorageAdapter_FindLastSync(t *testing.T) {
+func TestSyncLogStorageAdapter_FindLastSync(_ *testing.T) {
 }
 
-func TestSyncLogStorageAdapter_PatchSyncLog(t *testing.T) {
+func TestSyncLogStorageAdapter_PatchSyncLog(_ *testing.T) {
 }
