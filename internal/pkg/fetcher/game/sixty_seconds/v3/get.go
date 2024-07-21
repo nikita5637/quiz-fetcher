@@ -209,7 +209,9 @@ func getNumber(text string) string {
 }
 
 func getPrice(price string) (uint32, error) {
-	if strings.HasSuffix(price, " руб. с команды") {
+	if strings.HasSuffix(price, " руб. с команды + депозит") {
+		price = strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с команды + депозит")
+	} else if strings.HasSuffix(price, " руб. с команды") {
 		price = strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с команды")
 	} else if strings.HasSuffix(price, " руб. с человека") {
 		price = strings.TrimSuffix(strings.TrimPrefix(price, "\u00a0"), " руб. с человека")
