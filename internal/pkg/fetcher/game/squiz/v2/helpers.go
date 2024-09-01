@@ -86,6 +86,10 @@ func getGameName(text string) string {
 	ret = strings.TrimPrefix(ret, `"`)
 	ret = strings.TrimSuffix(ret, `"`)
 
+	if ind := strings.Index(ret, "#"); ind != -1 {
+		ret = ret[:ind-1]
+	}
+
 	return ret
 }
 

@@ -77,7 +77,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 		game, err := f.getGameFromProduct(ctx, product)
 		if err != nil {
-			logger.WarnKV(ctx, "getting game from product error", zap.Error(err), zap.Reflect("product", product))
+			logger.WarnKV(ctx, "failed to get game from product", zap.Error(err), zap.Reflect("product", product))
 			continue
 		}
 

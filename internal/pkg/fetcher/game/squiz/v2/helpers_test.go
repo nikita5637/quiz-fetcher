@@ -239,6 +239,13 @@ func Test_getGameName(t *testing.T) {
 			},
 			want: "18+",
 		},
+		{
+			name: "tc6",
+			args: args{
+				text: "Описание: \"Классическая игра #471.2\"<br />Дополнение описания: \"повтор от 31 августа\"<br />Особенности: \"\"<br />Локация: \" <a href=\"https://yandex.ru/maps/org/barbq_night/133678003397/?ll=30.338599%2C59.927607&amp;z=15\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"color: rgb(255, 255, 255);\">BarBQ Night</a>\", \"<a href=\"https://yandex.ru/maps/org/barbq_night/133678003397/?ll=30.338599%2C59.927607&amp;z=15\" target=\"_blank\" rel=\"noreferrer noopener\" style=\"color: rgb(177, 177, 177);\">Ломоносова, 16</a>\", \"59.927621, 30.338757\"<br />Спецпроект: \"\"<br />Текст карточки: \"Квиз с вопросами про все-все-все\"<br />Текст попапа: \"Квиз с вопросами про все-все-все.\"<br />SMS: \"Запись на игру\"<br />Дата: \"2024-09-01\"",
+			},
+			want: "Классическая игра",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
