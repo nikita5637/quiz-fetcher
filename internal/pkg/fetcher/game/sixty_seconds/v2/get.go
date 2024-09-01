@@ -92,7 +92,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 			dateTime, err := f.getDateTime(ctx, gameInfoPath)
 			if err != nil {
-				logger.WarnKV(ctx, "parsing game date and time error", zap.Error(err))
+				logger.WarnKV(ctx, "failed to get game date and time", zap.Error(err))
 				return
 			}
 			g.DateTime = dateTime

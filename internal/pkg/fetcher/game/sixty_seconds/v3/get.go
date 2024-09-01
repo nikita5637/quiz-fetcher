@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -92,7 +93,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 		dateTime, err := f.getDateTime(ctx, gameInfoPath)
 		if err != nil {
-			logger.WarnKV(ctx, "parsing game date and time error", zap.Error(err))
+			logger.WarnKV(ctx, "failed to get game date and time", zap.Error(err))
 			return
 		}
 		game.DateTime = dateTime
@@ -132,9 +133,16 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 }
 
 func (f *Fetcher) getDateTime(_ context.Context, gameInfoPath string) (time.Time, error) {
-	resp, err := f.client.Get(f.url + gameInfoPath)
+	req, err := http.NewRequest("GET", f.url+gameInfoPath, nil)
 	if err != nil {
-		return time.Time{}, fmt.Errorf("can't get response: %w", err)
+		return time.Time{}, fmt.Errorf("failed to create new request: %w", err)
+	}
+
+	req.Header.Add("Accept-Language", "en-GB,en;q=0.9")
+
+	resp, err := f.client.Do(req)
+	if err != nil {
+		return time.Time{}, fmt.Errorf("failed to do a request: %w", err)
 	}
 
 	doc, err := goquery.NewDocumentFromResponse(resp)
