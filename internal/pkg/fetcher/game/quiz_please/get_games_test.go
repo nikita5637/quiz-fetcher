@@ -421,6 +421,57 @@ const (
 "link_to_bar": null,
 "no_covid_general": ""
 }`
+	json91638 = `{
+	"gameId": 91638,
+	"nameGame": "Квиз, плиз! [новички] SPB",
+	"max_players": 9,
+	"titleGame": "#904",
+	"numberGame": "#904",
+	"game_type_id": 1,
+	"blockData": "6 декабря",
+	"blockNumberIs": 169,
+	"blockOf": 350,
+	"place": "PALMA",
+	"special": "",
+	"address": "ул. Салова, 61",
+	"place_description": "<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span style=\"font-family: 'Times New Roman', serif;\">Метро: Бухарестская&nbsp;</span></p>\r\n<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span style=\"font-family: 'Times New Roman', serif;\">&nbsp;</span></p>\r\n<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span lang=\"EN-US\" style=\"font-family: 'Times New Roman', serif;\">PALMA</span><span style=\"font-family: 'Times New Roman', serif;\">&nbsp;&ndash; местечко со вкусом. Оно расположено в стильном здании апарт-отеля&nbsp;</span><span lang=\"EN-US\" style=\"font-family: 'Times New Roman', serif;\">VALO</span><span style=\"font-family: 'Times New Roman', serif;\">&nbsp;прямо напротив метро. Так что можно смело отпраздновать победу, немного засидеться в ресторане и успеть запрыгнуть в вагон!&nbsp;&nbsp;Ну и самое важное! Ресторан славится своим собственным пивом и обширным меню.&nbsp;</span></p>\r\n<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span style=\"font-family: 'Times New Roman', serif;\">&nbsp;</span></p>\r\n<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span style=\"font-family: 'Times New Roman', serif;\">Кроме того, ребята обожают устраивать вечеринки. В программе живая музыка, выступления зажигательных групп и даже караоке-зал. Но и это не все.&nbsp;</span></p>\r\n<p class=\"MsoNormal\" style=\"margin: 0cm; font-size: medium; font-family: Calibri, sans-serif;\"><span style=\"font-family: 'Times New Roman', serif;\">Бренд-шеф&nbsp;</span><span lang=\"EN-US\" style=\"font-family: 'Times New Roman', serif;\">PALMA</span><span style=\"font-family: 'Times New Roman', serif;\">&nbsp;никогда не расстается с фантазией и мастерством готовки &ndash; новые позиции меню частенько радуют гостей. В общем, с этими ребятами точно не соскучишься.&nbsp;</span></p>",
+	"option": "Если вы желаете определенный стол, укажите это при регистрации в комментариях или позвоните нам.",
+	"menu": null,
+	"photos": [
+		"files/2024%2F04%2F662a6e1a4c45e.jpg",
+		"files/2024%2F04%2F662a6e1a6c307.jpg",
+		"files/2024%2F04%2F662a6e1a7e19d.jpg",
+		"files/2024%2F04%2F662a6e1a93985.jpg"
+	],
+	"time": "19:30",
+	"price": "600₽",
+	"text": "с человека, наличные или карта",
+	"payment_icon": 2,
+	"at": "в",
+	"description": "Наша классическая игра, но участвуют только начинающие команды. Вам не придётся соревноваться за пьедестал с магистрами Квиз, плиз!, так что у вас все шансы занять призовое место.",
+	"cityName": "Санкт-Петербург",
+	"status": 1,
+	"count": 181,
+	"is_teens": false,
+	"is_past": false,
+	"text_block": "<p><strong>Квиз, плиз!</strong> &mdash; это командная игра, отличный способ провести вечер с друзьями в уютном баре и получить новые позитивные впечатления. В этом формате игр вы будете соревноваться с такими же как и вы командами, только недавно знакомыми с нашей игрой. <br /><br />Огромное количество людей играет в Квиз, плиз! по всему миру, попробуйте и вы.<br /><br />Баллы с этой игры пойдут в рейтинг классики.&nbsp;</p>",
+	"imageData": "/files/2023%2F10%2F652813404e847.png",
+	"free_status": 2,
+	"success": true,
+	"game_type": 0,
+	"covid_free": 0,
+	"no_covid": 0,
+	"map_type": "yandex",
+	"latitude": "59.885020000000000",
+	"longitude": "30.369048000000000",
+	"special_mobile_banner": "/storage/source/2/aA8cW-MtbVAdu73pXxyOHiFTDquYHguK.png",
+	"datetime": "06.12.24 19:30",
+	"is_little_place": 0,
+	"link_to_bar": "https://palma.rest/",
+	"show_remind_button": false,
+	"game_difficulty": "\n    <div class=\"badge-difficulty badge-difficulty_detail badge-difficulty_normal\">\n        <div class=\"badge-difficulty__container\">\n            <div class=\"badge-difficulty__icon\">\n                <img src=\"https://cdn1.quizplease.com/old_static/themes/b4/images/game-difficulty/black/normal.svg\"  alt=\"Нормальная\"/>\n            </div>\n            <div class=\"badge-difficulty__subtitle\">\n                Сложность:\n            </div>\n                            <div class=\"badge-difficulty__title\">\n                    Нормальная                </div>\n                    </div>\n\n        \n                    <div class=\"badge-difficulty__description\">\n                Стандарт, подойдёт всем.            </div>\n            </div>\n",
+	"custom_fields": []
+}`
 )
 
 func TestGamesFetcher_getGames(t *testing.T) {
@@ -444,6 +495,8 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				r = strings.NewReader(json6)
 			case "50495":
 				r = strings.NewReader(json7)
+			case "91638":
+				r = strings.NewReader(json91638)
 			case "-1":
 				r = strings.NewReader(json8)
 			case "-2":
@@ -488,8 +541,9 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			50484,
 			50486, // get place ID error
 			50495,
-			-1, // invalid price
-			-2, // invalid json
+			91638, // newbie game
+			-1,    // invalid price
+			-2,    // invalid json
 		})
 
 		loc, err := time.LoadLocation(time_utils.TimeZoneMoscow)
@@ -610,6 +664,35 @@ func TestGamesFetcher_getGameIDs(t *testing.T) {
 			50840, 50844, 50843, 50842,
 			50845, 50846, 50847, 50849,
 			50848,
+		}, got)
+		assert.NoError(t, err)
+
+	})
+
+	t.Run("test case 2", func(t *testing.T) {
+		ctx := context.Background()
+
+		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+			r := strings.NewReader(html2)
+			_, err := io.Copy(w, r)
+			assert.NoError(t, err)
+		}))
+		defer svr.Close()
+
+		fetcher := Fetcher{
+			client:             *http.DefaultClient,
+			gameInfoPathFormat: gameInfoPathFormat,
+			url:                svr.URL,
+		}
+		got, err := fetcher.getGameIDs(ctx)
+		assert.ElementsMatch(t, []int64{
+			91625, 91624, 91626, 91628,
+			91627, 91683, 91631, 91629,
+			91634, 91636, 91633, 91635,
+			91637, 91639, 91638, 91692,
+			91643, 91644, 91642, 91645,
+			91641, 91693, 91647, 91649,
+			91646, 91650, 91648, 91696,
 		}, got)
 		assert.NoError(t, err)
 
