@@ -67,11 +67,18 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	}
 
 	countOnlineGames := 0
+	countNewbieGames := 0
 	modelGames := make([]model.Game, 0)
 	for _, product := range storeResponse.Products {
 		gameFormat := getGameFormat(product.Characteristics)
 		if gameFormat == "Онлайн" {
 			countOnlineGames++
+			continue
+		}
+
+		gameName := getGameName(product.Text)
+		if gameName == "Лига новичков" {
+			countNewbieGames++
 			continue
 		}
 
@@ -86,6 +93,10 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 	if countOnlineGames > 0 {
 		logger.Infof(ctx, "skipped %d online games", countOnlineGames)
+	}
+
+	if countNewbieGames > 0 {
+		logger.Infof(ctx, "skipped %d newbie games", countNewbieGames)
 	}
 
 	return modelGames, nil

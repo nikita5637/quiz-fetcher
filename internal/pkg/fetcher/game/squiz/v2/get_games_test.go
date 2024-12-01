@@ -196,7 +196,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 			url:                  svr.URL,
 		}
 
-		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(fx.ctx, "BarBQ Night", "Ломоносова, 16").Times(7).Return(database.Place{
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(fx.ctx, "BarBQ Night", "Ломоносова, 16").Times(6).Return(database.Place{
 			ID:         11,
 			ExternalID: 9,
 		}, nil)
@@ -217,7 +217,6 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Самый популярный&nbsp;формат с раундами на разные темы.").Return(1, nil)
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Классика с вопросами про все на свете.").Return(1, nil)
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра с раундами по мотивам легендарных ТВ-передач.").Return(2, nil)
-		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Участвуют только команды без опыта или с опытом не выше тройного белого пояса. Повтор вопросов классической игры #469 от 24 и 29 августа.").Return(1, nil)
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Квиз для всех и обо всем.").Return(1, nil)
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Универсальная игра для игроков всех уровней.").Return(1, nil)
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "100 мультимедийных вопросов по сериалам, кино и музыке.").Return(5, nil)
@@ -226,7 +225,7 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Сквиз для команд любого уровня.").Return(1, nil)
 
 		got, err := fetcher.GetGamesList(fx.ctx)
-		assert.Len(t, got, 13)
+		assert.Len(t, got, 12)
 
 		expect := []model.Game{
 			{
@@ -311,19 +310,6 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				ExternalID:  maybe.Nothing[int32](),
 				LeagueID:    leagueID,
 				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
-				Number:      "40",
-				Name:        maybe.Just("Лига новичков"),
-				PlaceID:     9,
-				DateTime:    convertTime("2024-09-08 13:00"),
-				Price:       500,
-				PaymentType: maybe.Just("cash"),
-				MaxPlayers:  maxPlayers,
-				IsInMaster:  true,
-			},
-			{
-				ExternalID:  maybe.Nothing[int32](),
-				LeagueID:    leagueID,
-				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
 				Number:      "474.1",
 				Name:        maybe.Just("Классическая игра"),
 				PlaceID:     2,
@@ -393,6 +379,255 @@ func TestGamesFetcher_GetGamesList(t *testing.T) {
 				Name:        maybe.Just("Классическая игра"),
 				PlaceID:     2,
 				DateTime:    convertTime("2024-09-15 12:30"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+		}
+
+		assert.ElementsMatch(t, expect, got)
+		assert.NoError(t, err)
+	})
+
+	t.Run("test case 3", func(t *testing.T) {
+		svr := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+			r := strings.NewReader(json3)
+			_, err := io.Copy(w, r)
+			assert.NoError(t, err)
+		}))
+		defer svr.Close()
+
+		mockPlaceStorage := mocks.NewPlaceStorage(t)
+
+		fx := tearUp(t)
+
+		fetcher := Fetcher{
+			gameTypeMatchStorage: fx.gameTypeMatchStorage,
+			placeStorage:         mockPlaceStorage,
+			url:                  svr.URL,
+		}
+
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(fx.ctx, "BarBQ Night", "Ломоносова, 16").Times(9).Return(database.Place{
+			ID:         11,
+			ExternalID: 9,
+		}, nil)
+
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(fx.ctx, "Parkking", "Александровский парк, 4, корп. 3").Times(6).Return(database.Place{
+			ID:         2,
+			ExternalID: 2,
+		}, nil)
+
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Классическая викторина на эрудицию и логику.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на общие темы. Самый популярный вариант.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Классический квиз на общие темы.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Квиз с вопросами про все-все-все.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Классический Squiz для новичков и опытных игроков.").Return(1, nil).Maybe().Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра на логику и эрудицию на общие темы.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Фановая игра с музыкой разных эпох и жанров.").Return(2, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра, посвященная сериалам, кино и музыке.").Return(5, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Самый популярный формат с раундами на разные темы.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Классика с вопросами про все на свете.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Квиз для всех и обо всем.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Универсальная игра для игроков всех уровней.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Два часа путешествий по детству и молодости.").Return(2, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Squiz для всех: от новичка до эрудита.").Return(1, nil).Once()
+		fx.gameTypeMatchStorage.EXPECT().GetGameTypeByDescription(fx.ctx, "Игра для каждого на самые разные темы.").Return(1, nil).Once()
+
+		got, err := fetcher.GetGamesList(fx.ctx)
+		assert.Len(t, got, 15)
+
+		expect := []model.Game{
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "498.1",
+				Name:        maybe.Just("Классическая игра"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-05 16:30"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "498.2",
+				Name:        maybe.Just("Классический Сквиз"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-06 16:00"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "499.1",
+				Name:        maybe.Just("Классический квиз"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-07 13:00"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "499.2",
+				Name:        maybe.Just("Классический Squiz"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-08 12:30"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "500.1",
+				Name:        maybe.Just("Классическая игра"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-12 16:30"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "500.2",
+				Name:        maybe.Just("Классический Сквиз"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-13 16:00"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_THEMATIC),
+				Number:      "12",
+				Name:        maybe.Just("Музыкальная игра"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-13 18:45"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_MOVIES_AND_MUSIC),
+				Number:      "62",
+				Name:        maybe.Just("Сериалы. Кино. Музыка"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-14 13:00"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "501",
+				Name:        maybe.Just("Классический квиз"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-20 16:30"),
+				Price:       1000,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "502",
+				Name:        maybe.Just("Классический Squiz"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-21 13:00"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "503.1",
+				Name:        maybe.Just("Классическая игра"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-22 12:30"),
+				Price:       500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "503.2",
+				Name:        maybe.Just("Классический Сквиз"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-26 16:30"),
+				Price:       700,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_THEMATIC),
+				Number:      "11",
+				Name:        maybe.Just("90-е и 2000-е"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-28 14:30"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "504",
+				Name:        maybe.Just("Классический квиз"),
+				PlaceID:     9,
+				DateTime:    convertTime("2024-12-28 17:30"),
+				Price:       600,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  maxPlayers,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Nothing[int32](),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "505",
+				Name:        maybe.Just("Классический Squiz"),
+				PlaceID:     2,
+				DateTime:    convertTime("2024-12-29 12:30"),
 				Price:       500,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  maxPlayers,
