@@ -18,10 +18,12 @@ const (
 
 // Fetcher ...
 type Fetcher struct {
-	client       http.Client
-	leagueID     int32
-	name         string
-	placeStorage storage.PlaceStorage
+	client                 http.Client
+	leagueID               int32
+	name                   string
+	needToFetchOpenLeague  bool
+	needToFetchFirstLeague bool
+	placeStorage           storage.PlaceStorage
 
 	schedulePath string
 	url          string
@@ -31,19 +33,23 @@ type Fetcher struct {
 type Config struct {
 	PlaceStorage storage.PlaceStorage
 
-	SchedulePath string
-	URL          string
+	NeedToFetchOpenLeague  bool
+	NeedToFetchFirstLeague bool
+	SchedulePath           string
+	URL                    string
 }
 
 // New ...
 func New(cfg Config) *Fetcher {
 	return &Fetcher{
-		client:       *http.DefaultClient,
-		schedulePath: cfg.SchedulePath,
-		leagueID:     leagueID,
-		name:         fetcherName,
-		placeStorage: cfg.PlaceStorage,
-		url:          cfg.URL,
+		client:                 *http.DefaultClient,
+		schedulePath:           cfg.SchedulePath,
+		leagueID:               leagueID,
+		needToFetchOpenLeague:  cfg.NeedToFetchOpenLeague,
+		needToFetchFirstLeague: cfg.NeedToFetchFirstLeague,
+		name:                   fetcherName,
+		placeStorage:           cfg.PlaceStorage,
+		url:                    cfg.URL,
 	}
 }
 

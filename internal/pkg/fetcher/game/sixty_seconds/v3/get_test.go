@@ -17,6 +17,17 @@ import (
 )
 
 const (
+	game25678 = "/quizgames/game/25678/"
+	game25679 = "/quizgames/game/25679/"
+	game25680 = "/quizgames/game/25680/"
+	game25681 = "/quizgames/game/25681/"
+	game25682 = "/quizgames/game/25682/"
+	game25683 = "/quizgames/game/25683/"
+	game25684 = "/quizgames/game/25684/"
+	game25685 = "/quizgames/game/25685/"
+	game25686 = "/quizgames/game/25686/"
+	game25687 = "/quizgames/game/25687/"
+	game25688 = "/quizgames/game/25688/"
 	game25781 = "/quizgames/game/25781/"
 	game25782 = "/quizgames/game/25782/"
 	game25783 = "/quizgames/game/25783/"
@@ -50,6 +61,28 @@ func (s *GetSuite) SetupSuite() {
 			r = strings.NewReader(html1)
 		case "/html2":
 			r = strings.NewReader(html2)
+		case game25678:
+			r = strings.NewReader(html25678)
+		case game25679:
+			r = strings.NewReader(html25679)
+		case game25680:
+			r = strings.NewReader(html25680)
+		case game25681:
+			r = strings.NewReader(html25681)
+		case game25682:
+			r = strings.NewReader(html25682)
+		case game25683:
+			r = strings.NewReader(html25683)
+		case game25684:
+			r = strings.NewReader(html25684)
+		case game25685:
+			r = strings.NewReader(html25685)
+		case game25686:
+			r = strings.NewReader(html25686)
+		case game25687:
+			r = strings.NewReader(html25687)
+		case game25688:
+			r = strings.NewReader(html25688)
 		case game25781:
 			r = strings.NewReader(html25781)
 		case game25782:
@@ -93,29 +126,57 @@ func (s *GetSuite) TestGetGamesList() {
 		s.fetcher = New(Config{
 			PlaceStorage: s.placeStorage,
 
-			SchedulePath: "/html1",
-			URL:          s.svr.URL,
+			NeedToFetchOpenLeague:  true,
+			NeedToFetchFirstLeague: true,
+			SchedulePath:           "/html1",
+			URL:                    s.svr.URL,
 		})
 
 		s.placeStorage.EXPECT().GetPlaceByNameAndAddress(s.ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(mysql.Place{
 			ExternalID: 1,
-		}, nil).Times(10)
+		}, nil).Times(21)
 
 		s.placeStorage.EXPECT().GetPlaceByNameAndAddress(s.ctx, "Фрегат \"Благодать\"", "Петровская наб., 2А").Return(mysql.Place{
 			ExternalID: 2,
 		}, nil).Times(1)
 
 		got, err := s.fetcher.GetGamesList(s.ctx)
-		s.Equal([]model.Game{
+		expected := []model.Game{
+			{
+				ExternalID:  maybe.Just(int32(25678)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#3",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-06-17 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
 			{
 				ExternalID:  maybe.Just(int32(25781)),
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#2",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-06-18 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25679)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#4",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-06-24 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -125,10 +186,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#3",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     2,
 				DateTime:    time_utils.ConvertTime("2024-06-25 16:30"),
 				Price:       2400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25680)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#5",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-07-01 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -138,10 +212,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#4",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-02 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25681)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#6",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-07-08 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -151,10 +238,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#5",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-09 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25682)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#7",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-07-15 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -164,10 +264,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#6",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-16 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25683)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#8",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-07-22 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -177,10 +290,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#7",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-23 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25684)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#9",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-07-29 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -190,10 +316,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#8",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-30 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25685)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#10",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-08-05 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -203,10 +342,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#9",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-06 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25686)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#11",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-08-12 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -216,10 +368,23 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#10",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-13 16:30"),
 				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(25687)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#12",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-08-19 16:30"),
+				Price:       400,
 				PaymentType: maybe.Just("cash"),
 				MaxPlayers:  6,
 				IsInMaster:  true,
@@ -229,7 +394,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#11",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-20 16:30"),
 				Price:       1500,
@@ -238,11 +403,24 @@ func (s *GetSuite) TestGetGamesList() {
 				IsInMaster:  true,
 			},
 			{
+				ExternalID:  maybe.Just(int32(25688)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      final,
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2024-08-26 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
 				ExternalID:  maybe.Just(int32(25791)),
 				LeagueID:    leagueID,
 				Type:        1,
-				Number:      "Финал",
-				Name:        maybe.Just("Первая лига"),
+				Number:      final,
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-27 16:30"),
 				Price:       1500,
@@ -250,7 +428,9 @@ func (s *GetSuite) TestGetGamesList() {
 				MaxPlayers:  6,
 				IsInMaster:  true,
 			},
-		}, got)
+		}
+
+		s.Equal(expected, got)
 		s.NoError(err)
 	})
 
@@ -258,8 +438,10 @@ func (s *GetSuite) TestGetGamesList() {
 		s.fetcher = New(Config{
 			PlaceStorage: s.placeStorage,
 
-			SchedulePath: "/html2",
-			URL:          s.svr.URL,
+			NeedToFetchOpenLeague:  false,
+			NeedToFetchFirstLeague: true,
+			SchedulePath:           "/html2",
+			URL:                    s.svr.URL,
 		})
 
 		s.placeStorage.EXPECT().GetPlaceByNameAndAddress(s.ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(mysql.Place{
@@ -273,7 +455,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#7",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-23 16:30"),
 				Price:       1500,
@@ -286,7 +468,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#8",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-07-30 16:30"),
 				Price:       1500,
@@ -299,7 +481,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#9",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-06 16:30"),
 				Price:       1500,
@@ -312,7 +494,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#10",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-13 16:30"),
 				Price:       1500,
@@ -325,7 +507,7 @@ func (s *GetSuite) TestGetGamesList() {
 				LeagueID:    leagueID,
 				Type:        1,
 				Number:      "#11",
-				Name:        maybe.Just("Первая лига"),
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-20 16:30"),
 				Price:       1500,
@@ -337,8 +519,8 @@ func (s *GetSuite) TestGetGamesList() {
 				ExternalID:  maybe.Just(int32(25791)),
 				LeagueID:    leagueID,
 				Type:        1,
-				Number:      "Финал",
-				Name:        maybe.Just("Первая лига"),
+				Number:      final,
+				Name:        maybe.Just(firstLeague),
 				PlaceID:     1,
 				DateTime:    time_utils.ConvertTime("2024-08-27 16:30"),
 				Price:       1500,
@@ -410,7 +592,7 @@ func Test_getName(t *testing.T) {
 			args: args{
 				text: "Первая лига | Игра #1",
 			},
-			want: "Первая лига",
+			want: firstLeague,
 		},
 		{
 			name: "tc2",
@@ -418,6 +600,20 @@ func Test_getName(t *testing.T) {
 				text: "Первая лига Игра #1",
 			},
 			want: "",
+		},
+		{
+			name: "tc3",
+			args: args{
+				text: "\n               Первая лига | Игра #1",
+			},
+			want: firstLeague,
+		},
+		{
+			name: "tc4",
+			args: args{
+				text: openLeagueFinal,
+			},
+			want: openLeague,
 		},
 	}
 	for _, tt := range tests {
@@ -453,6 +649,13 @@ func Test_getNumber(t *testing.T) {
 				text: "Первая лига Игра #1",
 			},
 			want: "",
+		},
+		{
+			name: "tc3",
+			args: args{
+				text: openLeagueFinal,
+			},
+			want: final,
 		},
 	}
 	for _, tt := range tests {

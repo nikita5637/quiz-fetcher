@@ -116,8 +116,10 @@ func main() {
 	sixtySecondsGamesFetcherConfig := sixty_seconds_game_fetcher.Config{
 		PlaceStorage: placeStorage,
 
-		SchedulePath: sixty_seconds_game_fetcher.SchedulePath,
-		URL:          sixty_seconds_game_fetcher.URL,
+		NeedToFetchOpenLeague:  true,
+		NeedToFetchFirstLeague: true,
+		SchedulePath:           sixty_seconds_game_fetcher.SchedulePath,
+		URL:                    sixty_seconds_game_fetcher.URL,
 	}
 	sixtySecondsGamesFetcher := sixty_seconds_game_fetcher.New(sixtySecondsGamesFetcherConfig)
 

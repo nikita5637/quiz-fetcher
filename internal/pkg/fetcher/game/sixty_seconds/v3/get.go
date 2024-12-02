@@ -17,6 +17,11 @@ import (
 	"go.uber.org/zap"
 )
 
+const openLeague = "Открытая лига"
+const firstLeague = "Первая лига"
+const openLeagueFinal = "Открытая лига Финал"
+const final = "Финал"
+
 // GetGamesList ...
 func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 	resp, err := f.client.Get(f.url + f.schedulePath)
@@ -67,7 +72,15 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 			return
 		}
 
-		if name != "Первая лига" {
+		if name == openLeague {
+			if !f.needToFetchOpenLeague {
+				return
+			}
+		} else if name == firstLeague {
+			if !f.needToFetchFirstLeague {
+				return
+			}
+		} else {
 			return
 		}
 
@@ -82,7 +95,7 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 		if strings.HasPrefix(number, "#") {
 			game.Type = int32(gamepb.GameType_GAME_TYPE_CLASSIC)
-		} else if number == "Финал" || number == "Финал сезона" {
+		} else if number == final || number == "Финал сезона" {
 			game.Type = int32(gamepb.GameType_GAME_TYPE_CLASSIC)
 		}
 
@@ -197,7 +210,11 @@ func getExternalID(path string) (int32, error) {
 func getName(text string) string {
 	s := strings.Split(text, " | ")
 	if len(s) == 2 {
-		return s[0]
+		return strings.TrimSpace(s[0])
+	}
+
+	if text == openLeagueFinal {
+		return openLeague
 	}
 
 	return ""
@@ -211,6 +228,10 @@ func getNumber(text string) string {
 		}
 
 		return s[1]
+	}
+
+	if text == openLeagueFinal {
+		return final
 	}
 
 	return ""
