@@ -39,6 +39,8 @@ const (
 	game25789 = "/quizgames/game/25789/"
 	game25790 = "/quizgames/game/25790/"
 	game25791 = "/quizgames/game/25791/"
+	game28702 = "/quizgames/game/28702/"
+	game28703 = "/quizgames/game/28703/"
 )
 
 type GetSuite struct {
@@ -61,6 +63,8 @@ func (s *GetSuite) SetupSuite() {
 			r = strings.NewReader(html1)
 		case "/html2":
 			r = strings.NewReader(html2)
+		case "/html3":
+			r = strings.NewReader(html3)
 		case game25678:
 			r = strings.NewReader(html25678)
 		case game25679:
@@ -105,6 +109,10 @@ func (s *GetSuite) SetupSuite() {
 			r = strings.NewReader(html25790)
 		case game25791:
 			r = strings.NewReader(html25791)
+		case game28702:
+			r = strings.NewReader(html28702)
+		case game28703:
+			r = strings.NewReader(html28703)
 		}
 		_, err := io.Copy(w, r)
 		s.NoError(err)
@@ -531,6 +539,39 @@ func (s *GetSuite) TestGetGamesList() {
 		}, got)
 		s.NoError(err)
 	})
+
+	s.Run("ok", func() {
+		s.fetcher = New(Config{
+			PlaceStorage: s.placeStorage,
+
+			NeedToFetchOpenLeague:  true,
+			NeedToFetchFirstLeague: false,
+			SchedulePath:           "/html3",
+			URL:                    s.svr.URL,
+		})
+
+		s.placeStorage.EXPECT().GetPlaceByNameAndAddress(s.ctx, "Rossi's Club", "ул. Зодчего Росси, 1-3").Return(mysql.Place{
+			ExternalID: 8,
+		}, nil).Twice()
+
+		got, err := s.fetcher.GetGamesList(s.ctx)
+		s.Equal([]model.Game{
+			{
+				ExternalID:  maybe.Just(int32(28702)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#2",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     8,
+				DateTime:    time_utils.ConvertTime("2024-12-09 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+		}, got)
+		s.NoError(err)
+	})
 }
 
 func Test_getExternalID(t *testing.T) {
@@ -656,6 +697,13 @@ func Test_getNumber(t *testing.T) {
 				text: openLeagueFinal,
 			},
 			want: final,
+		},
+		{
+			name: "tc4",
+			args: args{
+				text: "\n                            Первая лига | Игра #1\n                        ",
+			},
+			want: "#1",
 		},
 	}
 	for _, tt := range tests {

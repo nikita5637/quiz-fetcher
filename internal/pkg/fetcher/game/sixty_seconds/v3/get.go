@@ -223,11 +223,12 @@ func getName(text string) string {
 func getNumber(text string) string {
 	s := strings.Split(text, " | ")
 	if len(s) == 2 {
+		ret := s[1]
 		if strings.HasPrefix(s[1], "Игра ") {
-			return strings.TrimPrefix(s[1], "Игра ")
+			ret = strings.TrimPrefix(s[1], "Игра ")
 		}
 
-		return s[1]
+		return strings.TrimSpace(ret)
 	}
 
 	if text == openLeagueFinal {
