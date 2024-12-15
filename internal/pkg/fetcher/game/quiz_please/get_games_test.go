@@ -472,6 +472,52 @@ const (
 	"game_difficulty": "\n    <div class=\"badge-difficulty badge-difficulty_detail badge-difficulty_normal\">\n        <div class=\"badge-difficulty__container\">\n            <div class=\"badge-difficulty__icon\">\n                <img src=\"https://cdn1.quizplease.com/old_static/themes/b4/images/game-difficulty/black/normal.svg\"  alt=\"Нормальная\"/>\n            </div>\n            <div class=\"badge-difficulty__subtitle\">\n                Сложность:\n            </div>\n                            <div class=\"badge-difficulty__title\">\n                    Нормальная                </div>\n                    </div>\n\n        \n                    <div class=\"badge-difficulty__description\">\n                Стандарт, подойдёт всем.            </div>\n            </div>\n",
 	"custom_fields": []
 }`
+	json92226 = `{
+    "gameId": 92226,
+    "nameGame": "[HELLO 2025] SPB",
+    "max_players": 9,
+    "titleGame": "#1",
+    "numberGame": "#1",
+    "game_type_id": 1,
+    "blockData": "20 декабря",
+    "blockNumberIs": 296,
+    "blockOf": 300,
+    "place": "МЕГА Дыбенко",
+    "special": "",
+    "address": "Ленинградская область, Всеволожский район, Заневское городское поселение, Кудрово, Мурманское ш., 1\r\n",
+    "place_description": "",
+    "option": "Если вы желаете определенный стол, укажите это при регистрации в комментариях или позвоните нам.",
+    "menu": null,
+    "photos": [],
+    "time": "19:30",
+    "price": "600₽",
+    "text": "с человека, наличные или карта",
+    "payment_icon": 2,
+    "at": "в",
+    "description": "Колокольчики, красно-зелёные оттенки, мандарины, шампанское и праздничное настроение. Вот рецепт нашей игры, в которой мы прощаемся со старым 2024 и встречаем новый 2025 год. Без подарков не уйдёте!",
+    "cityName": "Санкт-Петербург",
+    "status": 2,
+    "count": 4,
+    "is_teens": false,
+    "is_past": false,
+    "text_block": "<p>Hello, <span style=\"text-decoration: line-through;\">world</span> 2025!</p>\r\n<p>Предлагаем вам вместе с нами проводить 2024 год и встретить новый, 2025!</p>\r\n<p>Ведь Квиз, плиз! &mdash; это не только интеллектуально-развлекательная битва, но ещё и праздник. Вы приходите командой, сидите за столом в баре, общаетесь, вкусно пьёте и едите, при этом отвечаете на интересные вопросы, серьёзные и не очень. Будем праздновать грядущий Новый год по-особенному!</p>\r\n<p>Баллы с этой игры идут в рейтинг классики.&nbsp;Обратите внимание, что игра пройдет на балконе около универмага Стокманн.</p>\r\n<p><img src=\"https://ltdfoto.ru/images/2024/12/13/BEZ-IMENI-1.png\" alt=\"\" width=\"1920\" height=\"1080\" /></p>",
+    "imageData": "/files/2024%2F11%2F673ef31e4ff04.png",
+    "free_status": 2,
+    "success": true,
+    "game_type": 0,
+    "covid_free": 0,
+    "no_covid": 0,
+    "map_type": "yandex",
+    "latitude": "59.892333000000000",
+    "longitude": "30.510695000000000",
+    "special_mobile_banner": "/storage/source/2/yozjES3B82x51PqIryXZodWp_emZMQKD.png",
+    "datetime": "20.12.24 19:30",
+    "is_little_place": 0,
+    "link_to_bar": "",
+    "show_remind_button": false,
+    "game_difficulty": "\n    <div class=\"badge-difficulty badge-difficulty_detail badge-difficulty_normal\">\n        <div class=\"badge-difficulty__container\">\n            <div class=\"badge-difficulty__icon\">\n                <img src=\"https://cdn1.quizplease.com/old_static/themes/b4/images/game-difficulty/black/normal.svg\"  alt=\"Нормальная\"/>\n            </div>\n            <div class=\"badge-difficulty__subtitle\">\n                Сложность:\n            </div>\n                            <div class=\"badge-difficulty__title\">\n                    Нормальная                </div>\n                    </div>\n\n        \n                    <div class=\"badge-difficulty__description\">\n                Стандарт, подойдёт всем.            </div>\n            </div>\n",
+    "custom_fields": []
+}`
 )
 
 func TestGamesFetcher_getGames(t *testing.T) {
@@ -497,6 +543,8 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				r = strings.NewReader(json7)
 			case "91638":
 				r = strings.NewReader(json91638)
+			case "92226":
+				r = strings.NewReader(json92226)
 			case "-1":
 				r = strings.NewReader(json8)
 			case "-2":
@@ -533,6 +581,11 @@ func TestGamesFetcher_getGames(t *testing.T) {
 
 		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "ЦИНЬ", "16 линия В.О дом 83").Once().Return(database.Place{}, errors.New("some error"))
 
+		mockPlaceStorage.EXPECT().GetPlaceByNameAndAddress(ctx, "МЕГА Дыбенко", "Ленинградская область, Всеволожский район, Заневское городское поселение, Кудрово, Мурманское ш., 1").Once().Return(database.Place{
+			ID:         7,
+			ExternalID: 34,
+		}, nil)
+
 		got := fetcher.getGames(ctx, []int64{
 			50069,
 			50071,
@@ -542,8 +595,9 @@ func TestGamesFetcher_getGames(t *testing.T) {
 			50486, // get place ID error
 			50495,
 			91638, // newbie game
-			-1,    // invalid price
-			-2,    // invalid json
+			92226,
+			-1, // invalid price
+			-2, // invalid json
 		})
 
 		loc, err := time.LoadLocation(time_utils.TimeZoneMoscow)
@@ -562,6 +616,9 @@ func TestGamesFetcher_getGames(t *testing.T) {
 		assert.NoError(t, err)
 
 		dt6, err := time.ParseInLocation(timeFormatString, "22.01.23 15:30", loc)
+		assert.NoError(t, err)
+
+		dt7, err := time.ParseInLocation(timeFormatString, "20.12.24 19:30", loc)
 		assert.NoError(t, err)
 
 		expect := []model.Game{
@@ -626,6 +683,19 @@ func TestGamesFetcher_getGames(t *testing.T) {
 				PlaceID:     5,
 				DateTime:    dt6.UTC(),
 				Price:       400,
+				PaymentType: maybe.Just("cash,card"),
+				MaxPlayers:  9,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(92226)),
+				LeagueID:    leagueID,
+				Type:        int32(gamepb.GameType_GAME_TYPE_CLASSIC),
+				Number:      "#1",
+				Name:        maybe.Just("[HELLO 2025]"),
+				PlaceID:     34,
+				DateTime:    dt7.UTC(),
+				Price:       600,
 				PaymentType: maybe.Just("cash,card"),
 				MaxPlayers:  9,
 				IsInMaster:  true,
