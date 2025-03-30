@@ -2830,10 +2830,6 @@ const (
     <link rel="icon" type="image/png" sizes="16x16" href="https://cdn1.quizplease.com/old_static/favicon-16x16.png">
 
     <script src="//vk.com/js/api/openapi.js?162" async=""></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn2nGGQDyv4w3VJ-5g6ZLNCguW4urkOFc" type="text/javascript"></script>
-
-            <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=54bd1178-fd98-4876-b8f6-90812ee6a466" type="text/javascript"></script>
-    
 
     <script type="text/javascript">!function (o, c) {
             var n = c.documentElement, t = " w-mod-";

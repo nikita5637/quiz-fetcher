@@ -1,4 +1,5 @@
 package sixty_seconds
+
 const (
 	html1 = `<html lang="ru"><head>
 	<meta charset="UTF-8">
