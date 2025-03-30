@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+// TestFetcher ...
 func TestFetcher(t *testing.T) {
 	t.Parallel()
 

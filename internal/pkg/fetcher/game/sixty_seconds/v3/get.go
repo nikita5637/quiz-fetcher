@@ -116,11 +116,10 @@ func (f *Fetcher) GetGamesList(ctx context.Context) ([]model.Game, error) {
 
 		var placeStr, priceStr string
 		c.Find("tr").Each(func(i int, tr *goquery.Selection) {
-			switch i {
-			case 2:
-				placeStr = tr.Text()
-			case 3:
+			if tr.Find("i").First().HasClass("fa-ruble-sign") {
 				priceStr = tr.Text()
+			} else if tr.Find("i").First().HasClass("fa-map-marker-alt") {
+				placeStr = tr.Text()
 			}
 		})
 
@@ -179,7 +178,7 @@ func (f *Fetcher) getPlaceID(ctx context.Context, place string) (int, error) {
 	if len(sl) != 2 {
 		sl = strings.Split(place, ", ")
 		if len(sl) < 2 {
-			return 0, errors.New("can't parse place string")
+			return 0, errors.New("failed to parse place string")
 		}
 
 		name = strings.TrimSpace(sl[0])

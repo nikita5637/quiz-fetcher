@@ -41,8 +41,27 @@ const (
 	game25791 = "/quizgames/game/25791/"
 	game28702 = "/quizgames/game/28702/"
 	game28703 = "/quizgames/game/28703/"
+	game30313 = "/quizgames/game/30313/"
+	game30325 = "/quizgames/game/30325/"
+	game30314 = "/quizgames/game/30314/"
+	game30326 = "/quizgames/game/30326/"
+	game30315 = "/quizgames/game/30315/"
+	game30327 = "/quizgames/game/30327/"
+	game30316 = "/quizgames/game/30316/"
+	game30328 = "/quizgames/game/30328/"
+	game30317 = "/quizgames/game/30317/"
+	game30329 = "/quizgames/game/30329/"
+	game30318 = "/quizgames/game/30318/"
+	game30330 = "/quizgames/game/30330/"
+	game30319 = "/quizgames/game/30319/"
+	game30331 = "/quizgames/game/30331/"
+	game30320 = "/quizgames/game/30320/"
+	game30332 = "/quizgames/game/30332/"
+	game30321 = "/quizgames/game/30321/"
+	game30333 = "/quizgames/game/30333/"
 )
 
+// GetSuite ...
 type GetSuite struct {
 	suite.Suite
 
@@ -55,6 +74,7 @@ type GetSuite struct {
 	svr *httptest.Server
 }
 
+// SetupSuite ...
 func (s *GetSuite) SetupSuite() {
 	s.svr = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		var r io.Reader
@@ -65,6 +85,8 @@ func (s *GetSuite) SetupSuite() {
 			r = strings.NewReader(html2)
 		case "/html3":
 			r = strings.NewReader(html3)
+		case "/html4":
+			r = strings.NewReader(html4)
 		case game25678:
 			r = strings.NewReader(html25678)
 		case game25679:
@@ -113,22 +135,61 @@ func (s *GetSuite) SetupSuite() {
 			r = strings.NewReader(html28702)
 		case game28703:
 			r = strings.NewReader(html28703)
+		case game30313:
+			r = strings.NewReader(html30313)
+		case game30325:
+			r = strings.NewReader(html30325)
+		case game30314:
+			r = strings.NewReader(html30314)
+		case game30326:
+			r = strings.NewReader(html30326)
+		case game30315:
+			r = strings.NewReader(html30315)
+		case game30327:
+			r = strings.NewReader(html30327)
+		case game30316:
+			r = strings.NewReader(html30316)
+		case game30328:
+			r = strings.NewReader(html30328)
+		case game30317:
+			r = strings.NewReader(html30317)
+		case game30329:
+			r = strings.NewReader(html30329)
+		case game30318:
+			r = strings.NewReader(html30318)
+		case game30330:
+			r = strings.NewReader(html30330)
+		case game30319:
+			r = strings.NewReader(html30319)
+		case game30331:
+			r = strings.NewReader(html30331)
+		case game30320:
+			r = strings.NewReader(html30320)
+		case game30332:
+			r = strings.NewReader(html30332)
+		case game30321:
+			r = strings.NewReader(html30321)
+		case game30333:
+			r = strings.NewReader(html30333)
 		}
 		_, err := io.Copy(w, r)
 		s.NoError(err)
 	}))
 }
 
+// TearDownSuite ...
 func (s *GetSuite) TearDownSuite() {
 	s.svr.Close()
 }
 
+// SetupTest ...
 func (s *GetSuite) SetupTest() {
 	s.ctx = context.Background()
 
 	s.placeStorage = mocks.NewPlaceStorage(s.T())
 }
 
+// TestGetGamesList ...
 func (s *GetSuite) TestGetGamesList() {
 	s.Run("ok", func() {
 		s.fetcher = New(Config{
@@ -572,8 +633,238 @@ func (s *GetSuite) TestGetGamesList() {
 		}, got)
 		s.NoError(err)
 	})
+
+	s.Run("ok", func() {
+		s.fetcher = New(Config{
+			PlaceStorage: s.placeStorage,
+
+			NeedToFetchOpenLeague:  true,
+			NeedToFetchFirstLeague: true,
+			SchedulePath:           "/html4",
+			URL:                    s.svr.URL,
+		})
+
+		s.placeStorage.EXPECT().GetPlaceByNameAndAddress(s.ctx, "Дворец «Олимпия»", "Литейный пр., д. 14").Return(mysql.Place{
+			ExternalID: 1,
+		}, nil).Times(16)
+
+		got, err := s.fetcher.GetGamesList(s.ctx)
+		expected := []model.Game{
+			{
+				ExternalID:  maybe.Just(int32(30313)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#4",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-03-31 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30325)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#4",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-01 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30314)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#5",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-07 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30326)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#5",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-08 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30315)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#6",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-14 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30327)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#6",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-15 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30316)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#7",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-21 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30328)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#7",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-22 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30317)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#8",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-28 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30329)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#8",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-04-29 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30318)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#9",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-05 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30330)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#9",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-06 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30319)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#10",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-12 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30332)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "#11",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-20 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30321)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "Финал",
+				Name:        maybe.Just(openLeague),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-26 16:30"),
+				Price:       400,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+			{
+				ExternalID:  maybe.Just(int32(30333)),
+				LeagueID:    leagueID,
+				Type:        1,
+				Number:      "Финал",
+				Name:        maybe.Just(string(firstLeague)),
+				PlaceID:     1,
+				DateTime:    time_utils.ConvertTime("2025-05-27 16:30"),
+				Price:       1500,
+				PaymentType: maybe.Just("cash"),
+				MaxPlayers:  6,
+				IsInMaster:  true,
+			},
+		}
+		s.Equal(expected, got)
+		s.NoError(err)
+	})
 }
 
+// Test_getExternalID ...
 func Test_getExternalID(t *testing.T) {
 	t.Parallel()
 
@@ -617,6 +908,7 @@ func Test_getExternalID(t *testing.T) {
 	}
 }
 
+// Test_getName ...
 func Test_getName(t *testing.T) {
 	t.Parallel()
 
@@ -666,6 +958,7 @@ func Test_getName(t *testing.T) {
 	}
 }
 
+// Test_getNumber ...
 func Test_getNumber(t *testing.T) {
 	t.Parallel()
 
@@ -715,6 +1008,7 @@ func Test_getNumber(t *testing.T) {
 	}
 }
 
+// Test_getPrice ...
 func Test_getPrice(t *testing.T) {
 	t.Parallel()
 
