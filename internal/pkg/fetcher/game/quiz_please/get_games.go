@@ -94,6 +94,11 @@ func (f *Fetcher) getGames(ctx context.Context, gameIDs []int64) []model.Game {
 			continue
 		}
 
+		if modelGame.Number == "" {
+			logger.WarnKV(ctx, "skipped game with empty number")
+			continue
+		}
+
 		place, err := f.placeStorage.GetPlaceByNameAndAddress(ctx, g.PlaceName, strings.TrimSpace(g.PlaceAddress))
 		if err != nil {
 			logger.WarnKV(ctx, "getting place by name and address error", zap.Error(err), zap.String("place_name", g.PlaceName), zap.String("place_address", g.PlaceAddress))
